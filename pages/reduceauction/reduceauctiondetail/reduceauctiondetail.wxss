@@ -1,0 +1,71 @@
+/* pages/reduceauction/reduceauctiondetail/reduceauctiondetail.wxss */
+@import '../../seckilling/seckillingDetail/seckillingDetail.wxss';
+
+.swiper-table-left.bg-w, .end-date-time.bg-w {
+  background: #fff;
+  color: #fd1d1d;
+}
+
+.swiper-table-left.bg-y {
+  background: linear-gradient(to right, #ffa200, #ff7800);
+}
+
+.end-date-time.bg-y {
+  background: #fa3935;
+}
+
+.end-date-time.bg-w .time {
+  width: 224rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 10px 0 0 10px;
+  color: #fff;
+  background: linear-gradient(to right, #ffa200, #ff7800);
+}
+
+.date-time-content .end-style {
+  width: 145rpx;
+  margin: 0 auto;
+}
+
+
+.reduceauction-time {
+  padding: 32rpx 24rpx;
+  background: #fff;
+}
+
+.reduceauction-time view {
+  display: flex;
+  justify-content: space-between;
+  line-height: 48rpx;
+}
+
+.popup-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  border-top: 1px solid #e0e0e0;
+}
+
+.popup-content {
+  height: 656rpx;
+  overflow: auto;
+}
+
+.popup-btn button {
+  width: 100%;
+  height: 100%;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  background: #fff;
+}
+.wxParse {
+  padding:24rpx;
+}
+.rich-img{
+  vertical-align: top;
+  max-width: 100% !important;
+  height: auto !important;
+}

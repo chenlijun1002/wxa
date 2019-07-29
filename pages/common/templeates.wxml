@@ -1,0 +1,417 @@
+<!--templdates.wxml-->
+<!-- 小程序视频模板-->
+<template name="temp_14">
+    <video id="myVideo" src="{{content.website}}" controls="true" loop poster="{{content.videoCoverImg}}?x-oss-process=style/720"></video>
+</template>
+<!-- 辅助空白-->
+<template name="temp_11">
+    <view class='members_con' style='height:{{content.height}}rpx'>
+    </view>
+</template>
+<!-- 分割线 -->
+<template name="temp_10">
+    <view class='members_con'>
+        <view class='{{content.styleClass}}' style='border-color:{{content.corlor}}'>
+        </view>
+    </view>
+</template>
+<!--商品搜索-->
+<template name="temp_6">
+    <view class='members_con seach flex'>
+        <input class='select_seach' bindinput="SearchValue" type='text' value='' placeholder="商品搜索：请输入商品关键字"></input>
+        <button bindtap='onSearch' form-type="submit">
+            <icon class="select_sub " type="search" size="20" />
+        </button>
+    </view>
+</template>
+<!--商品模板-->
+<template name="temp_4">
+    <view class="product-group">
+        <view class="product-lists">
+            <template is="layout_{{content.layout}}" data="{{...content,type:4}}"></template>
+        </view>
+    </view>
+</template>
+<!-- 顶部菜单 -->
+<template name="temp_12">
+    <view class='top-menu'>
+        <block wx:for="{{content.dataset}}" wx:key="*this" wx:for-item="dataset">
+            <view class='menu-item {{content.marginstyle==1?index==0?"mr1":index==2?"m1":"":""}}' bindtap="ClickSwiper" data-link="{{dataset.link}}" style='background-color:{{dataset.bgColor}};color:{{dataset.fotColor}};line-height:{{content.style==1?"40rpx":"88rpx"}};height:{{content.style==1?"100rpx":"88rpx"}};'
+                data-showtype="{{dataset.linkType}}">
+                <view style="padding-top: 12rpx;height: 42rpx;" wx:if="{{content.style==1}}">
+                    <image src='{{dataset.pic}}?x-oss-process=style/200'></image>
+                </view>
+                {{dataset.showtitle}}
+            </view>
+        </block>
+    </view>
+</template>
+<!-- 标题 -->
+<template name="temp_2">
+    <view class='temp-title' style='background-color:{{content.bgcorlor}};text-align:{{content.direction}};color:{{content.ftcorlor}}'>
+        <image src="{{content.pic}}?x-oss-process=style/200" class='title-img' wx:if="{{content.pic}}"></image>
+        <text>{{content.title}}</text>
+    </view>
+</template>
+<!-- 文本导航 -->
+<template name="temp_7">
+    <block wx:for="{{content.dataset}}" wx:key="*this" wx:for-item="dataset">
+        <view class='text-nav {{index==(content.dataset.length-1)?"border-bottom":""}}' bindtap='ClickSwiper' data-link="{{dataset.link}}" data-showtype="{{dataset.linkType}}">
+            <view class='nav-text'>{{dataset.title}}</view>
+            <image src='http://file.xiaokeduo.com/system/agentOA/images/arrow-right.png'></image>
+        </view>
+    </block>
+</template>
+<!-- 富文本 -->
+<template name="temp_1">
+    <block wx:for="{{content.fulltext}}" wx:key="*this" wx:for-item="item">
+        <rich-text nodes="{{[item]}}" wx:if="{{item.name !='video'}}"></rich-text>
+        <video style='width:100%' src="{{item.children.src}}?x-oss-process=style/720" class="{{item.class}}" wx:else></video>
+    </block>
+</template>
+<!-- 活动 -->
+<template name="temp_26">
+    <view class="temp-activity">
+        <template is="activity_layout_{{content.layout}}" data="{{content}}"></template>
+    </view>
+</template>
+<!-- 活动小图 -->
+<template name="activity_layout_1">
+    <block wx:for="{{content.activitylist}}" wx:key="*this" wx:for-item="item">
+        <view class='activity-item' bindtap='ClickSwiper' data-link="{{item.link}}">
+            <view class='item-inner'>
+                <image mode="aspectFill" src="{{item.pic}}?x-oss-process=style/360" mode="aspectFill"></image>
+                <view class='activity-text'>
+                    <view class='activity-tag'>{{item.tag}}</view>
+                    <text class='activity-price'>￥{{item.price}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+</template>
+
+<!-- 活动封面 -->
+<template name="activity_layout_2">
+    <block wx:for="{{content.activitylist}}" wx:key="*this" wx:for-item="item">
+        <view class='activity-item-layout2 {{index==content.activitylist.length-1?"mb0":""}}' bindtap='ClickSwiper' data-link="{{item.link}}">
+            <view class='item-inner'>
+                <image src="{{item.pic}}?x-oss-process=style/720"></image>
+            </view>
+            <view class='activity-text pl-24'>
+                <view class='activity-tag'>{{item.tag}}</view>
+                <text class='activity-price'>{{item.title}}</text>
+            </view>
+            <view class='layout2-price pl-24'>￥{{item.price}}</view>
+        </view>
+    </block>
+</template>
+<!-- 活动列表 -->
+<template name="activity_layout_4">
+    <block wx:for="{{content.activitylist}}" wx:key="*this" wx:for-item="item">
+        <view class='activity-item-layout4 {{index==content.activitylist.length-1?"mb0":""}}' bindtap='ClickSwiper' data-link="{{item.link}}">
+            <view class='item-inner'>
+                <image  src="{{item.pic}}?x-oss-process=style/300" ></image>
+            </view>
+            <view class='activity-text-right'>
+                <view class='activity-tag'>{{item.tag}}</view>
+                <text class='activity-price text-ellipsis-2'>{{item.title}}</text>
+                <view class='layout4-price'>￥{{item.price}}</view>
+            </view>
+        </view>
+    </block>
+</template>
+<!-- 图片广告 -->
+<template name="temp_9">
+    <view wx:if="{{content.showType==1}}" class="page-section-spacing">
+        <swiper indicator-dots="false" autoplay="false">
+            <block wx:for="{{content.dataset}}" wx:for-item="dataset" wx:key="*this">
+                <swiper-item bindtap="ClickSwiper" data-link="{{dataset.link}}" data-showtype="{{dataset.linkType}}">
+                    <image src="{{dataset.pic}}?x-oss-process=style/720" mode="aspectFit" class="slide-imagesds" style="width:750rpx;display:inline-block;" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <view wx:else class='page-banner-img-paved'>
+        <block wx:for="{{content.dataset}}" wx:for-item="dataset" wx:for-index="idx" wx:key="*this">
+            <image src="{{dataset.pic}}?x-oss-process=style/720" bindtap="ClickSwiper" data-modeIdx="{{index}}" data-link="{{dataset.link}}" data-index="{{idx}}" data-showtype="{{dataset.linkType}}" class="slide-imagesds" style="margin-bottom:{{content.margin*2}}rpx;height:{{dataset.setHeight}}px" bindload="loadImgSuccess" />
+        </block>
+    </view>
+</template>
+
+
+<!-- 图片导航 -->
+<template name="temp_8">
+    <view class="page-section bg-wihte">
+        <block  wx:if="{{content.dataset.length<5}}">
+            <block wx:for="{{content.dataset}}" wx:for-item="dataset" wx:key="*this">
+              <view class="menu-icon" style="width:{{1/content.dataset.length*100}}%;" bindtap="ClickSwiper" data-link="{{dataset.link}}" data-showtype="{{dataset.linkType}}">
+                  <image class="image" style="width:{{750/content.dataset.length}}rpx;height:{{750/content.dataset.length}}rpx;" src="{{dataset.pic}}?x-oss-process=style/300" mode="aspectFill"></image>  
+                  <view class="menu-name">{{dataset.showtitle}}</view>
+              </view>
+            </block>
+        </block>
+        <block wx:elif="{{content.dataset.length>=6&&content.dataset.length<=8}}">
+           <block wx:for="{{content.dataset}}" wx:for-item="dataset" wx:key="*this">
+              <view class="menu-icon" style="width:25%;" bindtap="ClickSwiper" data-link="{{dataset.link}}" data-showtype="{{dataset.linkType}}">
+                  <image class="image" style="width:{{750/4}}rpx;height:{{750/4}}rpx;" src="{{dataset.pic}}?x-oss-process=style/300" mode="aspectFill"></image>  
+                  <view class="menu-name">{{dataset.showtitle}}</view>
+              </view>
+            </block>
+        </block>
+        <block wx:else >
+            <block wx:for="{{content.dataset}}" wx:for-item="dataset" wx:key="*this">
+              <view class="menu-icon" style="width:20%;" bindtap="ClickSwiper" data-link="{{dataset.link}}" data-showtype="{{dataset.linkType}}">
+                <image class="image" style="width:{{750/5}}rpx;height:{{750/5}}rpx;" src="{{dataset.pic}}?x-oss-process=style/300" mode="aspectFill"></image>  
+                <view class="menu-name">{{dataset.showtitle}}</view>
+            </view>
+            </block>
+        </block>
+    </view>
+
+</template>
+<!-- 橱窗1 -->
+<template name="temp_21">
+    <view class="page-section bg-wihte" type="1">
+        <view wx:if="{{content.dataset[0].pic.length>=0}}" class="hd-pic border-bottom-e0" bindtap="ClickSwiper" data-link="{{content.dataset[0].link}}" data-showtype="{{content.dataset[0].linkType}}">
+            <image class="image" src="{{content.dataset[0].pic}}?x-oss-process=style/720" style="width:750rpx; height:88rpx" mode="aspectFit"></image>
+        </view>
+        <view class="bd-pic">
+            <view class="bd-l-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[1].link}}" data-showtype="{{content.dataset[1].linkType}}">
+                <image class="image" src="{{content.dataset[1].pic}}?x-oss-process=style/720" style="width:100%;height:360rpx;" mode="aspectFill"></image>
+            </view>
+            <view class="bd-r-pic">
+                <view class="bd-r-t-pic border-bottom-e0" bindtap="ClickSwiper" data-link="{{content.dataset[2].link}}" data-showtype="{{content.dataset[2].linkType}}">
+                    <image class="image" src="{{content.dataset[2].pic}}?x-oss-process=style/360" style="width:100%; height:180rpx" mode="aspectFill"></image>
+                </view>
+                <view class="bd-r-b-pic">
+                    <view class="bd-r-b-l-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[3].link}}" data-showtype="{{content.dataset[3].linkType}}">
+                        <image class="image" src="{{content.dataset[3].pic}}?x-oss-process=style/720" style="width:100%; height:180rpx" mode="aspectFill"></image>
+                    </view>
+                    <view class="bd-r-b-r-pic" data-link="{{content.dataset[4].link}}" bindtap="ClickSwiper" data-showtype="{{content.dataset[4].linkType}}">
+                        <image class="image" src="{{content.dataset[4].pic}}?x-oss-process=style/720" style="width:100%; height:180rpx" mode="aspectFill"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 橱窗2 -->
+<template name="temp_22">
+
+    <view class="page-section bg-wihte" type="2">
+        <view class="hd-pic border-bottom-e0" bindtap="ClickSwiper" data-link="{{content.dataset[0].link}}" data-showtype="{{content.dataset[0].linkType}}">
+            <image class="image" src="{{content.dataset[0].pic}}?x-oss-process=style/720" style="width:750rpx; height:88rpx" mode="aspectFit"></image>
+        </view>
+        <view class="bd-pic">
+            <view class="bd-l-pic border-right-e0">
+                <view class="bd-l-t-pic border-bottom-e0" bindtap="ClickSwiper" data-link="{{content.dataset[1].link}}" data-showtype="{{content.dataset[1].linkType}}">
+                    <image class="image" src="{{content.dataset[1].pic}}?x-oss-process=style/360" style="width:100%; height:180rpx" mode="aspectFill"></image>
+                </view>
+                <view class="bd-l-b-pic" bindtap="ClickSwiper" data-link="{{content.dataset[4].link}}" data-showtype="{{content.dataset[4].linkType}}">
+                    <image class="image" src="{{content.dataset[4].pic}}?x-oss-process=style/360" style="width:100%; height:180rpx" mode="aspectFill"></image>
+                </view>
+            </view>
+            <view class="bd-r-pic">
+                <view class="bd-r-t-pic border-bottom-e0">
+                    <view class="bd-r-b-l-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[2].link}}" data-showtype="{{content.dataset[2].linkType}}">
+                        <image class="image" src="{{content.dataset[2].pic}}?x-oss-process=style/360" style="width:100%;display:inline-block; height:180rpx" mode="aspectFill"></image>
+                    </view>
+                    <view class="bd-r-b-r-pic" bindtap="ClickSwiper" data-link="{{content.dataset[3].link}}" data-showtype="{{content.dataset[3].linkType}}">
+                        <image class="image" src="{{content.dataset[3].pic}}?x-oss-process=style/360" style="width:100%;display:inline-block; height:180rpx" mode="aspectFill"></image>
+                    </view>
+                </view>
+                <view class="bd-r-b-pic">
+                    <view class="bd-r-b-l-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[5].link}}" data-showtype="{{content.dataset[5].linkType}}">
+                        <image class="image" src="{{content.dataset[5].pic}}?x-oss-process=style/360" style="width:100%;display:inline-block; height:180rpx" mode="aspectFill"></image>
+                    </view>
+                    <view class="bd-r-b-r-pic" bindtap="ClickSwiper" data-link="{{content.dataset[6].link}}" data-showtype="{{content.dataset[6].linkType}}">
+                        <image class="image" src="{{content.dataset[6].pic}}?x-oss-process=style/360" style="width:100%;display:inline-block; height:180rpx" mode="aspectFill"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 橱窗3 -->
+<template name="temp_23">
+    <view class="page-section bg-wihte" type="3">
+        <view class="hd-pic border-bottom-e0" bindtap="ClickSwiper" data-link="{{content.dataset[0].link}}" data-showtype="{{content.dataset[0].linkType}}">
+            <image class="image" src="{{content.dataset[0].pic}}?x-oss-process=style/720" style="width:750rpx; height:88rpx" mode="aspectFit"></image>
+        </view>
+        <view class="bd-list-pic">
+
+            <block wx:for="{{content.dataset}}" wx:for-item="dataset" wx:key="*this">
+                <view class="bd-list-pro-pic" wx:if="{{index!=0}}" bindtap="ClickSwiper" data-link="{{dataset.link}}" data-showtype="{{dataset.linkType}}">
+                    <image class="image" src="{{dataset.pic}}?x-oss-process=style/360" style="width:100%; height:180rpx" class="border-right-e0  border-bottom-e0" mode="aspectFill"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>
+
+<!-- 橱窗4 -->
+<template name="temp_24">
+    <view class="page-section bg-wihte" type="4">
+        <view class="hd-pic border-bottom-e0" bindtap="ClickSwiper" data-link="{{content.dataset[0].link}}" data-showtype="{{content.dataset[0].linkType}}">
+            <image class="image" src="{{content.dataset[0].pic}}?x-oss-process=style/720" style="width:750rpx; height:88rpx" mode="aspectFit"></image>
+        </view>
+
+        <view class="bd-list-pic">
+
+
+            <view class="bd-list-pro-pic" bindtap="ClickSwiper" data-link="{{content.dataset[1].link}}" data-showtype="{{content.dataset[1].linkType}}">
+                <image class="image" src="{{content.dataset[1].pic}}?x-oss-process=style/720" style="width:100%; height:180rpx" class="border-right-e0  border-bottom-e0" mode="aspectFill" />
+            </view>
+
+            <view class="bd-list-pro-pic" bindtap="ClickSwiper" data-link="{{content.dataset[2].link}}" data-showtype="{{content.dataset[2].linkType}}">
+                <image class="image" src="{{content.dataset[2].pic}}?x-oss-process=style/360" style="width:100%; height:180rpx" class="border-right-e0  border-bottom-e0" mode="aspectFill" />
+            </view>
+
+
+            <view class="bd-list-pro-pic" bindtap="ClickSwiper" data-link="{{content.dataset[3].link}}" data-showtype="{{content.dataset[3].linkType}}">
+                <image class="image" src="{{content.dataset[3].pic}}?x-oss-process=style/360" style="width:100%; height:180rpx" class="border-right-e0  border-bottom-e0" mode="aspectFill" />
+            </view>
+
+
+            <view class="bd-list-pro-pic" bindtap="ClickSwiper" data-link="{{content.dataset[4].link}}" data-showtype="{{content.dataset[4].linkType}}">
+                <image class="image" src="{{content.dataset[4].pic}}?x-oss-process=style/360" style="width:100%; height:180rpx" class="border-right-e0  border-bottom-e0" mode="aspectFill" />
+            </view>
+        </view>
+        <view class="bd-list-b">
+            <view class="bd-list-b-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[5].link}}" data-showtype="{{content.dataset[5].linkType}}">
+                <image src="{{content.dataset[5].pic}}?x-oss-process=style/360" style="width:100%;height:180rpx" mode="aspectFill" />
+            </view>
+
+            <view class="bd-list-b-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[6].link}}" data-showtype="{{content.dataset[6].linkType}}">
+                <image src="{{content.dataset[6].pic}}?x-oss-process=style/360" style="width:100%;height:180rpx" mode="aspectFill" />
+            </view>
+
+            <view class="bd-list-b-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[7].link}}" data-showtype="{{content.dataset[7].linkType}}">
+                <image src="{{content.dataset[7].pic}}?x-oss-process=style/360" style="width:100%;height:180rpx" mode="aspectFill" />
+            </view>
+
+            <view class="bd-list-b-pic border-right-e0" bindtap="ClickSwiper" data-link="{{content.dataset[8].link}}" data-showtype="{{content.dataset[8].linkType}}">
+                <image src="{{content.dataset[8].pic}}?x-oss-process=style/360" style="width:100%;height:180rpx" mode="aspectFill" />
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 橱窗5 -->
+<template name="temp_25">
+    <view class="page-section bg-wihte" type="5">
+        <view class="banner-pic" bindtap="ClickSwiper" data-link="{{content.dataset[0].link}}" data-showtype="{{content.dataset[0].linkType}}" chu="1">
+            <image class="image" src="{{content.dataset[0].pic}}?x-oss-process=style/720" style="width:750rpx; height:120rpx" />
+        </view>
+    </view>
+</template>
+
+
+<!-- 销客多新增的主题商品模板-->
+<template name="temp_5">
+
+    <view class="product-group">
+        <!-- <view class="title-box">
+      <view class="product-group-title">
+        <view class="title-content">
+          <view class="line line-left"></view>
+          <view class="title-text">最新上架</view>
+          <view class="line line-right"></view>
+        </view>
+      </view>
+    </view> -->
+        <view class="product-lists">
+            <template is="{{'layout_'+content.layout}}" data="{{...content}}"></template>
+        </view>
+    </view>
+</template>
+<!--小图-->
+<template name="layout_1">
+    <block wx:for="{{goodslist}}">
+        <view class="product-item" data-link="{{item.link}}" data-showtype="1" bindtap="ClickSwiper">
+            <image mode="aspectFill" src="{{item.pic}}?x-oss-process=style/360" mode="aspectFill"></image>
+            <view class="product-name text-ellipsis-2" wx:if="{{showName}}">{{item.title}}</view>
+            <view wx:if="{{showSummary}}" class="product-descr">{{item.descr||''}}</view>
+            <view class="price">
+                <text wx:if="{{showPrice}}">￥{{item.price}}</text>
+                <text wx:if="{{showMaketPrice||(type==4&&item.original_price!=0)}}" class="ml6 originalprice">￥{{item.original_price}}</text>
+                <view wx:if="{{showIco}}" class="icon_buy"></view>
+            </view>
+        </view>
+    </block>
+</template>
+<!--大图-->
+<template name="layout_2">
+    <block wx:for="{{goodslist}}">
+        <view class='biggoods' data-link="{{item.link}}" data-showtype="1" bindtap="ClickSwiper">
+            <image mode="aspectFill" src="{{item.pic}}?x-oss-process=style/720" mode="aspectFill"></image>
+            <view class="product-name text-ellipsis-2" wx:if="{{showName}}">{{item.title}}</view>
+            <view wx:if="{{showSummary}}" class="product-descr">{{item.descr||''}}</view>
+            <view class="price">
+                <text wx:if="{{showPrice}}">￥{{item.price}}</text>
+                <text class="ml6 originalprice" wx:if="{{type==4&&item.original_price!=0}}" style='text-decoration:none'>原价：</text>
+                <text wx:if="{{showMaketPrice||(type==4&&item.original_price!=0)}}" class="ml6 originalprice">￥{{item.original_price}}</text>
+                <view wx:if="{{showIco}}" class="icon_buy"></view>
+            </view>
+
+        </view>
+    </block>
+</template>
+<!--商品列表-->
+<template name="layout_4">
+    <block wx:for="{{goodslist}}">
+        <view class='listbox' data-link="{{item.link}}" data-showtype="1" bindtap="ClickSwiper">
+            <view class='imgbox'>
+                <image mode="aspectFill" src="{{item.pic}}?x-oss-process=style/300" mode="aspectFill"></image>
+            </view>
+            <view class="g-flex">
+                <text class="product-name text-ellipsis-2" wx:if="{{showName}}">{{item.title}}</text>
+                <view wx:if="{{showSummary}}" class="product-descr">{{item.descr||''}}</view>
+                <view class="price">
+                    <text wx:if="{{showPrice}}">￥{{item.price}}</text>
+                    <text wx:if="{{showMaketPrice}}" class="ml6 originalprice">￥{{item.original_price}}</text>
+                </view>
+                <!-- <view wx:if="{{showIco&&type!=4}}" class="icon_buy">
+                </view> -->
+            </view>
+        </view>
+    </block>
+</template>
+<!--一大两小-->
+<template name="layout_3">
+    <view class='bigsmart'>
+        <block wx:for="{{goodslist}}" wx:for-index="index">
+            <view wx:if="{{index%3==0}}" class='biggoods' data-link="{{item.link}}" data-showtype="1" bindtap="ClickSwiper">
+                <image mode="aspectFill" src="{{item.pic}}?x-oss-process=style/720" mode="aspectFill"></image>
+                <text class="product-name text-ellipsis-2" wx:if="{{showName}}">{{item.title}}</text>
+                <view wx:if="{{showSummary}}" class="product-descr">{{item.descr||''}}</view>
+                <view class="price">
+                    <text wx:if="{{showPrice}}">￥{{item.price}}</text>
+                    <text class="ml6 originalprice" wx:if="{{type==4&&item.original_price!=0}}" style='text-decoration:none'>原价：</text>
+                    <text wx:if="{{showMaketPrice||(type==4&&item.original_price!=0)}}" class="ml6 originalprice">￥{{item.original_price}}</text>
+                    <view wx:if="{{showIco}}" class="icon_buy"></view>
+                </view>
+            </view>
+            <view wx:if="{{index%3==2}}" class="goods_odd product-item" data-link="{{item.link}}" data-showtype="1" bindtap="ClickSwiper">
+                <image mode="aspectFill" src="{{item.pic}}?x-oss-process=style/360" mode="aspectFill"></image>
+                <text class="product-name text-ellipsis-2" wx:if="{{showName}}">{{item.title}}</text>
+                <view wx:if="{{showSummary}}" class="product-descr">{{item.descr||''}}</view>
+                <view class="price">
+                    <text wx:if="{{showPrice}}">￥{{item.price}}</text>
+                    <text wx:if="{{showMaketPrice||(type==4&&item.original_price!=0)}}" class="ml6 originalprice">￥{{item.original_price}}</text>
+                    <view wx:if="{{showIco}}" class="icon_buy"></view>
+                </view>
+            </view>
+            <view wx:if="{{index%3==1}}" class="goods_event product-item " data-link="{{item.link}}" data-showtype="1" bindtap="ClickSwiper">
+                <image mode="aspectFill" src="{{item.pic}}?x-oss-process=style/360" mode="aspectFill"></image>
+                <text class="product-name text-ellipsis-2" wx:if="{{showName}}">{{item.title}}</text>
+                <view wx:if="{{showSummary}}" class="product-descr">{{item.descr||''}}</view>
+                <view class="price">
+                    <text wx:if="{{showPrice}}">￥{{item.price}}</text>
+                    <text wx:if="{{showMaketPrice||(type==4&&item.original_price!=0)}}" class="ml6 originalprice">￥{{item.original_price}}</text>
+                    <view wx:if="{{showIco}}" class="icon_buy"></view>
+                </view>
+            </view>
+            <view wx:if="{{index%3==2}}" class='clear'></view>
+        </block>
+    </view>
+</template>

@@ -1,0 +1,35 @@
+<!--commissiontobalance佣金转余额-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'><login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}">
+  <view class="balance-head margin-b-24">
+    <view class="overage-icon"></view>
+    <view class="balance-head-money">
+      <view>可转佣金</view>
+      <view class="money">￥
+        <text>{{balance}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <label>转出金额</label>
+    <input bindinput="bindKeyInput" bindfocus="iptFocus" type="digit" placeholder="本次可转出金额{{RequestMaxBlance}}" placeholder-style="color:#dbdbdb"></input>
+  </view>
+  <view class="tips" hidden="{{isHidden}}">佣金转账户余额即时到账 <text class="pull-right" bindtap="closeTips">×</text></view>
+  <view class="recharge-btn">
+        <button class="{{isBlur}}" bindtap="toBalance">确认转余额</button>
+    </view>
+    <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+</view>
+<view wx:else class="load-prompt">
+  <template is="loadPrompt"/>
+</view>
+<view wx:if="{{isShowToast}}">
+  <template is="toast" data="{{...toastText}}" />
+</view>
+</button>
+</form>

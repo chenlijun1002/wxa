@@ -1,0 +1,49 @@
+/* pages/reduceauction/myauctionlist/myauctionlist.wxss */
+@import '../../pintuan/mySpellGroup/mySepllGroup.wxss';
+.cell {
+  display: flex;
+  align-items: center;
+  height: 96rpx;
+  padding: 0 24rpx;
+}
+.cell-button {
+  justify-content: flex-end;
+}
+.cell .go-pay {
+  width: 132rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  color: #FF5722;
+  background: #fff;
+  border: 1px solid #FF5722;
+  border-radius: 8rpx;
+}
+.cell-left {
+  flex: 1;
+}
+.content {
+  width: 304rpx;
+}
+.table-view-cell {
+  background: #f7f7f7;
+}
+.table-cell-right {
+  line-height: 48rpx;
+}
+.product-name {
+  padding-top: 1px;
+  line-height: 48rpx;
+}
+.markdown-sale {
+  border: 1px solid #FD1D1D;
+  color: #FD1D1D;
+}
+.prodcut-specifications {
+  margin-top: 24rpx;
+}
+
+.logo-content{
+  position: absolute;
+  bottom: 0;
+}

@@ -1,0 +1,67 @@
+<!--comment.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'><login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view class="nav-fixed-top">    
+    <view data-index="-1" class="nav-item {{selectIndex==-1?'active':''}}" bindtap="changeState">全部评价({{totalcount}})</view>
+    <view wx:if="{{hasimgcount > 0}}" data-index="0" class="nav-item {{selectIndex==0?'active':''}}" bindtap="changeState">晒图评价({{hasimgcount}})</view>    
+</view>
+<view wx:if="{{loadComplete}}">
+  <scroll-view scroll-y lower-threshold="50" scroll-top="{{scrollTop}}" bindscrolltolower="pullLoadingData" class="scroll">
+                <view class="product-configure pt24" wx:if="{{commentList.length>0}}">
+                    <block wx:for="{{commentList}}" wx:key="*this" wx:for-item="itemComment">
+                        <view class="font32  p24 {{index==0?'padding-32-0':''}} {{index>0?'mt80':''}}">
+                            <label class="configure-label font28">
+                                <image class="mr24" src="{{itemComment.UserImg}}"></image>
+                                {{itemComment.UserName}}
+                                <text class="ml40 font28 color-74"></text>
+                            </label>
+                            <view class="fr star">
+                                <image src="{{itemComment.StarRating>0?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>1?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>2?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>3?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>4?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                            </view>
+                            <view class="comment-text-ellipsis-2 mt24 margin-b-24 font32" style="display:{{itemComment.showAll?'':'-webkit-box'}};overflow:{{itemComment.showAll?'':'hidden'}};-webkit-line-clamp:{{itemComment.showAll?'':2}}">
+                                <text>{{itemComment.Content}}</text>
+                            </view>
+                            <view class="img-boxes">
+                                <block wx:for="{{itemComment.ImageUrl}}" wx:key="*this" wx:for-item="itemName">
+                                    <view class="pull-left mr16 {{index==3||index==7?'mr-none':''}}" data-images="{{itemComment.ImageUrl}}" bindtap="imagesPreview">
+                                        <image src="{{itemName}}" data-target="{{itemName}}"></image>
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="buy-time font28">
+                                {{itemComment.BuyDate}}
+                                <text class='active pull-right' data-index="{{index}}" bindtap='showAllText'>展开/收起</text>
+                            </view>
+                            <view class="font32 color-21 line-height-48 mt16" wx:if="{{itemComment.ReplyContent}}">
+                                <text class="color-FF4757">商家回复：</text>{{itemComment.ReplyContent}}
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="empty-data" wx:else>
+                    <view class="empty-img-prompt">
+                        <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/noComment.png"></image>
+                    </view>
+                    <text class="font-36">亲~暂无评价哦~</text>
+                </view>
+                <view class="pull-loading" wx:if="{{isShowLoading}}">
+                    <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                    {{loadingText}}
+                </view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

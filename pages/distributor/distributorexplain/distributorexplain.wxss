@@ -1,0 +1,227 @@
+/*申请分销说明*/
+
+.request-condition {
+  background: #fff;
+}
+
+.request-condition .title {
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-left: 28rpx;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 32rpx;
+  color: #202020;
+}
+
+.request-condition .request-progress {
+  position: relative;
+  padding: 0 28rpx 32rpx;
+  font-size: 28rpx;
+}
+
+.step {
+  position: relative;
+  margin-left: 20rpx;
+}
+.step text {
+  color: #747474;
+}
+.step.active text {
+  color: #212121;
+}
+.step.active .line-progress {
+  background: #00A699;
+}
+.step.active::before {
+  background: #00A699;
+}
+.step .line-progress {
+  width: 1px;
+  height: 60rpx;
+  background: #e0e0e0;
+}
+
+.step-one .line-progress {
+  height: 56rpx;
+}
+
+.step::before {
+  position: absolute;
+  top: 56rpx;
+  left: -8rpx;
+  content: "";
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  background: #e0e0e0;
+}
+.text view {
+  display: inline;
+}
+.step .text {
+  display: inline-block;
+  margin-top: 44rpx;
+  margin-left: 24rpx;
+}
+
+.step-two .line-progress {
+  margin-top: -8rpx;
+}
+
+.step-two::before {
+  top: 52rpx;
+}
+
+.step-two .text {
+  margin-top: 42rpx;
+  width: 70%;
+  line-height: 48rpx;
+}
+
+.step icon {
+  margin-top: 32rpx;
+}
+
+.step-two text.pull-right {
+  margin-top: 44rpx;
+}
+.step .color-main {
+  color: #00a699;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.privilege {
+  background: #fff;
+}
+.privilege .title {
+  height: 96rpx;
+  line-height: 96rpx;
+  padding-left: 26rpx;
+  border-bottom: 1px solid #dfdfdf;
+  font-size: 32rpx;
+}
+.privilege .items {
+  position: relative;
+  padding: 26rpx 32rpx 26rpx 50rpx;
+  font-size: 28rpx;
+}
+.item .item-head {
+  position: relative;
+  margin-bottom: 8rpx;
+  margin-top: 16rpx;
+  font-weight: bold;
+}
+.item .item-head::before {
+  position: absolute;
+  top: 18rpx;
+  left: -24rpx;
+  content: "";
+  width: 10rpx;
+  height: 10rpx;
+  background: #757575;
+  border-radius: 50%;
+}
+.item .item-head, .item  .item-text {
+  line-height: 48rpx;
+}
+.item  .item-text {
+  color: #757575;
+}
+.items::before {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  content: "";
+  width: 96%;
+  height: 1px;
+  transform:scaleY(.5);
+	transform-origin:0 0;
+  background: #dfdfdf;
+} 
+.privilege .explain {
+  padding: 24rpx 26rpx;
+  line-height: 48rpx;
+  font-size: 28rpx;
+  color: #747474;
+}
+.btn {
+  margin-bottom: 20rpx;
+  padding: 0 24rpx;
+}
+.btn button {
+  height: 90rpx;  
+  line-height: 90rpx;
+  background: #00A699;
+  font-size: 36rpx;
+  text-align: center;
+  color: #fff;
+  margin-top:30rpx;
+}
+
+/* 申请分销填写信息 */
+.content{
+  background: #fff;
+  font-size: 24rpx;
+}
+.line-height200 {
+    line-height: 200rpx;
+}
+.view-cell {
+    position: relative;
+    padding: 22rpx 20rpx;   
+}
+.height-42{
+  height: 42rpx;
+}
+.border-t-b{
+  border-top:1px solid #e0e0e0;
+  border-bottom:1px solid #e0e0e0; 
+}
+.upload-img {
+    position: absolute;
+    right: 20rpx;
+    top: 22rpx;
+    width: 200rpx;
+    height: 200rpx;
+    overflow: hidden;
+}
+.upload-img image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.upload-prompt {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(0,0,0,0.4);
+    font-size: 12px;
+    z-index: 10;
+}
+.edit-shopname input {
+    width: 75%;
+    float: right;
+    height: 40rpx;
+}
+.apply-btn {
+  height: 90rpx;
+  width: 95%; 
+  margin: 0 auto;
+  line-height: 90rpx;
+  background: #00A699;
+  font-size: 36rpx;
+  text-align: center;
+  color: #fff;
+  margin-top:30rpx;  
+}
+.mt410{
+  margin-bottom: 410rpx;
+}
+.common-color-r{
+  color: #14a8a1;
+}

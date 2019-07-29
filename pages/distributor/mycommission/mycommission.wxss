@@ -1,0 +1,87 @@
+/*我的佣金*/
+
+.total-commission {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  padding-left: 26rpx;
+}
+
+.commission-detail {
+  display: flex;
+  align-items: center;
+  height: 216rpx;
+  background: #fff;
+}
+
+.commission-detail .column {
+  display: flex;
+  flex: 1;
+  height: 50%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.commission-detail .column1 {
+  border-right: 1px solid #e0e0e0;
+}
+
+.commission-detail .column .text {
+  font-size: 28rpx;
+}
+
+.commission-detail .column .money-box {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.commission-detail .column .money {
+  font-size: 56rpx;
+}
+
+.commission-function {
+  background: #fff;
+  padding-left: 26rpx;
+}
+
+.commission-function .row {
+  display: flex;
+  align-items: center;
+  height: 112rpx;
+  font-size: 32rpx;
+  color: #515151;
+}
+.commission-function .row text {
+  flex: 1;
+}
+.right-icon {
+  transform: translate3d(-24rpx,0,0);
+}
+
+.commission-function .translate-icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 18rpx;
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/translate.png') no-repeat;
+  background-size: cover;
+}
+
+.commission-function .record-icon, .commission-function .balance_detail-icon,.commission-function .withdrawrecord-icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 18rpx;
+}
+
+.commission-function .record-icon {
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/record.png') no-repeat;
+  background-size: cover;
+}
+
+.commission-function .balance_detail-icon {
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/balance_detail.png') no-repeat;
+  background-size: cover;
+}
+.commission-function .withdrawrecord-icon {
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/withdrawrecord-icon.png') no-repeat;
+  background-size: cover;
+}

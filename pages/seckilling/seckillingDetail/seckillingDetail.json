@@ -1,0 +1,11 @@
+{
+  "navigationBarTextStyle": "",
+  "navigationBarTitleText": "秒杀详情",
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh": false,
+  "component": "true",
+  "usingComponents": {
+    "component-common": "/pages/components/commonComponent/commonComponent",
+    "login-authorization": "/pages/components/launchLogin/launchLogin"
+  }
+}

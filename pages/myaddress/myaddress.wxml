@@ -1,0 +1,31 @@
+<!--pages/addresslist/addresslist.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}" class='address-container'>
+  <view class="address-item" wx:for="{{addressList}}" wx:key="*this">
+    <view class="address-info">
+      <view class="user-tel">
+        <text class="user">{{item.ShipTo}}</text>
+        <text>{{item.CellPhone}}</text>
+        <text wx:if="{{item.IsDefault}}" class="default">默认</text>
+      </view>
+      <view class="address-detail">{{item.ProvinceName}} {{item.CityName}} {{item.CountyName}} {{item.StreetName}} {{item.Address}}</view>
+    </view>
+    <view class="edit" bindtap="editAddress" data-addressid="{{item.Id}}"></view>
+  </view>
+  <view class="add-new-address padding-24">
+    <button class="add-btn" type="primary" hover-class="add-btn-hover" bindtap="addNewAddress">新增收货地址</button>
+  </view>
+  <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+</view>
+<view wx:else class="load-prompt">
+  <template is="loadPrompt" />
+</view>
+<view wx:if="{{isShowToast}}">
+  <template is="toast" data="{{...toastText}}" />
+</view>
+</button>
+</form>

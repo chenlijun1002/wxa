@@ -1,0 +1,71 @@
+<!--pages/stairgroup/cashbackrecord/cashbackrecord.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}">
+            <view class="shop-panel margin-b-24">
+                <view class="shop-cell">商品详情</view>
+                <navigator url="/pages/stairgroup/activitydetail/activitydetail?activityId={{StairGroupInfo.ActivityId}}">
+                    <view class="shop-detail clearfix">
+                        <view class="shop-detail-img pull-left">
+                            <image mode="aspectFill" src="{{StairGroupInfo.ProductImg}}"></image>
+                        </view>
+                        <view class="shop-detail-content">
+                            <view class="shop-name text-ellipsis font-28">
+                                <text class="activity-tag">{{StairGroupInfo.ActivityTag}}</text>{{StairGroupInfo.ProductName}}</view>
+                            <view class="shop-specification font-24">
+                                <text>{{StairGroupInfo.SkuName}}</text>
+                            </view>
+                            <view class="shop-price">
+                                <text class="font-28">
+              <text class="font-24">￥</text>{{StairGroupInfo.SalePrice}}</text>
+                                <text>x{{StairGroupInfo.Quantity}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <view class="shop-cell flex-e">
+                    <text class="font-28">实付款: ￥<text class="font-32">{{StairGroupInfo.PayMoney}}</text> </text>
+                    <text class="font-28 color-74">（含运费￥{{StairGroupInfo.Freight}}）</text>
+                </view>
+            </view>
+            <view class="cashback-description bg-white margin-b-24">
+                <view class="cashback-description-icon"></view>
+                <view class="cashback-description-text">
+                    <text class="font-28">活动期间</text>
+                    <view wx:for="{{StairGroupInfo.cashBackDesc}}" class="font-24">{{item}}</view>
+                </view>
+            </view>
+            <view class="shop-panel margin-b-24 padding-b-48">
+                <view class="shop-cell line">获得返现记录</view>
+                <view wx:for="{{RefundRecord}}" class="row {{index % 2 == 0 ? 'bg-f7' : ''}}">
+                    <text>满{{item.StairNum}}件</text>
+                    <text>{{item.CreateDateTime}}</text>
+                    <text>获得￥{{item.RefundPrice}}</text>
+                </view>
+            </view>
+            <view class="shop-panel">
+                <view class="shop-cell total">
+                    <text>累计返现（总计）</text>
+                    <text class="color-fd">￥{{StairGroupInfo.ReturnMoney}}</text>
+                </view>
+            </view>
+            <view class="padding-lr-24 text-right">
+                <text class="font-24 color-74">提示：累计最高可获得每件￥{{StairGroupInfo.cashBackTotal}}返现</text>
+            </view>
+            <view class="bottom-link">
+                <button open-type="share">邀请小伙伴返现</button>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

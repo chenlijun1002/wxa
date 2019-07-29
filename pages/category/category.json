@@ -1,0 +1,11 @@
+{
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "商品分类",
+    "backgroundTextStyle": "light",
+    "disableScroll": true,
+    "enablePullDownRefresh": false,
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

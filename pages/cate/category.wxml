@@ -1,0 +1,53 @@
+<!--pages/category/category.wxml-->
+<import src="../../template/loading.wxml" />
+
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+  <button class='sendformid-btn' form-type='submit'>
+    <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+    <view class="search border-bottom" bindtap="searchProduct">
+      <view class="search-input">
+        <text class="inputf">搜索商品</text>
+      </view>
+      <icon class="search-icon" type="search" size="16" color="#202020" />
+      <button class="search-btn" type="primary">搜索</button>
+    </view>
+    <view wx:if="{{loadComplete}}">
+      <view wx:if="{{allEmpty}}">
+        <scroll-view class="one-class-nav" scroll-y>
+          <view class="one-class-nav-item {{item.active}}" id="{{item.id}}" data-index="{{idx}}" wx:for="{{oneClass}}" wx:for-index="idx" wx:for-item="item" bindtap="questTwoClass">
+            <text class="text-ellipsis" data-index="{{idx}}" id="{{item.id}}">{{item.name}}</text>
+          </view>
+        </scroll-view>
+        <scroll-view class="two-class-list" scroll-y>
+          <view wx:if="{{twoEmpty}}">
+            <view class="two-class-group clearfix">
+              <navigator url="/pages/productlist/productlist?secondId={{item.Id}}&categoryName={{item.CName}}" open-type="navigate" wx:for="{{twoClass}}" wx:for-item="item">
+                <view class="two-class-item">
+                  <image mode="aspectFill" src="{{item.CategoryImg}}"></image>
+                  <view class="two-class-name">{{item.CName}}</view>
+                </view>
+              </navigator>
+            </view>
+          </view>
+          <view class="empty-data" wx:else>
+            <view class="empty-img-prompt">
+              <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/search-empty-icon.png"></image>
+            </view>
+            <view class="font-28 empty-text">没有找到“{{currentClassText}}”的下级分类</view>
+            <button class='look-product-btn' bindtap='linkProduct'>查看商品列表</button>
+          </view>
+        </scroll-view>
+      </view>
+      <view class="empty-data" wx:else>
+        <view class="empty-img-prompt">
+          <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/empty-category.png"></image>
+        </view>
+        <text class="font-36">商家暂未上架分类哦~</text>
+      </view>
+    </view>
+    <view wx:else class="load-prompt">
+      <template is="loadPrompt" />
+    </view>
+  </button>
+</form>

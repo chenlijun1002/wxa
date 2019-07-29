@@ -1,0 +1,372 @@
+<import src="../../template/loading.wxml" />
+<import src="../../template/switch/switch.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+  <button class='sendformid-btn' form-type='submit'>
+    <template wx:if="{{isClose}}" is="close" />
+    <view wx:if="{{isDel==0}}">
+      <view wx:if="{{loadComplete}}">
+        <view class='probation-tips' wx:if="{{isProbationShop===0}}">试用店铺,请勿购买任何商品</view>
+        <view class="order-address text-center" wx:if="{{!isAuthAddress}}" bindtap="addNewAddress">
+          <label>+</label>
+          <text>新建收货地址</text>
+        </view>
+        <view class="order-address" wx:if="{{isAuthAddress}}" bindtap="goAddressList">
+          <text class="font-32">{{regionInfo.regionMemberName}} {{regionInfo.regionCellPhone}}</text>
+          <view class="address">
+            <text>{{regionInfo.regionProvince}} {{regionInfo.regionCity}} {{regionInfo.regionCounty}} {{regionInfo.regionStreet}} {{regionInfo.regionAddress}}</text>
+            <label class="address-icon"></label>
+            <label class="right-icon"></label>
+          </view>
+        </view>
+        <!--立即购买时的显示-->
+        <view class="order-info bg-white margin-b-24" wx:if="{{pageType=='submitbuy'}}">
+          <view class="group-row color-75 border-bottom">我的订单</view>
+          <view class="table-view-cell border-bottom padding-24 clearfix">
+            <image class="media-object" mode="aspectFill" src="{{productImgUrl}}"></image>
+            <view class="media-body">
+              <view class="text-ellipsis product-name">{{productInfo.ProductName}}</view>
+              <view class="prodcut-specifications">{{productSkuInfo}}</view>
+              <view class="font-28 color-75" style="margin-bottom:5rpx;">库存：{{productStock}}件</view>
+              <view class="price-num">
+                <text class="pull-left font-32">￥{{productSalePrice}}</text>
+                <text class="pull-right font-28">x{{selectedCount}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="group-row font-32" bindtap="discountMode" wx:if="{{discountInfoList.length>0}}">
+            <label class="color-75">满减优惠</label>
+            <view class="pull-right" style="margin-right:60rpx;">
+              {{discountText}}
+            </view>
+            <label class="right-icon"></label>
+          </view>
+          <view class="group-row font-32 line" bindtap="couponMode" wx:if="{{showCoupon && couponList.length>0}}">
+            <label class="color-75">优惠券</label>
+            <view class="pull-right" style="margin-right:60rpx;">{{couponSelectedText}}</view>
+            <label class="right-icon"></label>
+          </view>
+          <!-- <view class="group-row font-32" bindtap="deliveryMode" data-templateid="{{templateId}}">
+            <label class="color-75">配送方式</label>
+            <view class="pull-right" wx:if="{{templateId<=0}}">
+              {{shipText}}
+              <text class="margin-l-10 font-28">(快递发货)</text>
+            </view>
+            <view class="pull-right" style="margin-right:60rpx;" wx:if="{{templateId>0}}">
+              {{shipText}}
+            </view>
+            <label class="right-icon" wx:if="{{templateId>0}}"></label>
+          </view> -->
+          <view class="group-row font-32 distribution line" bindtap="showDistributionMode">
+            <label class="color-75">配送方式</label>
+            <!-- <view wx:if="{{!IsExpress && !CityDistribution.IsCityDistribution && PickUp.IsPickup && !PickUp.EnablePickUp}}" class="pull-right" style="margin-right:60rpx;">
+              上门自提
+            </view> -->
+            <!-- <view wx:elif="{{!IsExpress && CityDistribution.IsCityDistribution && !PickUp.IsPickup}}" class="pull-right" style="margin-right:60rpx;">
+              同城配送
+            </view> -->
+            <view  class="pull-right" style="margin-right:60rpx;">
+              {{ shipText}}
+            </view>
+            <label class="right-icon"></label>
+              <!-- <label class="right-icon" wx:if="{{!isSelectedAddress || IsExpress || (!IsExpress && !CityDistribution.IsCityDistribution && PickUp.IsPickup) || (!IsExpress && !PickUp.IsPickup && CityDistribution.IsCityDistribution)}}"></label> -->
+          </view>
+          <view wx:if="{{currentPickup.Id > -1}}" class='pickup-info line' bindtap="showPickupPopup">
+            <view class='title'>自提点</view>
+            <view class='pikup-info-address'>
+              <text class='name'>{{currentPickup.PickUpName}}</text>
+              <text class='address'>{{currentPickup.MaxAddress}}{{currentPickup.Address}}</text>
+            </view>
+            <label class="right-icon" wx:if="{{IsExpress}}"></label>
+          </view>
+          <view class="remark">
+            <label>备注：</label>
+            <view class="remark-input">
+              <input type="text" maxlength="50" bindinput="bindRemarkInput" placeholder="选填,给商家留言，50字以内" />
+            </view>
+          </view>
+        </view>
+        <!--立即购买时的显示结束-->
+        <!--购物车购买时的显示-->
+        <view class="order-info bg-white margin-b-24" wx:if="{{pageType=='shopcart'}}" wx:for="{{orderList}}" wx:key="*this" wx:for-index="index" wx:for-item="orderItem">
+          <view class="group-row color-75 border-bottom">我的订单{{index+1}}</view>
+          <view class="table-view-cell border-bottom padding-24 clearfix" wx:for="{{orderItem.ShoppingCarts}}" wx:key="*this" wx:for-index="idx" wx:for-item="item">
+            <image class="media-object" mode="aspectFill" src="{{item.Product.ImageUrl1}}"></image>
+            <view class="media-body">
+              <view class="text-ellipsis product-name">{{item.Product.ProductName}}</view>
+              <view class="prodcut-specifications">{{item.skuContent}}</view>
+              <view class="font-28 color-75" style="margin-bottom:5rpx;">库存：{{item.stock}}件</view>
+              <view class="price-num">
+                <text class="pull-left font-32">￥{{item.skuPrice}}</text>
+                <text class="pull-right font-28">x{{item.Quantity}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="group-row font-32" bindtap="cartDiscountMode" wx:if="{{orderItem.discountInfoList.length>0}}" data-index="{{index}}">
+            <label class="color-75">满减优惠</label>
+            <view class="pull-right" style="margin-right:60rpx;">
+              {{orderItem.discountText}}
+            </view>
+            <label class="right-icon"></label>
+          </view>
+          <view class="group-row font-32" bindtap="cartCouponMode" wx:if="{{showCoupon && orderItem.couponList.length>0}}" data-couponindex="{{index}}">
+            <label class="color-75">优惠券</label>
+            <!-- <view class="pull-right" style="margin-right:60rpx;">{{couponsNum>index?orderItem.couponSelectedText:"选择优惠券"}}</view> -->
+            <view class="pull-right" style="margin-right:60rpx;">{{orderItem.couponSelectedText}}</view>
+            <label class="right-icon"></label>
+          </view>
+          <!-- cartDeliveryMode  -->
+          <view class="group-row font-32" bindtap="showDistributionMode" data-templateid="{{orderItem.TemplateId}}" data-index="{{index}}">
+            <label class="color-75">配送方式</label>
+            <view class="pull-right" style="margin-right:60rpx;">
+              {{orderItem.shipText}}
+            </view>
+            <label class="right-icon"></label>
+          </view>
+          <view wx:if="{{orderItem.currentPickup.Id > -1}}" class='pickup-info line' bindtap="showPickupPopup">
+            <view class='title'>自提点</view>
+            <view class='pikup-info-address'>
+              <text class='name'>{{orderItem.currentPickup.PickUpName}}</text>
+              <text class='address'>{{orderItem.currentPickup.MaxAddress}}{{orderItem.currentPickup.Address}}</text>
+            </view>
+            <label class="right-icon" wx:if="{{IsExpress}}"></label>
+          </view>
+          <view class="remark">
+            <label>备注：</label>
+            <view class="remark-input">
+              <input type="text" maxlength="50" bindinput="bindRemarkInputList" data-ids="{{index}}" placeholder="选填,给商家留言，50字以内" />
+            </view>
+          </view>
+        </view>
+        <!--购物车购买时的显示结束-->
+        <view class="xkd-panel" wx:if="{{orderConfig.EnableBalance || (orderConfig.PointsEnable && orderConfig.MaxUsedPoints>0)}}">
+          <view class="xkd-cell xkd-cell-single line" wx:if="{{orderConfig.PointsEnable && orderConfig.MaxUsedPoints>0&&PointsEnable}}">
+            <text class="left-words font-32">{{pointsText}}</text>
+            <view>
+              <template is="xkd-switch" data="{{...pointsSwitch, switchType: 'pointsSwitch', componentId: 'sync'}}"></template>
+            </view>
+          </view>
+          <view class="xkd-cell xkd-cell-single line" wx:if="{{orderConfig.EnableBalance && balanceDiscount>0}}">
+            <text class="left-words font-32">{{balanceText}}</text>
+            <view>
+              <template is="xkd-switch" data="{{...balanceSwitch, switchType: 'balanceSwitch', componentId: 'sync'}}"></template>
+            </view>
+          </view>
+        </view>
+        <view class="order-price margin-b-24">
+          <view class="row">
+            <label class="color-75">商品金额</label>
+            <text class="pull-right">￥{{productTotal}}</text>
+          </view>
+          <view class="row" wx:if="{{showCoupon && totalCouponDiscount!='0.00'}}">
+            <label class="color-75">优惠券</label>
+            <text class="pull-right">-￥{{totalCouponDiscount}}</text>
+          </view>
+          <view class="row" wx:if="{{orderConfig.PointsEnable && orderConfig.MaxUsedPoints>0&&PointsEnable}}">
+            <label class="color-75">积分抵扣</label>
+            <text class="pull-right">-￥{{totalPointDiscount}}</text>
+          </view>
+          <view class="row" wx:if="{{totalDiscount!='0.00'}}">
+            <label class="color-75">满减优惠</label>
+            <text class="pull-right">-￥{{totalDiscount}}</text>
+          </view>
+          <view class="row">
+            <label class="color-75">运费</label>
+            <text class="pull-right">+￥{{freight}}</text>
+          </view>
+          <view class="row">
+            <label class="color-75">合计</label>
+            <text class="pull-right">￥{{totalPrice}}</text>
+          </view>
+          <!-- <view class="row">
+        <text class="pull-right">积分 完成订单后预计可返{{returnPoint}}积分</text>
+      </view> -->
+        </view>
+        <view class="bg-white padding-32-24">
+          <text class="font-32"><text class="integral-mark">积分</text> 完成订单后预计可返
+          <text class="color-FF4757">{{returnPoint>=0?returnPoint:0}}</text>积分</text>
+        </view>
+        <view class="nav-fiexd-bottom">
+          <view class="nav-fiexd-bottom-item total-info">
+            <view class="price-total">
+              合计：
+              <text class="coin">￥</text>
+              <text class="total">{{totalPrice}}</text>(含运费)
+            </view>
+          </view>
+          <view class='distribution-bottom-tips' wx:if="{{!IsExpress && !CityDistribution.IsCityDistribution && PickUp.IsPickup && !PickUp.EnablePickUp}}">
+            <icon class='icon' type="warn" size="16" /> 您的收货地址不支持上门自提
+          </view>
+          <view class='distribution-bottom-tips' wx:elif="{{!IsExpress && CityDistribution.IsCityDistribution && !addressInCitydistribution && !PickUp.IsPickup}}">
+            <icon class='icon' type="warn" size="16" /> 您的收货地址不支持同城配送
+          </view>
+          <view class="nav-fiexd-bottom-item payment-btn">
+            <button wx:if="{{!IsExpress && !CityDistribution.IsCityDistribution && PickUp.IsPickup && !PickUp.EnablePickUp}}" type="primary" disabled="{{true}}"> {{payText}} </button>
+            <button wx:else type="primary" hover-class="payment-btn-hover" bindtap="wxPay" disabled="{{btnIsLoading}}"> {{payText}} </button>
+          </view>
+        </view>
+        <!--配送配置选择弹窗-->
+        <view class="mask {{isDistributionModalShow}}" bindtap="closeDistributionModal"></view>
+        <view class="popup distribution-modal {{isDistributionModalShow}} padding-lr-24">
+          <view class="popup-header line" style='text-align: left;'>
+            <text>选择配送方式</text>
+            <icon class="cancel pull-right margin-r-24" type="cancel" bindtap="closeDistributionModal" size="22" color="#757575" />
+          </view>
+          <!-- 立即购买 -->
+          <view class='distribution-list' wx:if="{{pageType == 'submitbuy'}}">
+            <view class='distribution-item line {{distributionMode == 1 && isSelectedDistribution ? "active" : ""}}' wx:if="{{IsExpress}}" data-id="1" bindtap='selectDistributionMode'>
+              <view class='distribution-item-icon'>
+                <icon wx:if="{{distributionMode == 1 && isSelectedDistribution}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='font-32'>物流配送</text>
+              </view>
+            </view>
+            <view class='distribution-item line {{distributionMode == 2 && isSelectedDistribution ? "active" : ""}}' wx:if="{{PickUp.IsPickup}}" data-id="2" bindtap='selectDistributionMode'>
+              <view class="distribution-item-icon {{PickUp.EnablePickUp ? '' : 'bg'}}">
+                <icon wx:if="{{distributionMode == 2 && isSelectedDistribution}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='font-32'>上门自提</text>
+                <text class='tips font-28 color-bd' wx:if="{{!PickUp.EnablePickUp}}">您的收货地址不支持上门自提</text>
+              </view>
+            </view>
+            <view class='distribution-item line {{distributionMode == 3 && isSelectedDistribution? "active" : ""}}' wx:if="{{CityDistribution.IsCityDistribution}}" data-id="3" bindtap='selectDistributionMode'>
+              <view class="distribution-item-icon {{!addressInCitydistribution || addressInCitydistribution && notStartPrice ? 'bg' : ''}}">
+                <icon wx:if="{{distributionMode == 3 && isSelectedDistribution}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='font-32'>同城配送</text>
+                <text class='tips font-28 color-bd' wx:if="{{!addressInCitydistribution}}">您的收货地址不支持同城配送</text>
+                <text class='tips font-28 color-bd' wx:if="{{addressInCitydistribution && notStartPrice}}">您还差 {{CityDistribution.SpreadMoney}} 元才可达到起送价</text>
+              </view>
+            </view>
+          </view>
+          <!-- 购物车 -->
+          <view class='distribution-list' wx:else>
+            <view class='distribution-item line {{orderList[currentCarOrderIndex].distributionMode == 1 && orderList[currentCarOrderIndex].isSelectedDistribution ? "active" : ""}}' wx:if="{{IsExpress}}" data-id="1" bindtap='selectDistributionMode'>
+              <view class='distribution-item-icon'>
+                <icon wx:if="{{orderList[currentCarOrderIndex].distributionMode == 1 && orderList[currentCarOrderIndex].isSelectedDistribution}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='font-32'>物流配送</text>
+              </view>
+            </view>
+            <view class='distribution-item line {{orderList[currentCarOrderIndex].distributionMode == 2 && orderList[currentCarOrderIndex].isSelectedDistribution? "active" : ""}}' wx:if="{{PickUp.IsPickup}}" data-id="2" bindtap='selectDistributionMode'>
+              <view class="distribution-item-icon {{PickUp.EnablePickUp && !(SupplyShip && orderList[currentCarOrderIndex].SupplyId > 0) ? '' : 'bg'}}">
+                <icon wx:if="{{orderList[currentCarOrderIndex].distributionMode == 2 && orderList[currentCarOrderIndex].isSelectedDistribution}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='font-32'>上门自提</text>
+                <text class='tips font-28 color-bd' wx:if="{{!PickUp.EnablePickUp}}">您的收货地址不支持上门自提</text>
+                <text class='tips font-28 color-bd' wx:if="{{SupplyShip && orderList[currentCarOrderIndex].SupplyId > 0}}">部分商品不支持上门自提</text>
+              </view>
+            </view>
+            <view class='distribution-item line {{orderList[currentCarOrderIndex].distributionMode == 3 && orderList[currentCarOrderIndex].isSelectedDistribution ? "active" : ""}}' wx:if="{{CityDistribution.IsCityDistribution}}" data-id="3" bindtap='selectDistributionMode'>
+              <view class="distribution-item-icon {{!addressInCitydistribution || addressInCitydistribution && orderList[currentCarOrderIndex].notStartPrice ? 'bg' : ''}}">
+                <icon wx:if="{{orderList[currentCarOrderIndex].distributionMode == 3 && orderList[currentCarOrderIndex].isSelectedDistribution}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='font-32'>同城配送</text>
+                <text class='tips font-28 color-bd' wx:if="{{!addressInCitydistribution}}">您的收货地址不支持同城配送</text>
+                <text class='tips font-28 color-bd' wx:if="{{addressInCitydistribution && orderList[currentCarOrderIndex].notStartPrice}}">您还差 {{orderList[currentCarOrderIndex].CityDistribution.SpreadMoney}} 元才可达到起送价</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!--配送配置选择弹窗结束-->
+        <!--物流方式选择弹窗-->
+        <view class="mark {{isPopupShow}}" bindtap="closePopup"></view>
+        <view class="popup-bottom {{isPopupShow}} padding-lr-24">
+          <view class="popup-header line" style='text-align: left;'>
+            <text>选择物流方式</text>
+            <icon class="cancel pull-right margin-r-24" type="cancel" bindtap="closePopup" size="22" color="#757575" />
+          </view>
+          <view class="popup-delivery-mode">
+            <view class="delivery-mode-item line" wx:for="{{deliveryList}}" wx:for-index="idx" wx:for-item="item" data-index="{{idx}}" bindtap="selectDeliveryMode" data-value="{{item.Value}}" data-key="{{item.Key}}">
+              <label class="checkbox-box" data-index="{{idx}}">
+                <view class="checkbox {{item.isChecked}}" data-index="{{idx}}"></view>
+                {{item.Key}}
+              </label>
+            </view>
+          </view>
+          <!-- <button class="popup-bottom-btn" hover-class="popup-bottom-btn-hover" type="primary" bindtap="closePopup">关闭</button> -->
+        </view>
+        <!--物流方式选择弹窗结束-->
+        <!--满减活动选择弹窗-->
+        <view class="mark {{isDiscountShow}}" bindtap="closeDiscount"></view>
+        <view class="popup-bottom {{isDiscountShow}}">
+          <view class="popup-delivery-mode padding-lr-24">
+            <view class="delivery-mode-item" wx:for="{{discountList}}" wx:for-index="idx" wx:for-item="item" data-index="{{idx}}" data-activitiesid="{{item.ActivitiesId}}" data-name="{{item.ActivitiesName}}" data-discountmoney="{{item.ReductionMoney}}" data-freeship="{{item.FreeShip}}"
+              data-point="{{item.Point}}" bindtap="selectDiscountMode">
+              <label class="checkbox-box">
+                <view class="checkbox {{item.isChecked}}"></view>
+                {{item.ActivitiesName}}
+              </label>
+            </view>
+          </view>
+          <button class="popup-bottom-btn" hover-class="popup-bottom-btn-hover" type="primary" bindtap="closeDiscount">确定</button>
+        </view>
+        <!--满减活动选择弹窗结束-->
+        <!-- 优惠券弹窗 -->
+        <view class="mask {{showCouponPopup}}" bindtap="closeCouponPopup"></view>
+        <view class="popup {{showCouponPopup}}">
+          <view class="popup-header line">
+            <text>选择优惠券</text>
+            <icon class="cancel" type="cancel" bindtap="closeCouponPopup" size="22" color="#757575" />
+          </view>
+          <view class="select-group">
+            <view class="group-row line" data-serviceType="0" wx:for="{{couponList}}" bindtap="selectCoupon" data-couponid="{{item.Value}}" data-conditionmoney="{{item.conditionMoney}}" data-discountmoney="{{item.discountMoney}}">
+              {{item.showText}}
+              <icon type="success_no_circle" style="display:block;" size="18" color="#00A699" wx:if="{{item.selected}}" />
+            </view>
+          </view>
+        </view>
+        <!-- 自提点弹窗 -->
+        <view class="mask {{pickupPopup}}" bindtap="closePickupPopup"></view>
+        <view class="popup {{pickupPopup}}">
+          <view class="popup-header padding-l-24 line" style='text-align: left;'>
+            <text>选择自提点</text>
+            <icon class="cancel pull-right" type="cancel" bindtap="closePickupPopup" size="22" color="#757575" />
+          </view>
+          <view class='distribution-list pickup-list' wx:if="{{pageType == 'submitbuy'}}">
+            <view class='distribution-item line {{currentPickup.Id == item.Id||(currentPickup.Id ==0&&itemp== item.Id) ? "active" : ""}}' wx:for="{{pickupList}}" wx:key="{{item.Id}}" data-id="{{item.Id}}" bindtap='selectPickup'>
+              <view class='distribution-item-icon'>
+                <icon wx:if="{{currentPickup.Id == item.Id||(currentPickup.Id ==0&&itemp== item.Id)}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='distribution-title font-28'>{{item.PickUpName}}</text>
+                <text class='pickup-address font-28'>{{item.MaxAddress}}{{item.Address}}</text>
+              </view>
+            </view>
+          </view>
+          <view class='distribution-list pickup-list' wx:else>
+            <view class='distribution-item line {{orderList[currentCarOrderIndex].currentPickup.Id == item.Id ? "active" : ""}}' wx:for="{{pickupList}}" wx:key="{{item.Id}}" data-id="{{item.Id}}" bindtap='selectPickup'>
+              <view class='distribution-item-icon'>
+                <icon wx:if="{{orderList[currentCarOrderIndex].currentPickup.Id == item.Id}}" type="success" color="#00A699" size="20" />
+              </view>
+              <view class='distribution-item-info'>
+                <text class='distribution-title font-28'>{{item.PickUpName}}</text>
+                <text class='pickup-address font-28'>{{item.MaxAddress}}{{item.Address}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+      </view>
+      <view wx:else class="load-prompt">
+        <template is="loadPrompt" />
+      </view>
+    </view>
+    <view class="empty-data" wx:else>
+      <view class="empty-img-prompt">
+        <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/noProduct.png"></image>
+      </view>
+      <text class="font-32 empty-text">用户已被删除！</text>
+    </view>
+    <view wx:if="{{isShowToast}}">
+      <template is="toast" data="{{...toastText}}" />
+    </view>
+  </button>
+</form>

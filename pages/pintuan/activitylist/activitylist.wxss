@@ -1,0 +1,319 @@
+/* pages/pintuan/activitylist/activitylist.wxss */
+page{
+    padding-bottom: 130rpx;
+}
+.search {
+  position: relative;
+  padding: 16rpx 110rpx 16rpx 24rpx;
+  background-color: #fff;
+}
+
+.search input {
+  display: block;
+  height: 74rpx;
+  background-color: #e0e0e0;
+  border-radius: 8rpx;
+  padding-left: 74rpx;
+  font-size: 28rpx;
+}
+
+.search icon {
+  position: absolute;
+  left: 48rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search .screen {
+  position: absolute;
+  right: 0;
+  width: 110rpx;
+  text-align: center;
+  height: 74rpx;
+  top: 50%;
+  margin-top: -37rpx;
+}
+
+.search .screen .icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0 auto 2rpx;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/screen-icon.png') no-repeat left top;
+  background-size: cover;
+}
+
+.search .screen .screen-text {
+  font-size: 24rpx;
+  color: #515151;
+}
+
+.activity-list-nav {
+  display: table;
+  width: 100%;
+  background-color: #fff;
+}
+
+.activity-list-nav .nav-item {
+  position: relative;
+  display: table-cell;
+  width: 50%;
+  text-align: center;
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 32rpx;
+}
+
+.activity-list-nav .nav-item.active {
+  color: #ffa200;
+}
+
+.activity-list-nav .nav-item.active:after {
+  position: absolute;
+  content: "";
+  height: 4rpx;
+  background-color: #ffa200;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 130rpx;
+}
+
+scroll-view {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 206rpx;
+}
+
+.activity-list {
+  background-color: #fff;
+}
+
+.activity-list .media-object {
+  float: left;
+  padding: 24rpx;
+}
+
+.activity-list .media-object image {
+  width: 202rpx;
+  height: 202rpx;
+}
+
+.activity-list .media-body {
+  overflow-x: hidden;
+  padding: 24rpx 0;
+  padding-right: 24rpx;
+  border-bottom: 1rpx solid #dfdfdf;
+}
+
+.activity-list:last-child .media-body {
+  border-bottom: none;
+}
+
+.activity-list .media-body .prodcut-name {
+  font-size: 28rpx;
+  line-height: 48rpx;
+  height: 96rpx;
+}
+
+.activity-list .media-body .prodcut-name label {
+  font-size: 24rpx;
+  color: #ff7800;
+  border: 1rpx solid #ff7800;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+}
+
+.seckill.activity-list .media-body .prodcut-name label {
+  color: #fd1d1d;
+  border: 1rpx solid #fd1d1d;
+}
+
+.original-price-sold {
+  font-size: 24rpx;
+  line-height: 48rpx;
+}
+
+.original-price-sold .original-price {
+  color: #757575;
+  text-decoration: line-through;
+  margin-right: 26rpx;
+}
+
+.activity-price .present-price {
+  font-size: 32rpx;
+  color: #fd1d1d;
+}
+
+.activity-price .original-price {
+  font-size: 28rpx;
+  color: #bdbdbd;
+  text-decoration: line-through;
+  margin-left: 24rpx;
+}
+
+.activity-price {
+  line-height: 66rpx;
+}
+
+button.activity-btn {
+  font-size: 28rpx;
+  margin-left: 26rpx;
+  background-color: #fd1d1d;
+  line-height: 64rpx;
+  padding: 0 34rpx;
+}
+
+button.activity-pintuan-btn.disable-btn, button.activity-miaosha-btn.disable-btn {
+  background: #bbb;
+}
+
+button.activity-pintuan-btn {
+  background-color: #fd1d1d;
+}
+
+button.activity-miaosha-btn {
+  background-color: #ffa200;
+}
+
+.miaosha-btn-hover {
+  background-color: #e59100 !important;
+}
+
+.pintuan-btn-hover {
+  background-color: #e31a1a !important;
+}
+
+.screen-popup {
+  position: fixed;
+  width: 568rpx;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: #fff;
+  transform: translateX(100%);
+  transition: all 0.4s;
+}
+
+.screen-popup.show {
+  transform: translateX(0);
+}
+
+.screen-content-header {
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+.screen-content-header .header-text {
+  display: inline-block;
+  padding-left: 64rpx;
+  font-size: 36rpx;
+  color: #515151;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/screen-icon.png') no-repeat left center;
+  background-size: 46rpx;
+}
+
+.screen-nav-list {
+  padding: 0 24rpx;
+}
+
+.screen-nav-list .nav-item {
+  display: inline-block;
+  margin-right: 16rpx;
+}
+
+.screen-nav-list .nav-item:last-child {
+  margin-right: 0;
+}
+
+.screen-nav-list .nav-item.all {
+  display: block;
+}
+
+.screen-nav-list .nav-item .nav-text {
+  display: inline-block;
+  height: 66rpx;
+  line-height: 66rpx;
+  background-color: #f0f0f0;
+  color: #747474;
+  border-radius: 8rpx;
+  padding: 0 34rpx;
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  max-width: 122rpx;
+  transition: all 0.4s;
+}
+
+.screen-nav-list .nav-item.select .nav-text {
+  background-color: #ffa200;
+  color: #fff;
+}
+
+/* 倒计时 */
+
+.media-object {
+  position: relative;
+}
+
+.label-title {
+  position: absolute;
+  bottom: 34rpx;
+  /* left: 24rpx; */
+  text-align: center;
+  width: 150rpx;
+  height: 50rpx;
+  display: table;
+  background: #ff7800;
+  background: -moz-linear-gradient(left, #ff7800 0%, #ffa200 100%);
+  background: -webkit-gradient(linear, left center, right center, color-stop(0%, #ff7800), color-stop(100%, #ffa200));
+  background: -webkit-linear-gradient(left, #ff7800 0%, #ffa200 100%);
+  background: -ms-linear-gradient(left, #ff7800 0%, #ffa200 100%);
+  background: linear-gradient(to right, #ff7800 0%, #ffa200 100%);
+  color: #fff;
+  /* padding-left: 24rpx;    */
+  padding-right: 20rpx;
+  border-top-right-radius: 50rpx;
+  border-bottom-right-radius: 50rpx;
+}
+
+.seckill .label-title {
+  background: #fd1d1d;
+  background: -moz-linear-gradient(left, #fd1d1d 0%, #ff7800 100%);
+  background: -webkit-gradient(linear, left center, right center, color-stop(0%, #fd1d1d), color-stop(100%, #ff7800));
+  background: -webkit-linear-gradient(left, #fd1d1d 0%, #ff7800 100%);
+  background: -ms-linear-gradient(left, #fd1d1d 0%, #ff7800 100%);
+  background: linear-gradient(to right, #fd1d1d 0%, #ff7800 100%);
+}
+
+.label-title .label-text {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.label-title .label-text .text {
+  padding-top: 10rpx;
+    height: 30rpx;
+    font-size: 24rpx;
+    line-height: 30rpx;
+}
+
+.label-title .label-text .time {
+  font-size: 28rpx;
+    height: 45rpx;
+    line-height: 45rpx;
+}
+
+.research {
+  position: absolute;
+  bottom: 16rpx;
+  right: 10rpx;
+  background-color: #ff7800 !important;
+  width: 100rpx;
+  height: 74rpx;
+  line-height: 74rpx;
+}

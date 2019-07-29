@@ -1,0 +1,98 @@
+<!--toComment.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="nav-fixed-top">
+            <view class="nav-item" data-index="-1" bindtap="changeState">
+                <view data-index="-1" class="{{selectIndex==-1?'active':''}}">待评价</view>
+            </view>
+            <view class="nav-item " data-index="0" bindtap="changeState">
+                <view data-index="0" class="{{selectIndex==0?'active':''}}">已评价
+                    <text class="circle-tip" wx:if="{{IsRead}}"></text>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{loadComplete}}" class="box">
+            <scroll-view scroll-y lower-threshold="50" scroll-top="{{scrollTop}}" bindscrolltolower="pullLoadingData" class="scroll">
+                <!-- <view wx:if="{{sepllGroupList.length>0}}">
+      <view class="order-item" wx:for="{{sepllGroupList}}">       
+        <navigator url="{{item.OrderStatus==0?'/pages/seckilling/confirmorder/confirmorder?orderId='+item.OrderId:item.OrderStatus==1?'/pages/orderdetail/orderdetail?orderId='+item.OrderId:item.OrderStatus==2?'/pages/seckilling/paystatus/paystatus?status=3&orderId='+item.OrderId:''}}">
+          <view class="table-view-table border-bottom padding-24">
+            <view class="table-view-cell clearfix">
+              <image mode="aspectFill" class="media-object" src="{{item.ProductImgUrl}}"></image>
+              <view class="media-body">
+                <view class="text-ellipsis-2 product-name font-28"><view class="markdown-sale">限时秒杀</view>{{item.ProductName}}</view>
+                <view class="prodcut-specifications font-28">
+                  <text class="color-21 font-32">￥{{item.Price}}</text>
+                  <text class="color-75 ml30">{{item.ProductNum}}件</text>
+                  <text wx:if="{{item.OrderStatus==1}}" class="pull-right {{item.OrderStatus==1?'color-success':''}}">秒杀成功</text>
+                  <text wx:if="{{item.OrderStatus==2}}" class="pull-right">秒杀失败</text>
+                  <text wx:if="{{item.OrderStatus==0}}" class="pull-right {{item.OrderStatus==0?'color-200':''}}">待付款</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </view>    
+    </view> -->
+                <view class="{{selectIndex==-1?'mt24':''}} {{commentList.length<=4?'mt0':''}}" wx:if="{{commentList.length>0}}">
+                    <block wx:for="{{commentList}}" wx:key="*this" wx:for-item="itemComment">
+                        <view style="height:24rpx;" wx:if="{{commentList.length<=4}}"></view>
+                        <view class="look-comment {{selectIndex==0?'mt24':''}}" wx:if="{{selectIndex==0}}">
+                            <view class="pull-left star margin-r-32">
+                                <image src="{{itemComment.StarRating>0?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>1?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>2?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>3?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                <image src="{{itemComment.StarRating>4?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                            </view>
+                            <view class="time pull-left">
+                                <text class="font-28">{{itemComment.AddDate}}</text>
+                            </view>
+                            <view class="time pull-left" wx:if="{{itemComment.HasPicComment}}">
+                                <text class="font-24 hasImg">有晒图</text>
+                            </view>
+                            <view class="pull-right font-28 time mr24 relative" data-orderId="{{itemComment.OrderId}}" data-productId="{{itemComment.ProductId}}" data-skuId="{{itemComment.SkuId}}" catchtap="lookComment">
+                                <text>查看评价<text class="circle-tips" wx:if="{{!itemComment.IsRead}}"></text></text>
+                                <text class="right-arrow inline-block"></text>
+                            </view>
+                        </view>
+                        <navigator url="../detail/detail?productId={{itemComment.ProductId}}">
+                            <view class="padding-32-24 bgcolor-ff product {{selectIndex==0?'border-b-none':''}}">
+                                <view class="productImg inline-block">
+                                    <image mode="scaleToFill" src="{{itemComment.ProductImg}}"></image>
+                                </view>
+                                <view class="pull-right font-28 productName">
+                                    <view class="text-ellipsis-2">
+                                        <text class="color-51">{{itemComment.ProductName}}</text>
+                                    </view>
+                                    <text class="text-ellipsis color-74 sku text-ellipsis">{{itemComment.SkuStr}}</text>
+                                </view>
+                                <view class="button" data-orderId="{{itemComment.OrderId}}" data-productId="{{itemComment.ProductId}}" data-skuId="{{itemComment.SkuId}}" wx:if="{{selectIndex==-1}}" catchtap="toComment">评价晒单</view>
+                            </view>
+                        </navigator>
+                    </block>
+                </view>
+                <view class="empty-data" wx:else>
+                    <view class="empty-img-prompt">
+                        <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/noComment.png"></image>
+                    </view>
+                    <text class="font-36">暂无评价~</text>
+                </view>
+                <view class="pull-loading" wx:if="{{isShowLoading}}">
+                    <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                    {{loadingText}}
+                </view>
+                <!-- <view style="height:24rpx;" wx:if="{{commentList.length<=2}}"></view> -->
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

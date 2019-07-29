@@ -1,0 +1,57 @@
+<!--pages/productlist/productlist.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view class="search">
+            <view class="search-input">
+                <input placeholder="搜索商品" type="text" bindinput="changeSearchValue" bindconfirm="changeSearchValue" />
+            </view>
+            <icon class="search-icon" type="search" size="16" color="#202020" />
+            <button class="search-btn" type="primary" hover-class="search-btn-hover" bindtap="doSearch">搜索</button>
+        </view>
+        <view class="product-nav border-bottom">
+            <view class="product-nav-item {{item.active}}" wx:for="{{navList}}" wx:for-index="idx" wx:key="idx" data-index="{{idx}}" bindtap="changeNav">
+                <view wx:if="{{idx>0}}" class="arrow-icon {{item.arrow}}"></view>{{item.name}}</view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view scroll-y lower-threshold="200" scroll-top="{{scrollTop}}" bindscrolltolower="pullLoadingData">
+                <view wx:if="{{productList.length>0}}">
+                    <navigator url="../detail/detail?productId={{item.Id}}" wx:for="{{productList}}" wx:key="*this">
+                        <view class="table-view-table border-bottom padding-24 bg-white">
+                            <view class="table-view-cell clearfix">
+                                <image mode="aspectFill" class="media-object" src="{{item.ImageUrl1}}"></image>
+                                <view class="media-body">
+                                    <view class="text-ellipsis-2 height-96 margin-b-24 product-name">{{item.ProductName}}</view>
+                                    <view class="classname">
+                                        <text class="color-strong font-28">￥</text>
+                                        <text class="color-strong font-40">{{item.MinShowPrice}}</text>
+                                        <text class="color-75 font-28 margin-l-28">{{item.ShowSaleCounts}}人已购买</text>
+                                    </view>
+                                    <navigator class="add-cart" url="../detail/detail?productId={{item.Id}}"></navigator>
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+                <view class="empty-data" wx:else>
+                    <view class="empty-img-prompt">
+                        <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/empty-product.png"></image>
+                    </view>
+                    <text class="font-36">还没有相关商品哦~</text>
+                </view>
+                <view class="pull-loading" wx:if="{{isShowLoading}}">
+                    <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                    {{loadingText}}
+                </view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+            <button class='customer-service' open-type='contact'></button>
+        </view>
+        <view wx:else class="load-prompt" style="top:236rpx;">
+            <template is="loadPrompt" />
+        </view>
+    </button>
+</form>

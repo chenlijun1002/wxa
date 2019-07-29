@@ -1,0 +1,195 @@
+<!--pages/stairgroup/activitydetail/activitydetail.wxml-->
+<import src="../../../wxparse/wxParse.wxml" />
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <template wx:if="{{isClose}}" is="close" />
+        <view wx:if="{{loadComplete}}">
+            <view class='probation-tips' wx:if="{{isProbationShop===0}}">试用店铺,请勿购买任何商品</view>
+            <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#FFE07F" indicator-active-color="#FFA200">
+                <block wx:if="{{productInfo.VideoUrl}}">
+                    <swiper-item>
+                        <video src="{{productInfo.VideoUrl}}"  poster="{{productInfo.VideoImgUrl}}" objectFit="cover" style="width:100%;height:100%" bindplay="playVideo" bindended="endVideo">
+                        </video>
+                    </swiper-item>
+                </block>
+                <block wx:for="{{productInfo.ImageUrls}}" wx:key="*this">
+                    <swiper-item>
+                        <image mode="aspectFill" src="{{item}}" class="slide-image" width="100%" />
+                    </swiper-item>
+                </block>
+            </swiper>
+            <view class="swiper-table-view line">
+                <view class="table-view-cell swiper-table-left {{activityStatus != 1 || StairGroupInfo.Stock<=0 ? 'bg-w' : ''}}">
+                    <view class="price font-48">
+                        <text class="font-28">￥</text>
+                        <text class="fw-700">{{StairGroupInfo.AuctionPrice}}</text>
+                    </view>
+                    <view wx:if="{{activityStatus == 0 && StairGroupInfo.Stock > 0}}" class="original-price-num flex-column">
+                        <view class="original-price color-74" style="line-height: 70rpx;">￥{{StairGroupInfo.ProductOldPrice}}</view>
+                    </view>
+                    <view wx:if="{{activityStatus == 1 && StairGroupInfo.Stock > 0}}" class="original-price-num flex-column" style="opacity: .7;">
+                        <view class="original-price">￥{{StairGroupInfo.ProductOldPrice}}</view>
+                        <view>当前返现￥{{StairGroupInfo.currentBackMoney}}</view>
+                    </view>
+                    <view wx:if="{{activityStatus == 2 || StairGroupInfo.Stock<=0}}" class="original-price-num flex-column">
+                        <view class="original-price color-74">￥{{StairGroupInfo.ProductOldPrice}}</view>
+                        <view class="color-74">最终返现￥{{StairGroupInfo.finalBackMoney}}</view>
+                    </view>
+                </view>
+                <view class="table-view-cell">
+                    <view class="end-date-time bg-w" wx:if="{{activityStatus==0 && StairGroupInfo.Stock > 0}}">
+                        <view class="date-time-content padding-r-24">
+                            <view class="end-text font-32 text-right color-21" style="letter-spacing: 0;color: #BDBDBD;">活动未开始</view>
+                        </view>
+                    </view>
+                    <view class="end-date-time" wx:if="{{activityStatus==1 && StairGroupInfo.Stock > 0}}">
+                        <view class="end-date-time">
+                            <view class="date-time-content">
+                                <view class="end-text end-style font-28">距团购结束</view>
+                                <view class="time font-32" style="margin-top: 16rpx;">{{ActivityEnd}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="end-date-time bg-w" wx:if="{{activityStatus==2 || StairGroupInfo.Stock<=0}}">
+                        <view class="date-time-content padding-r-24 color-f0 text-right font-32">
+                            活动已结束
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="activity-prodcut-name line">
+                <text class="name text-ellipsis-2"><text class="markdown-sale">{{StairGroupInfo.ActivityTag}}</text>{{StairGroupInfo.ProductName}}</text>
+                <button class="share-icon" open-type="share"></button>
+                <view class="arrowTip font-28">
+                    <text wx:if="{{activityStatus == 0}}" class="fl">等待开团</text>
+                    <text wx:else class="saleTip">已团<text class="color-ff0000">{{StairGroupInfo.SaleNum}}</text>件</text>
+                    <text class="fr">剩余<text class="color-ff0000">{{StairGroupInfo.Stock}}</text>件</text>
+                </view>
+            </view>
+            <view class="select-rows font-28 prodcut-specifications margin-b-24" bindtap="selectSpecifications">
+                <label class="color-75">选择</label>
+                <view class="specifications-text select-text text-ellipsis">
+                    <view class="line1" wx:for="{{selectedSku.selectedSkuName}}" wx:key="*this">{{item}}
+                        <view class="line1" wx:if="{{index!=selectedSku.selectedSkuName.length-1}}">/</view>
+                    </view>
+                </view>
+                <view class="select-row-right"></view>
+            </view>
+            <view class="xkd-panel">
+                <view class="xkd-cell" bindtap="showRulePopup">
+                    <text class="font-32 color-fa">越团越便宜</text>
+                    <text class="font-28 color-74">活动细则>></text>
+                </view>
+                <view class="groupon-table">
+                    <view class="row table-header">
+                        <view class="col">销量</view>
+                        <view class="col">每件返现</view>
+                        <view class="col">最终单价</view>
+                    </view>
+                    <block wx:for="{{StairGroupInfo.StairGroupPriceInfo}}" wx:key="Id">
+                        <view class="row {{item.Id == priceId ? 'active' : ''}}">
+                            <view class="col">
+                                <text class="p-text" wx:if="{{index > 0}}">或</text> 满{{item.SaleNum}}件</view>
+                            <view class="col">￥{{item.ReturnMoney}}</view>
+                            <view class="col">￥{{item.FinalMoney}}</view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="section-box bg-white margin-t-24">
+                <view class="section-box-header">商品详情</view>
+                <view class="image-text">
+                    <view class="wxParse">
+                        <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
+                        <block wx:for="{{nodes}}" wx:key="*this" wx:for-item="item">
+                            <rich-text nodes="{{[item]}}" wx:if="{{item.name !='video'}}" ></rich-text>
+                            <video style='width:100%' src="{{item.children.src}}" class="{{item.class}} wxParse-{{item.iframe}}-video" wx:else></video>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <view class="nav-fiexd-bottom">
+                <view class="nav-fiexd-bottom-item nav-icon" bindtap="goIndex">
+                    <view class="index-icon icon"></view>
+                    <text class="icon-text">专题</text>
+                </view>
+                <button class="nav-fiexd-bottom-item nav-icon" open-type='contact'>
+                    <view class="message-icon icon"></view>
+                    <text class="icon-text">客服</text>
+                </button>
+                <view class="nav-fiexd-bottom-item nav-icon" bindtap="goMember">
+                    <view class="member-icon icon"></view>
+                    <text class="icon-text">会员</text>
+                </view>
+                <view class="nav-fiexd-bottom-item operation-btn go-open-group">
+                    <text wx:if="{{activityStatus==0}}" class="bg-color-cc">{{StairGroupInfo.StartTime}}开团</text>
+                    <button wx:if="{{activityStatus==1 && StairGroupInfo.Stock>0}}" class="share-btn" bindtap="buyNow">立即团</button>
+                    <button wx:if="{{activityStatus==2 || StairGroupInfo.Stock<=0}}" class="share-btn" bindtap="goIndex">去看看其他活动</button>
+                </view>
+            </view>
+            <!-- 规格弹窗 -->
+            <view class="mark {{specifications}}" bindtap="closeSpecificationsPopup"></view>
+            <view class="rule-popup {{specifications}}">
+                <view class="rule-popup-herder">
+                    <image class="product-imag" mode="aspectFill" src="{{selectedSku.selectedSkuImg}}"></image>
+                    <view class="price">
+                        <text>￥</text>{{StairGroupInfo.AuctionPrice}}</view>
+                    <view class="selected-specifications">剩余数量{{Stock}}件</view>
+                    <icon class="cancel" type="cancel" bindtap="closeSpecificationsPopup" size="28" color="#757575" />
+                </view>
+                <view class="rule-popup-body">
+                    <scroll-view scroll-y style="max-height:400rpx;">
+                        <view class="specifications-list">
+                            <view class="specifications-list" wx:for-index="pidx" wx:for="{{productInfo.ProductSKU.skuData}}" wx:for-item="sku" wx:key="*this">
+                                <view class="specifications-title">{{sku.pname}}</view>
+                                <view class="specifications-list-group">
+                                    <view class="specifications-item {{skuValue.selected}}" data-currentIndex="{{cidx}}" data-parentIndex="{{pidx}}" wx:for-index="cidx" wx:for="{{sku.values}}" wx:for-item="skuValue" bindtap="selectedSp" wx:key="*this">{{skuValue.vname}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                    <view class="buy-number clearfix">
+                        <text class="number-text">购买数量</text>
+                        <view class="number-control clearfix">
+                            <text catchtap="minusStock">-</text>
+                            <input type="number" value="{{selectedCount}}" bindinput="validateCount" bindblur="validateCount" bindconfirm="validateCount" />
+                            <text catchtap="addStock">+</text>
+                            <text wx:if="{{StairGroupInfo.AmountLimit < 99999999}}" class="stock-text">每人限购{{StairGroupInfo.AmountLimit}}件</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="rule-popup-footer" wx:if="{{!isConfirm}}">
+                    <button class="block-btn-big" type="primary" hover-class="btn-hover" bindtap="closeSpecificationsPopup">确定</button>
+                </view>
+                <view class="rule-popup-footer" wx:else>
+                    <button class="block-btn-big" type="primary" hover-class="btn-hover" bindtap="confirmBuy">确定</button>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+        <!-- 规则弹窗 -->
+        <view class="mask {{isShowRulePopup}}" bindtap="closeRulePopup"></view>
+        <view class="popup {{isShowRulePopup}}">
+            <view class="popup-header line">
+                <text>团购须知</text>
+                <icon class="cancel" type="cancel" bindtap="closeRulePopup" size="22" color="#757575" />
+            </view>
+            <view class="popup-content font-28 padding-24">
+                {{StairGroupInfo.Regulation}}
+            </view>
+            <view class="popup-btn">
+                <button bindtap="closeRulePopup">我知道了</button>
+            </view>
+        </view>
+    </button>
+</form>

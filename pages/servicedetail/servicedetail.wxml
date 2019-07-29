@@ -1,0 +1,194 @@
+<!--pages/servicedetail/servicedetail.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}">
+  <view class="group-row border-bottom">
+    <text>售后状态</text>
+    <text class="color-main pull-right">{{refundInfo.refundStatusName}}</text>
+  </view>
+  <view class="service-explain">
+    <text wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==0}}">如果商家同意：申请成功，需要您将商品退货给商家后，退款将在1-7个工作日内退回到您指定的账号。</text>
+    <text wx:if="{{refundInfo.refundPayType==0 && refundInfo.sendResult==0}}">如果商家同意，申请将达成，商家将在1-7个工作日内退款至您的账号。</text>
+    <text wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==0}}">如果商家拒绝：该订单的将不能再次申请退款。</text>
+    <text wx:if="{{refundInfo.refundPayType==0 && refundInfo.sendResult==0}}">如果商家拒绝，申请将关闭，不能再进行售后</text>
+    <text wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==0}}">如果商家未处理：可以主动联系商家。</text>
+    <text wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==1}}">亲爱的会员您好，商家已经同意您的退货申请，请在7个工作日内寄回商品。</text>
+    <text wx:if="{{refundInfo.refundPayType==0 && (refundInfo.sendResult==1 || refundInfo.sendResult==3)}}">申请将达成，商家将在1-7个工作日内退款至您的账号。</text>
+    <text wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==5}}">申请成功，商家收到商品退货后，退款将在1-7个工作日内退回到您指定的账号。</text>
+    <text wx:if="{{refundInfo.refundPayType==1 && (refundInfo.sendResult==3 || refundInfo.sendResult==4)}}">亲爱的会员您好，您的退款申请商家已经审核通过，将在7个工作日内退回到您指定的账号。</text>
+    <text wx:if="{{refundInfo.sendResult==-1}}">{{refundInfo.adminRemark}}。</text>
+    <text wx:if="{{refundInfo.sendResult==2}}">亲爱的会员您好，您的退款申请商家已经审核通过，将在7个工作日内退回到您指定的账号。</text>
+    <view class="tel-text" wx:if="{{refundInfo.rExpressTel}}" bindtap="makeCall" data-number="{{refundInfo.rExpressTel}}">{{refundInfo.rExpressTel}}</view>
+  </view>
+  <view class="group-row border-bottom">
+    <text>售后信息</text>
+  </view>
+  <view class="service-info">
+    <view class="service-info-item">
+      <text class="color-75">售后类型：</text>{{refundInfo.refundType}}
+    </view>
+    <view class="service-info-item">
+      <text class="color-75">商品名称：</text>{{refundInfo.productName}}
+    </view>
+    <view class="service-info-item">
+      <text class="color-75">退款金额：</text>￥{{refundInfo.refundMoney}}
+    </view>
+    <view class="service-info-item">
+      <text class="color-75">退款原因：</text>{{refundInfo.refundReason}}
+    </view>
+    <view class="service-info-item">
+      <text class="color-75">提交时间：</text>{{refundInfo.requestTime}}
+    </view>
+    <view class="service-info-item">
+      <text class="color-75">退款编号：</text>{{refundInfo.refundId}}
+    </view>
+    <view class="service-info-item" wx:if="{{refundInfo.certPicList.length>0}}">
+      <text class="color-75">退款凭证：</text>
+      <view class="refund-imgview" wx:for="{{refundInfo.certPicList}}">
+        <image class="refund-img" src="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+  <view class="logistics-data-title">退款进度</view>
+  <view class="logistics-data-p">
+    <view class="logistics-data-group">
+      <!-- <view class="logistics-data-item {{(refundInfo.refundStatus==6 || refundInfo.refundStatus==7)?'current':''}}">
+        <text class="title" wx:if="{{refundInfo.refundStatus==6 || refundInfo.refundStatus==7}}">等待审核</text>
+        <text class="title" wx:if="{{refundInfo.refundStatus==13}}">商家拒绝退款，原因：{{refundInfo.adminRemark}}</text>
+        <text class="title" wx:if="{{refundInfo.refundStatus==9 || refundInfo.refundStatus==10}}">商家同意退款</text>
+        <text class="date-time" wx:if="{{refundInfo.refundTime}}">{{refundInfo.refundTime}}</text>
+      </view> -->
+
+                    <!--退货退款，未审核-->
+                    <block wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==0}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">等待审核</text>
+                        </view>
+                    </block>
+                    <!--退货退款，已审核-->
+                    <block wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==1}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">待买家寄回</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">已审核</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+                    <!--退货退款，买家发货-->
+                    <block wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==5}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">待商家收货</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">买家寄回</text>
+                            <text class="date-time">{{refundInfo.shippingTime}}</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">已审核</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+                    <!--退货退款，确认收货-->
+                    <block wx:if="{{refundInfo.refundPayType==1 && (refundInfo.sendResult==3 || refundInfo.sendResult==4)}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">待发放</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">商家收到货</text>
+                            <text class="date-time">{{refundInfo.takeDeliveryTime}}</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">买家寄回</text>
+                            <text class="date-time">{{refundInfo.shippingTime}}</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">已审核</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+                    <!--退货退款，驳回-->
+                    <block wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==-1}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">驳回</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+                    <!--退货退款，已发放-->
+                    <block wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==2}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">发放</text>
+                            <text class="date-time">{{refundInfo.sendDate}}</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">商家收到货</text>
+                            <text class="date-time">{{refundInfo.takeDeliveryTime}}</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">买家寄回</text>
+                            <text class="date-time">{{refundInfo.shippingTime}}</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">已审核</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+
+                    <!--仅退款，待审核-->
+                    <block wx:if="{{refundInfo.refundPayType==0 && refundInfo.sendResult==0}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">等待审核</text>
+                        </view>
+                    </block>
+                    <!--仅退款，已审核-->
+                    <block wx:if="{{refundInfo.refundPayType==0 && (refundInfo.sendResult==1 || refundInfo.sendResult==3)}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">待发放</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">已审核</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+                    <!--仅退款，驳回-->
+                    <block wx:if="{{refundInfo.refundPayType==0 && refundInfo.sendResult==-1}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">驳回</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+                    <!--仅退款，已发放-->
+                    <block wx:if="{{refundInfo.refundPayType==0 && refundInfo.sendResult==2}}">
+                        <view class="logistics-data-item current">
+                            <text class="title">已发放</text>
+                            <text class="date-time">{{refundInfo.sendDate}}</text>
+                        </view>
+                        <view class="logistics-data-item">
+                            <text class="title">已审核</text>
+                            <text class="date-time">{{refundInfo.autitDate}}</text>
+                        </view>
+                    </block>
+                    <view class="logistics-data-item">
+                        <text class="title">提交申请</text>
+                        <text class="date-time">{{refundInfo.applyForTime}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="padding-24" style="margin-top:50rpx;">
+                <button class="default-size" type="primary" bindtap="goReturnExpress" wx:if="{{refundInfo.refundPayType==1 && refundInfo.sendResult==1}}">寄回商品</button>
+                <button class="default-size" bindtap="goBack" style="margin-top:15rpx;">返回</button>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

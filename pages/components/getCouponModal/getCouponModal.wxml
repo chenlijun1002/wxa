@@ -1,0 +1,21 @@
+<!--pages/components/getCouponModal/getCouponModal.wxml-->
+<view class="getCouponModal-box">
+    <view class='getCouponModal-modal'>
+        <view class='modal-body'>
+            <view class='coupon-content'>
+              <view class='coupon-value color-ff5a5f font-48'>
+                <span class="font-24">￥</span>{{couponData.CouponValue}}
+              </view>
+              <view class='coupon-condition' style="text-align:left;padding-left:72rpx;">
+            <view class='color-515151' wx:if="{{item.ConditionValue>0}}">满{{couponData.ConditionValue}}可用</view>
+            <view class='color-515151' wx:else>无限制</view>
+            <view class='font-24 color-bdbdbd'>{{couponData.BeginDate}}-{{couponData.EndDate}}</view>
+            <view class='font-24 color-bdbdbd'>{{couponData.IsAllProduct?'全店商品适用':'仅部分商品适用'}}</view>
+          </view>
+            </view>
+        </view>
+        <view class='modal-footer'>
+            <button class='bg-fff font-32 color-747474' bindtap="closeGetCouponModal" style='height:88rpx;line-height:88rpx'>我知道了</button>
+        </view>
+    </view>
+</view>

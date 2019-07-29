@@ -1,0 +1,75 @@
+<!--pages/reduceauction/myauctionlist/myauctionlist.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<import src="../../../template/empty-data.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view class="nav-fixed-top">
+            <view class="nav-item {{status == 0 ?'active':''}}" data-status="0" bindtap="changeStatus">全部</view>
+            <view class="nav-item {{status == 1 ?'active':''}}" data-status="1" bindtap="changeStatus">待付款</view>
+            <view class="nav-item {{status == 2 ?'active':''}}" data-status="2" bindtap="changeStatus">竞拍成功</view>
+            <view class="nav-item {{status == 4 ?'active':''}}" data-status="4" bindtap="changeStatus">竞拍失败</view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view scroll-y lower-threshold="200" scroll-top="{{scrollTop}}" bindscrolltolower="pullLoadingData" class="scroll">
+                <view wx:if="{{myReduceAuctionList.length > 0}}">
+                    <block wx:for="{{myReduceAuctionList}}">
+                        <navigator url="/pages/reduceauction/myauctiondetail/myauctiondetail?orderId={{item.OrderId}}">
+                            <view class="order-item">
+                                <view class="cell font-28">
+                                    <text class="cell-left">下单时间：{{item.CreateTime}}</text>
+                                    <text class="color-fd" wx:if="{{item.OrderStatus == 2}}">竞拍成功</text>
+                                    <text class="color-74" wx:if="{{item.OrderStatus == 4}}">竞拍失败</text>
+                                    <text class="color-fa" wx:if="{{item.OrderStatus == 1}}">待付款</text>
+                                </view>
+
+                                <view class="table-view-table">
+                                    <view class="table-view-cell clearfix padding-24">
+                                        <image mode="aspectFill" class="media-object" src="{{item.ProductImg}}"></image>
+                                        <view class="content pull-left">
+                                            <view class="text-ellipsis-2 product-name font-28">
+                                                <view class="markdown-sale">{{item.ActivityTag}}</view>{{item.ProductName}}
+                                            </view>
+                                            <view class="prodcut-specifications font-24 color-74 text-ellipsis-2">
+                                                <text>{{item.SkuName}}</text>
+                                            </view>
+                                        </view>
+                                        <view class="table-cell-right pull-right font-28 text-right lh-48">
+                                            <view class="price">￥{{item.SalePrice}}</view>
+                                            <view class="num color-74">x1</view>
+                                        </view>
+                                    </view>
+                                </view>
+
+                                <view class="cell font-28 {{item.OrderStatus == 1 ? 'line' : ''}}">
+                                    <text class="cell-left text-right">
+            <text class="font-28">合计：￥<text class="font-32">{{item.Total}}</text></text>
+                                    <text class="font-24 color-74">（含运费￥{{item.Freight}}）</text>
+                                    </text>
+                                </view>
+                                <view wx:if="{{item.OrderStatus == 1}}" class="cell cell-button">
+                                    <button class="go-pay font-28">去支付</button>
+                                </view>
+                            </view>
+                        </navigator>
+                    </block>
+                </view>
+                <view wx:else>
+                    <template is="emptyData" data="{{...emptyData}}"></template>
+                </view>
+                <view class="pull-loading" wx:if="{{isShowLoading}}">
+                    <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                    {{loadingText}}
+                </view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

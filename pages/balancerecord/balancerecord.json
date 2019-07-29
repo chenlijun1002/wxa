@@ -1,0 +1,10 @@
+{
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "提现记录",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false,
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

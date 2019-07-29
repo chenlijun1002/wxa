@@ -1,0 +1,155 @@
+<!--spellGroupDetail.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}">
+            <view>
+                <view class="order-item">
+                    <navigator url="/pages/pintuan/detail/detail?activityId={{activityId}}" open-type="redirect">
+                        <view class="table-view-table padding-32-23">
+                            <view class="table-view-cell clearfix">
+                                <image mode="aspectFill" class="media-object" src="{{spellGroupInfo.ProductImg}}"></image>
+                                <view class="media-body">
+                                    <view class="text-ellipsis-2 product-name">
+                                        <view class="markdown-sale">{{spellGroupInfo.ActivityTag}}</view>{{spellGroupInfo.ProductName}}</view>
+                                    <view class="prodcut-specifications font-28">
+                                        <view class="mb20">
+                                            <text class="color-75">{{spellGroupInfo.GroupNumber}}人团</text>
+                                            <text class="color-75 ml30">已团{{spellGroupInfo.SaleNum}}件</text>
+                                            <text class="font-24 color-75 pull-right" wx:if="{{spellGroupInfo.orderStatu==1&&spellGroupInfo.spellGroupStatu==0&&spellGroupInfo.IsEnd==0}}">(运费￥{{spellGroupInfo.Freight}})</text>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                    </view>
+                    <view class="group {{spellSuccessClass}}">
+                        <view class="group-top padding-23" wx:if="{{!spellSuccessClass}}">
+                            <text class="color-75 font-28">{{spellGroupInfo.SuccessDate}} 成团</text>
+                        </view>
+                        <view class="group-bottom padding-32-23">
+                            <view class="users">
+                                <view class="captain inline-block" bindtap="showModel">
+                                    <image class="userImg" src="{{spellGroupInfo.BossUserHead}}"></image>
+                                </view>
+                                <view class="inline-block" wx:for="{{participantList}}" bindtap="showModel">
+                                    <image class="userImg" src="{{item}}"></image>
+                                </view>
+                                <view class="inline-block" wx:if="{{moreUser}}" bindtap="showModel">
+                                    <text class="beyond">...</text>
+                                </view>
+                            </view>
+                            <view class="group-bottom-text">
+                                <text class="font-32 color-21" wx:if="{{spellGroupInfo.orderStatu==2&&spellGroupInfo.spellGroupStatu==1}}">很赞哦！已成功拼团</text>
+                                <text class="font-32 color-21" wx:if="{{spellGroupInfo.spellGroupStatu==1&&spellGroupInfo.IsJoin==0}}">团人数已满</text>
+                                <text class="font-32 color-21" wx:if="{{spellGroupInfo.spellGroupStatu==2&&spellGroupInfo.IsPay==0}}">超时未支付，拼团失败~</text>
+                                <text class="font-32 color-21" wx:if="{{spellGroupInfo.spellGroupStatu==2&&spellGroupInfo.IsPay==1}}">人数未满，拼团失败，货款退回账户余额~</text>
+                                <text class="font-32 color-21" wx:if="{{spellGroupInfo.spellGroupStatu==0}}">已开团，离成团还差<text class="color-success">{{spellGroupInfo.GroupNumber-spellGroupInfo.JoinNum}}</text>人哦~</text>
+                                <view class="classname" wx:if="{{spellGroupInfo.orderStatu==2&&spellGroupInfo.spellGroupStatu==1}}">
+                                    <text class="font-28 color-bd">商家正在努力发货中，请耐心等待...</text>
+                                </view>
+                            </view>
+                            <view class="time-box" wx:if="{{(spellGroupInfo.spellGroupStatu==0&&spellGroupInfo.IsJoin==0)||(spellGroupInfo.orderStatu==2&&spellGroupInfo.spellGroupStatu==0)||(spellGroupInfo.orderStatu==1&&spellGroupInfo.spellGroupStatu==0)}}">
+                                <text class="line"></text>
+                                <view class="surplus-time font-28">
+                                    <text>剩余</text>
+                                    <text class="bg-box font-24 bg-color-fd1d1d ml-16">{{dateTimeObj.hour}}</text>
+                                    <text class="padding-5">:</text>
+                                    <text class="bg-box font-24 bg-color-fd1d1d">{{dateTimeObj.minute}}</text>
+                                    <text class="padding-5">:</text>
+                                    <text class="bg-box font-24 bg-color-fd1d1d mr-16">{{dateTimeObj.second}}</text>
+                                    <text>结束</text>
+                                </view>
+                                <text class="line"></text>
+                            </view>
+                        </view>
+                    </view>
+                    </view>
+                    <view class="btns">
+                        <button class="bg-color-ffa200 look-detail font-36" hover-class="hover-btn" wx:if="{{spellGroupInfo.orderStatu==1&&spellGroupInfo.spellGroupStatu==0&&spellGroupInfo.IsEnd==0}}" disabled="{{submission}}" bindtap="selectPay">立即支付</button>
+                        <button class="bg-color-ffa200 look-detail font-36" hover-class="hover-btn" wx:if="{{spellGroupInfo.orderStatu==2&&spellGroupInfo.spellGroupStatu==0&&spellGroupInfo.IsEnd==0}}" open-type="share">邀请好友参团</button>
+                        <button class="bg-color-ffa200 look-detail font-36" hover-class="hover-btn" wx:if="{{spellGroupInfo.spellGroupStatu==0&&spellGroupInfo.IsJoin==0&&spellGroupInfo.IsEnd==0}}" bindtap="offeredGroup">一键参团</button>
+                        <button class="bg-color-ffa200 look-detail font-36" hover-class="hover-btn" wx:if="{{spellGroupInfo.spellGroupStatu==1&&spellGroupInfo.IsJoin==0&&spellGroupInfo.IsEnd==0}}" bindtap="openGroup">一键开团</button>
+                        <button class="bg-color-ffa200 look-detail font-36" hover-class="hover-btn" wx:if="{{spellGroupInfo.spellGroupStatu==2&&spellGroupInfo.IsEnd==0}}" bindtap="openGroup">再次开团</button>
+                        <button class="bg-color-ffa200 look-detail font-36" hover-class="hover-btn" wx:if="{{spellGroupInfo.orderStatu==2&&spellGroupInfo.spellGroupStatu==1}}" bindtap="lookOrderDetail">查看订单详情</button>
+                        <button class="bg-color-fbfafc stroll-around font-36" wx:if="{{spellGroupInfo.orderStatu!=1}}" bindtap="goIndex">随便逛逛</button>
+                        <button class="bg-color-fbfafc stroll-around font-36" disabled="{{btnIsLoading}}" wx:if="{{spellGroupInfo.orderStatu==1&&spellGroupInfo.spellGroupStatu==0}}" bindtap="cancelOrder">取消</button>
+                    </view>
+                    <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+                </view>
+                <view wx:else class="load-prompt" style="top:100rpx;">
+                    <template is="loadPrompt" />
+                </view>
+                <view wx:if="{{isShowToast}}">
+                    <template is="toast" data="{{...toastText}}" />
+                </view>
+                <!-- 弹层 -->
+                <view class="showModal" wx:if="{{isShowModal}}" bindtap="hideModal">
+                    <view class="modal-content padding-23" style="padding-bottom:0;">
+                        <view class="modal-top">
+                            <view class="caputor">
+                                <view class="captain">
+                                    <image class="caputorImg" src="{{spellGroupInfo.BossUserHead}}"></image>
+                                </view>
+                            </view>
+                            <view class="mb60">
+                                <text class="font-28 color-75">{{createSpellGroupDate}} 开团</text>
+                            </view>
+                        </view>
+                        <scroll-view scroll-y>
+                            <view class="modal-bottom font-28">
+                                <view class="member" wx:if="{{isMember}}" wx:for="{{spellGroupInfo.userInfo}}">
+                                    <view class="inlineBlock">
+                                        <image class="memberImg" src="{{item.userHead}}"></image>
+                                    </view>
+                                    <view class="inlineBlock">
+                                        <text class="userName text-ellipsis">{{item.userName}}</text>
+                                    </view>
+                                    <view class="inlineBlock">
+                                        <text class="time text-ellipsis">{{item.CreateDate}} 参团</text>
+                                    </view>
+                                </view>
+                                <view class="wait" wx:if="{{!isMember}}">
+                                    <image class="waitImg" src="http://file.xiaokeduo.com/system/xkdxcx/system/images/date-time-icon.png"></image>
+                                    <text class="font-32">等待参团</text>
+                                </view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                </view>
+                <!-- 支付弹窗 -->
+                <view class="mask {{payPopup}}" bindtap="closePayPopup"></view>
+                <view class="popup {{payPopup}}">
+                    <view class="popup-header line" style="display:block;">
+                        <text>选择支付方式</text>
+                        <icon class="cancel" type="cancel" bindtap="closePayPopup" size="22" color="#757575" />
+                    </view>
+                    <view class="popup-content">
+                        <view class="xkd-panel">
+                            <view class="xkd-cell font-32 line" wx:if="{{!isBalance}}">
+                                <view class="balance-pay-icon"></view>
+                                <text class="pay-text color-75">余额支付（可用余额￥{{Balance}}）</text>
+                            </view>
+                            <view class="xkd-cell font-32 line" wx:if="{{isBalance}}" data-payMethod="balancePay" bindtap="selectPayMethod">
+                                <view data-payMethod="balancePay" class="balance-pay-icon"></view>
+                                <text data-payMethod="balancePay" class="pay-text">余额支付（可用余额￥{{Balance}}）</text>
+                                <icon data-payMethod="balancePay" wx:if="{{payMethod=='balancePay'}}" type="success_no_circle" size="18" color="#00A699" />
+                            </view>
+                            <view class="xkd-cell font-32" bindtap="selectPayMethod" data-payMethod="wxPay">
+                                <view data-payMethod="wxPay" class="wx-pay-icon"></view>
+                                <text data-payMethod="wxPay" class="pay-text">微信支付</text>
+                                <icon wx:if="{{payMethod=='wxPay'}}" data-payMethod="wxPay" type="success_no_circle" size="18" color="#00A699" />
+                            </view>
+                        </view>
+                    </view>
+                    <view class="popup-btn">
+                        <button wx:if="{{payMethod=='balancePay'}}" disabled="{{btnIsLoading}}" bindtap="balancePay">确认支付</button>
+                        <button wx:if="{{payMethod=='wxPay'}}" disabled="{{btnIsLoading}}" bindtap="wxPay">确认支付</button>
+                    </view>
+                </view>
+    </button>
+</form>

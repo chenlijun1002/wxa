@@ -1,0 +1,61 @@
+/* pages/reduceauction/auctionsuccess/auctionsuccess.wxss */
+@import '../../pintuan/activitylist/activitylist.wxss';
+.pay-status {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 176rpx;
+  padding-left: 48rpx;
+  padding-top: 48rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/seckilling-success-bg.jpg") no-repeat left top;
+  background-size: cover;
+}
+.auction-nav {
+  display: flex;
+  align-items: center;
+  height: 128rpx;
+  padding: 0 72rpx;
+  background: #fff;
+}
+.auction-nav navigator {
+  flex: 1;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+}
+.auction-nav navigator:first-child {
+  color: #424242;
+  border: 1px solid #333;
+  margin-right: 24rpx;
+} 
+.auction-nav navigator:last-child {
+  color: #FF7800;
+  border: 1px solid #FF7800;
+  margin-left: 24rpx;
+} 
+.recommend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  margin-top: 64rpx;
+  background: #f7f7f7;
+  color: #c3c3c3;
+  font-size: 24rpx;
+}
+.recommend-line {
+  width: 168rpx;
+  height: 1px;
+  background: #dedede;
+}
+.recommend-icon {
+  width: 32rpx;
+  height: 28rpx;
+  margin-right: 16rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/recommend-icon.png") no-repeat left top;
+  background-size: cover;
+}

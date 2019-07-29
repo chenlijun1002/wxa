@@ -1,0 +1,53 @@
+/* pages/statepage/statepage.wxss */
+.state-view{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    text-align: center;
+    padding: 0 97rpx;
+    z-index: 99999;
+}
+.state-icon{
+    width: 211rpx;
+    height: 276rpx;
+    margin: 223rpx auto 53rpx;
+}
+.state-title{
+    color: #212121;
+    font-size: 48rpx;
+    margin-bottom: 44rpx;
+}
+.state-tips{
+    color: #595959;
+    font-size: 28rpx;
+    line-height: 42rpx;
+}
+.state-success-icon{
+    background: url(http://testfile.xiaokeduo.com/system/xkdxcx/system/images/state-success-icon.png) no-repeat left top;
+    background-size: cover;
+}
+.state-error-icon{
+    background: url(http://testfile.xiaokeduo.com/system/xkdxcx/system/images/state-error-icon.png) no-repeat left top;
+    background-size: cover;
+}
+.state-error-icon{
+    background: url(http://testfile.xiaokeduo.com/system/xkdxcx/system/images/state-prompt-icon.png) no-repeat left top;
+    background-size: cover;
+}
+.btn{
+    padding: 0 35rpx;
+    color: #00A191;
+    border:1rpx solid #00A191;
+    border-radius: 16rpx;
+    box-sizing: border-box;
+    line-height: 62rpx;
+    height: 65rpx;
+    display: inline-block;
+    font-size: 28rpx;
+    min-width: 180rpx;
+    background-color: transparent;
+    margin-top: 50rpx;
+}

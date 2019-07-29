@@ -1,0 +1,138 @@
+<!--pages/pintuan/confirmorder/confirmorder.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <template wx:if="{{isClose}}" is="close" />
+        <view wx:if="{{loadComplete}}">
+            <view class='probation-tips' wx:if="{{isProbationShop===0}}">试用店铺,请勿购买任何商品</view>
+            <view class="order-address text-center" wx:if="{{!isAuthAddress}}" bindtap="addNewAddress">
+                <label>+</label>
+                <text>新建收货地址</text>
+            </view>
+            <view class="order-address" wx:if="{{isAuthAddress}}" bindtap="goAddressList">
+                <text class="font-32">{{regionInfo.regionMemberName}} {{regionInfo.regionCellPhone}}</text>
+                <view class="address">
+                    <text>{{regionInfo.regionProvince}} {{regionInfo.regionCity}} {{regionInfo.regionCounty}} {{regionInfo.regionStreet}} {{regionInfo.regionAddress}}</text>
+                    <label class="address-icon"></label>
+                    <label class="right-icon"></label>
+                </view>
+            </view>
+            <view class="order-info bg-white margin-b-24">
+                <view class="group-row color-75 font-28">商品详情</view>
+                <view class="table-view-cell padding-24 clearfix">
+                    <image class="media-object" mode="aspectFill" src="{{SpellGroupData.ProductImg}}"></image>
+                    <view class="media-body">
+                        <view class="text-ellipsis product-name">{{SpellGroupData.ProductName}}</view>
+                        <!-- <view class="prodcut-specifications">尺码：XL；颜色分类：橙色</view> -->
+                        <view class="prodcut-specifications">
+                            <view class="inline-block" wx:for="{{SpellGroupData.skus}}" wx:key="*this">{{item}}；</view>
+                        </view>
+                        <view class="price-num">
+                            <text class="pull-left font-28">￥{{SpellGroupData.GroupPrice}}</text>
+                            <text class="pull-right font-28">x{{SpellGroupData.ProductNum}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="group-row font-28 border-bottom" bindtap="cartDeliveryMode" data-index="{{index}}">
+                    <label class="color-75">配送方式</label>
+                    <view class="pull-right" style="margin-right:{{hasDistribution?'60':''}}rpx;">{{shipText}}</view>
+                    <label wx:if="{{hasDistribution}}" class="right-icon"></label>
+                </view>
+                <view class="group-row font-28">
+                    <label class="color-75">订单备注</label>
+                    <input class="pull-right text-ellipsis input-box" placeholder="给商家留言，50字以内" bindinput="remarkinput" value="{{reMark}}" />
+                </view>
+            </view>
+            <view class="order-price">
+                <view class="row">
+                    <label class="color-75">商品金额</label>
+                    <text class="pull-right">￥{{SpellGroupData.total}}</text>
+                </view>
+                <view class="row">
+                    <label class="color-75">运费</label>
+                    <text class="pull-right">￥{{freight}}</text>
+                </view>
+            </view>
+            <view class="group-row font-28" style="border-top:1rpx solid #E0E0E0;">
+                <view class="text-right">
+                    <text class="font-28">应付金额：</text>
+                    <text class="font-32">￥{{AmountPayable}}</text>
+                </view>
+            </view>
+            <!-- <view class="group-row font-28 margin-t-24">
+        账户余额可用 ￥{{Balance}}
+        <switch class="pull-right" color="#3CB035" checked="{{isDefault}}" bindchange="switchChecked" />
+    </view> -->
+            <view class="nav-fiexd-bottom">
+                <view class="nav-fiexd-bottom-item total-info">
+                    <view class="price-total pull-right">
+                        <view class="table-cell">
+                            <text class="coin">￥</text>
+                            <text class="total">{{AmountPayable}}</text>
+                            <!-- <view class="balance">(含余额￥286.00)</view> -->
+                        </view>
+                    </view>
+                    <view class="price-text pull-right" style="padding-right:10rpx;">
+                        实付金额：
+                    </view>
+                </view>
+                <view class="nav-fiexd-bottom-item payment-btn">
+                    <button class="confirm-pay" type="primary" hover-class="payment-btn-hover" bindtap="selectPay"> 确认支付 </button>
+                    <!-- <button wx:if="{{paymentMethod=='balance'}}" type="primary" hover-class="payment-btn-hover" disabled="{{btnIsLoading}}" bindtap="balancePay"> {{btnText}} </button> -->
+                </view>
+            </view>
+            <!--配送方式选择弹窗-->
+            <view class="mark {{isPopupShow}}" bindtap="closePopup"></view>
+            <view class="popup-bottom {{isPopupShow}}">
+                <view class="popup-delivery-mode">
+                    <view class="delivery-mode-item" wx:for="{{deliveryList}}" wx:for-index="idx" wx:for-item="item" data-index="{{idx}}" bindtap="selectDeliveryMode" data-value="{{item.Value}}" data-key="{{item.Key}}">
+                        <label class="checkbox-box" data-index="{{idx}}">
+                            <view class="checkbox {{item.isChecked}}" data-index="{{idx}}"></view>
+                            {{item.Key}}
+                        </label>
+                    </view>
+                </view>
+                <button class="popup-bottom-btn" hover-class="popup-bottom-btn-hover" type="primary" bindtap="closePopup">关闭</button>
+            </view>
+            <!--配送方式选择弹窗结束-->
+            <!-- 支付弹窗 -->
+            <view class="mask {{payPopup}}" bindtap="closePayPopup"></view>
+            <view class="popup {{payPopup}}">
+                <view class="popup-header line">
+                    <text>选择支付方式</text>
+                    <icon class="cancel" type="cancel" bindtap="closePayPopup" size="22" color="#757575" />
+                </view>
+                <view class="popup-content">
+                    <view class="xkd-panel">
+                        <view class="xkd-cell font-32 line" wx:if="{{!isBalance&&CanUseBalance}}">
+                            <view class="balance-pay-icon"></view>
+                            <text class="pay-text color-75">余额支付（可用余额￥{{Balance}}）</text>
+                        </view>
+                        <view class="xkd-cell font-32 line" wx:if="{{isBalance&&CanUseBalance}}" data-payMethod="balancePay" bindtap="selectPayMethod">
+                            <view data-payMethod="balancePay" class="balance-pay-icon"></view>
+                            <text data-payMethod="balancePay" class="pay-text">余额支付（可用余额￥{{Balance}}）</text>
+                            <icon data-payMethod="balancePay" wx:if="{{payMethod=='balancePay'}}" type="success_no_circle" size="18" color="#00A699" />
+                        </view>
+                        <view class="xkd-cell font-32" bindtap="selectPayMethod" data-payMethod="wxPay">
+                            <view data-payMethod="wxPay" class="wx-pay-icon"></view>
+                            <text data-payMethod="wxPay" class="pay-text">微信支付</text>
+                            <icon wx:if="{{payMethod=='wxPay'}}" data-payMethod="wxPay" type="success_no_circle" size="18" color="#00A699" />
+                        </view>
+                    </view>
+                </view>
+                <view class="popup-btn">
+                    <button wx:if="{{payMethod=='balancePay'}}" disabled="{{btnIsLoading}}" bindtap="balancePay">确认支付</button>
+                    <button wx:if="{{payMethod=='wxPay'}}" disabled="{{btnIsLoading}}" bindtap="wxPay">确认支付</button>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

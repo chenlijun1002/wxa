@@ -1,0 +1,44 @@
+/* pages/stairgroup/mygroupdetail/mygroupdetail.wxss */
+
+@import "/pages/reduceauction/myauctiondetail/myauctiondetail.wxss";
+.buy-now,
+.submit-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 24rpx;
+  z-index: 8;
+}
+
+.submit-btn {
+  display: flex;
+  height: 112rpx;
+  margin-top: 0;
+  background: #fff;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.submit-btn.flex-e {
+  justify-content: flex-end;
+}
+
+.submit-btn navigator {
+  height: 64rpx;
+  line-height: 64rpx;
+  padding: 0 56rpx;
+  font-size: 32rpx;
+  border-radius: 8rpx;
+}
+
+.submit-btn navigator:first-child {
+  color: #515151;
+  border: 1px solid #515151;
+}
+
+.submit-btn navigator:last-child {
+  color: #ff7800;
+  border: 1px solid #ff7800;
+}

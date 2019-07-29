@@ -1,0 +1,46 @@
+/* pages/error/error.wxss */
+.error-icon{
+    width: 256rpx;
+    height: 256rpx;
+    margin: 0 auto;
+}
+.error-icon-404{
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/error-icon-404.png') no-repeat left top;
+    background-size: cover;
+}
+.error-icon-500{
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/error-icon-500.png') no-repeat left top;
+    background-size: cover;
+}
+.error-icon-600{
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/error-icon-600.png') no-repeat left top;
+    background-size: cover;
+}
+.error-icon-700{
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/error-icon-700.png') no-repeat left top;
+    background-size: cover;
+}
+.empty-data-text{
+    font-size: 36rpx;
+    line-height: 58rpx;
+    margin-bottom: 8rpx;
+}
+.empty-second-text{
+    font-size: 28rpx;
+    line-height: 40rpx;
+    color: #999;
+}
+.link-text{
+    font-size: 32rpx;
+    line-height: 48rpx;
+    color: #00A699;
+    padding-left: 40rpx;
+}
+.link-icon-back{
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/back-icon.png') no-repeat left center;
+    background-size: 32rpx;
+}
+.link-icon-message{
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/message-icon.png') no-repeat left center;
+    background-size: 32rpx;
+}

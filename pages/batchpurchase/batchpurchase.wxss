@@ -1,0 +1,663 @@
+/* pages/batchpurchase/batchpurchase.wxss */
+
+page {
+  width: 100%;
+  height: 100%;
+}
+.color-e9 {
+  color: #E94F37;
+}
+.search{
+  position: relative;
+  padding: 20rpx;
+  background-color: #fff;
+}
+.search-input{
+  width: 100%;
+  height: 64rpx;
+  background-color: #e7e7e7;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.search .inputf{
+  display: block;
+  background-color: #e7e7e7;
+  border-radius: 8rpx;
+  width: 532rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 28rpx;
+  color: #999;
+  box-sizing: border-box;
+  padding-left: 68rpx;
+}
+.search .search-icon{
+  position: absolute;
+  height: 32rpx;
+  left: 48rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 左边tab栏 */
+
+.product-content {
+  width: 100%;
+  height: calc(100% - 112rpx - 100rpx);
+}
+
+.left-categorys {
+  height: 100%;
+  width: 190rpx;
+}
+
+.category-item {
+  position: relative;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 24rpx;
+  color: #8c8c8c;
+  box-sizing: border-box;
+  text-align: center;	
+}
+
+.category-item.active {
+  background: #fff;
+  color: #333333;
+}
+
+.category-item.active::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 6rpx;
+  height: 50%;
+  margin-top: -22rpx;
+  background: #f54336;
+}
+
+.category-item .hot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40rpx;
+  height: 40rpx;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/hot-icon.png') no-repeat;
+  background-size: cover;
+}
+.category-mode{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  color: #00A699;
+  margin: 60rpx 0 100rpx;
+}
+.category-mode text{
+    padding-left: 40rpx;
+    line-height: 32rpx;
+    font-size: 28rpx;
+}
+.category-mode.brand-icon text{
+    background: url('http://file.xiaokeduo.com/system/agentOA/images/brand-icon.png') no-repeat left top;
+    background-size: 32rpx 32rpx;
+}
+.category-mode.class-icon text{
+    background: url('http://file.xiaokeduo.com/system/agentOA/images/class-icon.png') no-repeat left top;
+    background-size: 32rpx 32rpx;
+}
+/* 右边商品展示区域 */
+
+.right-categorys {
+  overflow: hidden;
+  height: 100%;
+  padding-left: 20rpx;
+  padding-top: 30rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.right-categorys scroll-view {
+  height: 100%;
+  padding-bottom: 150rpx;
+  box-sizing: border-box;
+}
+
+.category-title {
+  position: relative;
+  height: 42rpx;
+  font-size: 32rpx;
+  color: #666;
+  padding-left: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.category-title::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8rpx;
+  height: 100%;
+  background: #f54336;
+}
+
+.mid-categorys {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 264rpx;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-bottom: 1rpx solid #e6e6e6;
+  padding: 24rpx 0;
+  box-sizing: border-box;
+}
+
+.mid-category-item {
+  position: relative;
+  height: 56rpx;
+  width:160rpx;
+box-sizing:border-box;
+  line-height: 56rpx;
+  border: 1px solid #bdbdbd;
+  font-size: 28rpx;
+  color: #333;
+  text-align: center;
+  margin-right: 16rpx;
+  background-color: #f5f5f5;
+	border-radius: 8rpx;	
+}
+
+.mid-category-item.active {
+  border-color: #f54336;
+  color: #333;
+  background-color: #fbe9e7;
+}
+
+.mid-category-item .fire {
+  display: inline-block;
+  width: 24rpx;
+  height: 24rpx;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/fire-icon.png') no-repeat;
+  background-size: contain;
+}
+
+/* 商品栏 */
+
+.product-item {
+  box-sizing: border-box;
+  height: 200rpx;
+  padding: 24rpx 0 24rpx 20rpx;
+}
+
+.product-item.line::after {
+  width: 97%;
+}
+
+.product-img {
+  width: 132rpx;
+  height: 132rpx;
+  margin-right: 30rpx;
+}
+
+.product-info {
+  position: relative;
+  overflow: hidden;
+  width: 66%;
+  height: 100%;
+}
+
+.product-name {
+  font-size: 32rpx;
+  color: #000;
+  height: 88rpx;
+  word-break: break-all;
+}
+
+.product-sale-num {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.product-price {
+  margin-top: 6rpx;
+  font-size: 32rpx;
+  color: #e4330a;
+}
+
+.operation-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+
+.count {
+  width: 40rpx;
+  margin: 0 8rpx;
+  font-size: 16px;
+  text-align: center;
+}
+
+.minus-icon, .add-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.minus-icon {
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/minus-icon1.png') no-repeat;
+  background-size: contain;
+}
+
+.add-icon {
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/add-icon1.png') no-repeat;
+  background-size: contain;
+}
+
+/*下箭头*/
+
+.arrow-box {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+.bottom {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-6px);
+}
+.arrow-down .arrow1, .arrow-down .arrow2 {
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-bottom: 6px transparent dashed;
+  border-left: 6px transparent dashed;
+  border-right: 6px transparent dashed;
+  border-top: 6px solid white;
+  overflow: hidden;
+}
+.arrow-up .arrow1,.arrow-up .arrow2 {
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-bottom: 6px solid white;
+  border-left: 6px transparent dashed;
+  border-right: 6px transparent dashed;
+  border-top:  6px transparent dashed;
+  overflow: hidden;
+}
+.arrow-down .arrow1 {
+  top: 1px;
+  border-top: 6px solid #bdbdbd;
+}
+.arrow-up .arrow1 {
+  top: -1px;
+  border-bottom: 6px solid #bdbdbd;
+}
+/* 底部 */
+
+.placeholder1 {
+  position: fixed;
+  bottom: 20rpx;
+  left: 34rpx;
+  width: 92rpx;
+  height: 92rpx;
+  border: 2rpx solid #bdbdbd;
+  z-index: 101;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.placeholder2 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 140rpx;
+  height: 96rpx;
+  z-index: 102;
+  background: #fff;
+}
+
+.circle-box {
+  position: fixed;
+  bottom: 14rpx;
+  left: 36rpx;
+  width: 92rpx;
+  height: 92rpx;
+  border: 2rpx solid #00a699;
+  z-index: 103;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.car-badge {
+  position: fixed;
+  bottom:80rpx;
+  left:106rpx;
+  min-width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  border-radius: 50%;
+  background: #E4330A;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  z-index: 104;
+}
+.car-icon {
+  width: 49rpx;
+  height: 49rpx;
+  margin-left: -4rpx;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/buy-car.png') no-repeat;
+  background-size: contain;
+}
+
+.bottom-content {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 98rpx;
+  border-top: 2rpx solid #e1e1e1;
+  background: #fff;
+  z-index: 100;
+  box-sizing: border-box;
+  padding-left: 210rpx;
+}
+
+.go-buycar {
+  width: 242rpx;
+  height: 100%;
+  line-height: 98rpx;
+  background: #e4330a;
+  color: #fff;
+  font-size: 36rpx;
+  text-align: center;
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.freight {
+  margin-left: 10rpx;
+}
+
+/* 规格popup */
+.rule-popup{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 98rpx;
+  background-color: #fff;
+  z-index: 20;
+  transform: translateY(120%);
+  transition: all 0.4s;
+}
+.rule-popup .rule-popup-herder{
+  position: relative;
+  padding:20rpx 0 20rpx 218rpx;
+  border-bottom: 1px solid #DFDFDF;
+  min-height: 165rpx;
+  box-sizing: border-box;
+}
+.rule-popup .rule-popup-herder .price{
+  margin-bottom: 20rpx;
+  color: #E94F37;
+  font-size: 40rpx;
+}
+.rule-popup .rule-popup-herder .price text{
+  font-size: 28rpx;
+}
+.selected-specifications{
+  font-size: 32rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+}
+.rule-popup .rule-popup-herder .product-imag{
+  position: absolute;
+  left: 24rpx;
+  top: -30rpx;
+  width: 162rpx;
+  height: 162rpx;
+  border-radius: 8rpx;
+  border:1px solid #DFDFDF;
+  background-color: #fff;
+}
+.rule-popup .rule-popup-herder .cancel{
+  position: absolute;
+  width: 32rpx;
+  height: 32rpx;
+  right: 24rpx;
+  top: 24rpx;
+  background: url("http://file.xiaokeduo.com/system/agentOA/images/close.png") no-repeat center;
+    background-size: 100%;
+}
+.rule-popup-body{
+  padding: 0 24rpx;
+}
+.specifications-list{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.specifications-list .specifications-title{
+  font-size: 32rpx;
+  margin-bottom: 24rpx;
+}
+.specifications-list-group .specifications-item{
+  display: inline-block;
+  font-size: 28rpx;
+  padding: 14rpx 35rpx;
+  background-color: #F5F5F5;
+  border-radius: 20rpx;
+  color: #757575;
+  margin-right: 24rpx;
+  min-width: 40rpx;
+  text-align: center;
+  transition: all 0.4s;
+  margin-bottom: 24rpx;
+}
+.specifications-list-group .specifications-item.select{
+  background-color: #00A699;
+  color: #fff;
+}
+.buy-number{
+  margin-bottom: 100rpx;
+  margin-top: 40rpx;
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+}
+.buy-number .number-control{
+    float: right;
+}
+.buy-number .number-text{
+  float: left;
+  font-size: 32rpx;
+  color: #202020;
+  line-height: 48rpx;
+  margin-right: 30rpx;
+}
+.buy-number .number-control>text{
+  float: left;
+  text-align: center;
+  color: #fff;
+  border-radius: 50%;
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 32rpx;
+  font-size: 70rpx;
+}
+.buy-number .number-control .minus{
+    background: url("http://file.xiaokeduo.com/system/agentOA/images/minus.png") no-repeat center;
+    background-size: 100%;
+}
+.buy-number .number-control .plus{
+    /* background-color: #00A699; */
+    font-size: 56rpx;
+    line-height: 36rpx;
+    background: url("http://file.xiaokeduo.com/system/agentOA/images/plus.png") no-repeat center;
+    background-size: 100%;
+}
+.buy-number .number-control .selectedSkuNumber{
+  float: left;
+  width: 80rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  border:2px solid #DFDFDF;
+  margin: 0 20rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #202020;
+  border-radius: 48rpx;
+}
+.buy-number .number-control input{
+  float: left;
+  width: 80rpx;
+  height: 48rpx;
+  border:2px solid #DFDFDF;
+  margin: 0 20rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #202020;
+  border-radius: 48rpx;
+  min-height: 46rpx;
+}
+.rule-popup.show{
+  transform: translateY(0);
+}
+.buy-number .number-control label.stock-text{
+    float: left;
+  width: auto;
+  border-radius: 0;
+  border:none;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+    height: 48rpx;
+    line-height: 48rpx;
+}
+.buy-number .number-control label.stock-text .n{
+    color: #FF4757;
+}
+.mask, .mark {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  display: none;
+}
+
+.mask.show, .mark.show {
+  display: block;
+}
+
+/* 筛选条件 */
+.filter-condition{
+  display: table;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #eee;  
+}
+.filter-condition view{
+  display: table-cell;
+  width: 33.333333%;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.filter-condition view button{
+  font-size: 28rpx;
+  background: #fff;
+}
+.by-price,.by-sales{
+  position: relative;
+}
+ .by-price::before,.by-sales::before{
+  content: '';
+  position: absolute;
+  top:60%;
+  margin-top: -25rpx;
+  right: 20rpx;
+  border: 8rpx solid #8c8c8c;
+  border-top: 8rpx solid transparent;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;
+} 
+ .by-price::after,.by-sales::after{
+  content: '';
+  position: absolute;
+  top:70%;
+   margin-top: -16rpx; 
+  right: 20rpx;
+  border: 8rpx solid #8c8c8c;
+  border-bottom: 8rpx solid transparent;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent; 
+}
+.descending::after{  
+  border: 8rpx solid #f54336;
+  border-bottom: 8rpx solid transparent;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent; 
+}
+.ascending::before{  
+  border: 8rpx solid #f54336;
+  border-top: 8rpx solid transparent;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;
+}
+.pt0{
+  padding-top: 0 !important;
+}
+.toggleShowChild{
+  font-size: 28rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #eee;  
+}
+.toggleShowChild-btn{
+  position: relative;
+}
+.toggleShowChild-btn::after{
+  content: '';
+  position: absolute;
+  top:70%;
+  margin-top: -8rpx; 
+  right: -24rpx;
+  border: 8rpx solid #212121;
+  border-bottom: 8rpx solid transparent;
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;  
+}
+.folding::after{
+  top:40%;
+  transform: rotate(180deg);
+}
+.color-f54336{
+  color: #f54336;
+}
+.mt24{
+  margin-top: 24rpx;
+}

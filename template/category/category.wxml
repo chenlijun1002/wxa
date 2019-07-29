@@ -1,0 +1,153 @@
+<!-- 模板3 data categoryList -->
+<template name="categoryTpl3">
+  <view class="search" bindtap="searchProduct">
+    <view class="search-input">
+      <text class="inputf">搜索商品名称</text>
+    </view>
+    <icon class="search-icon" type="search" size="16" color="#999" />
+  </view>
+  <scroll-view scroll-y class='y-category-list-3'>
+  <view class='item-tpl-3' wx:for="{{categoryList}}" wx:key="item.Id">
+    <view class='tpl3-banner-box' data-cname="{{item.CName}}" data-id="{{item.Id}}" bindtap='lookTopCategory'>
+      <image src='{{item.BannerImg}}' mode='aspectFill'></image>
+      <view class='wrapper'>
+        <view class='name-box'>
+          <view>{{item.CName}}</view>
+          <view class='look-more-btn'>查看全部</view>
+        </view>
+      </view>
+    </view>
+    <view class='tpl3-text-box'>
+      <view wx:for="{{item.Childrens}}" wx:for-item="subCategory" wx:key="subCategory.Id" class="{{subCategory.IsHot ? 'color-ed6003 text-ellipsis' : 'text-ellipsis'}}" data-sname="{{subCategory.CName}}" data-id="{{subCategory.Id}}" bindtap='lookSubCategory'>{{subCategory.CName}}</view>
+    </view>
+    </view>
+  </scroll-view>
+</template>
+<!-- 默认模板 -->
+<template name="categoryTpl0">
+  <view class="search" bindtap="searchProduct">
+    <view class="search-input">
+      <text class="inputf">搜索商品名称</text>
+    </view>
+    <icon class="search-icon" type="search" size="16" color="#999" />
+  </view>
+  <scroll-view class="one-class-nav" scroll-y>
+    <view class="one-class-nav-item {{item.Id === currentTopCateId ? 'active' : ''}}" data-id="{{item.Id}}" data-name="{{item.CName}}" wx:for="{{categoryList}}" bindtap="getSubCategory">
+      <text class="text-ellipsis">{{item.CName}}</text>
+    </view>
+  </scroll-view>
+  <scroll-view class="two-class-list" scroll-y>
+    <view class='top-cate-banner' wx:if="{{subCategoryList.length && currentTopCateBanner}}">
+      <image mode="aspectFill" class='bannerImg' src="{{currentTopCateBanner}}"></image>
+    </view>
+    <view wx:if="{{subCategoryList.length}}">
+      <view class="two-class-group clearfix">
+        <view class="two-class-item" wx:for="{{subCategoryList}}" data-id="{{item.Id}}" data-sname="{{item.CName}}" bindtap='lookSubCategory'>
+          <image mode="aspectFill" src="{{item.CategoryImg}}"></image>
+          <view class="two-class-name">{{item.CName}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty-data" wx:else>
+      <view class="empty-img-prompt">
+        <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/search-empty-icon.png"></image>
+      </view>
+      <view class="font-28 empty-text">没有找到“{{currentClassText}}”的下级分类</view>
+      <button class='look-product-btn' data-cname="{{currentClassText}}" data-id="{{currentTopCateId}}" bindtap='lookTopCategory'>查看商品列表</button>
+    </view>
+  </scroll-view>
+</template>
+<!-- 模板1 -->
+<template name="categoryTpl1">
+  <view class="search" bindtap="searchProduct">
+    <view class="search-input">
+      <text class="inputf">搜索商品名称</text>
+    </view>
+    <icon class="search-icon" type="search" size="16" color="#999" />
+  </view>
+  <view class='bg-fff' style="height:6000rpx;">
+    <scroll-view scroll-y class='y-category-list-1 clearfix'>
+      <view class='y-category-list-item-1' wx:for="{{categoryList}}" wx:key="item.Id">
+        <view class='category-title'>{{item.CName}}</view>
+        <view class='category-child-list'>
+          <text wx:for="{{item.Childrens}}" wx:for-item="subCategory" wx:key="subCategory.Id" class="{{subCategory.IsHot ? 'h' : ''}}" data-id="{{subCategory.Id}}" data-sname="{{subCategory.CName}}" bindtap='lookSubCategory'>{{subCategory.CName}}</text>
+        </view>
+        <image mode="aspectFill" src="{{item.CategoryImg}}" data-id="{{item.Id}}" data-cname="{{item.CName}}" bindtap='lookTopCategory' />
+      </view>
+    </scroll-view>
+  </view>
+</template>
+<!-- 模板2 -->
+<template name="categoryTpl2">
+  <view class="search bg-c" bindtap="searchProduct">
+    <view class="search-input">
+      <text class="inputf">搜索商品名称</text>
+    </view>
+    <icon class="search-icon" type="search" size="16" color="#999" />
+  </view>
+  <scroll-view scroll-y class='y-category-list-2'>
+    <view class='y-category-list-item-2' wx:for="{{categoryList}}" wx:key="item.Id">
+      <view class='category-title' data-id="{{item.Id}}" data-sname="{{item.CName}}" bindtap='lookSubCategory'>{{item.CName}}</view>
+      <view class='category-child-2 clearfix'>
+        <view class='category-child-item-2' wx:for="{{item.Childrens}}" wx:for-item="subCategory" wx:key="subCategory.Id" data-id="{{subCategory.Id}}" data-sname="{{subCategory.CName}}" bindtap='lookSubCategory'>
+          <image mode="aspectFill" src="{{subCategory.CategoryImg}}" />
+          <view class='category-name text-ellipsis'>{{subCategory.CName}}</view>
+        </view>
+        <view class='empty-class' wx:if="{{item.Childrens.length<=0}}">商家暂未添加二级分类</view>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+<!-- 模板4 -->
+<template name="categoryTpl4">
+  <block>
+    <view class="c-search border-bottom" bindtap="searchProduct">
+      <view class="c-search-input">
+        <text class="c-inputf">搜索商品名称</text>
+      </view>
+      <icon class="c-search-icon" type="search" size="16" color="#999" />
+    </view>
+    <view class='c-product-content clearfix {{isBigscreen?"height6":""}}'>
+      <view class='c-left-categorys pull-left {{isBigscreen?"height-per-100":""}}'>
+        <scroll-view scroll-y style="height: 100%;" scroll-top="{{leftScrollTop}}" bindscroll="getTop" data-scrolltype='0'>
+          <view class='c-category-items'>
+            <view wx:for="{{categoryList}}" class="c-category-item text-ellipsis line {{categoryId == item.Id ? 'active': ''}}" data-info="{{item}}" data-key="{{item.Id}}" wx:key="{{index}}" bindtap='toggleCategoryType'>{{item.CName}}
+              <view wx:if="{{item.IsHot}}" class='hot'></view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view class='c-right-categorys pt0 {{isBigscreen?"pb144":"pb200"}}'>
+        <view class='c-filter-condition'>
+          <view class='{{productQuery.sortField==0?"color-f54336":""}}' bindtap='productSort' data-sortType='0'>综合排序</view>
+          <view class='c-by-price {{productQuery.sortField==1?productQuery.isDesc?"color-f54336 c-descending":"color-f54336 c-ascending":""}}' bindtap='productSort' data-sortType='1'>按价格</view>
+          <view class='c-by-sales {{productQuery.sortField==2?productQuery.isDesc?"color-f54336 c-descending":"color-f54336 c-ascending":""}}' bindtap='productSort' data-sortType='2'>按销量</view>
+        </view>
+         <view class="c-toggleShowChild" bindtap='toggleShowChildCategory' wx:if="{{subMidCategory.length&&!isShowChildCategory2}}">
+            <text class='c-toggleShowChild-btn {{isShowChildCategory?"c-folding":""}}'>全部分类</text>
+          </view>
+          <view class='c-mid-categorys' wx:if="{{subMidCategory.length&&isShowChildCategory2}}">
+            <view class="c-mid-category-item {{subCategoryId == categoryId ? 'active': ''}}" data-key="-1" data-id="{{categoryId}}" bindtap='toggleMidCategory'>全部</view>
+            <view class="c-mid-category-item text-ellipsis {{subCategoryId == item.Id ? 'active': ''}} {{item.IsHot ? 'fire' : ''}} {{index>=2?'mt24':''}}" wx:for="{{subMidCategory}}" data-id="{{item.Id}}" data-key="{{index}}" wx:key="{{index}}" bindtap='toggleMidCategory'><text class="{{item.IsHot?'fire':''}}"></text>{{item.CName}}</view>
+          </view>
+        <scroll-view scroll-y style="height: 100%;" bindscrolltolower="scrollToLower" scroll-top="{{rightScrollTop}}"  bindscroll="getTop" bindtouchend="handletouchend" data-scrolltype='1'>
+          <!-- <view class="c-toggleShowChild" bindtap='toggleShowChildCategory' wx:if="{{subMidCategory.length}}">
+            <text class='c-toggleShowChild-btn {{isShowChildCategory?"c-folding":""}}'>全部分类</text>
+          </view> -->
+          <!-- <view class='c-mid-categorys' wx:if="{{subMidCategory.length&&isShowChildCategory}}">
+            <view class="c-mid-category-item {{subCategoryId == categoryId ? 'active': ''}}" data-key="-1" data-id="{{categoryId}}" bindtap='toggleMidCategory'>全部</view>
+            <view class="c-mid-category-item text-ellipsis {{subCategoryId == item.Id ? 'active': ''}} {{item.IsHot ? 'fire' : ''}} {{index>=2?'mt24':''}}" wx:for="{{subMidCategory}}" data-id="{{item.Id}}" data-key="{{index}}" wx:key="{{index}}" bindtap='toggleMidCategory'>{{item.CName}}</view>
+          </view> -->
+          <view class='c-product-item line' wx:for="{{productList}}" wx:key="{{index}}" bindtap='goDetail' data-id="{{item.Id}}">
+            <image class='c-product-img pull-left' src='{{item.ImageUrl1}}'></image>
+            <view class='c-product-info'>
+              <view class='c-product-name text-ellipsis-2'>{{item.ProductName}}</view>
+              <!-- <view class='product-sale-num'>销量 {{item.SaleCounts}}</view> -->
+              <view class='c-product-price'>￥{{item.MarketPrice}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </block>
+</template>

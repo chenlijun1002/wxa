@@ -1,0 +1,88 @@
+<!--pages/applyservice/applyservice.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view class="group-input">
+            <view class="group-row group-row-form" bindtap="serviceType">
+                <label>售后类型</label>
+                <text>{{servicetypeText}}</text>
+                <view class="right-icon" wx:if="{{pageType != '0'}}" bindtap="serviceType"></view>
+            </view>
+            <view class="group-row group-row-form">
+                <label>退款金额</label>
+                <input type="digit" placeholder="本次申请最多可退{{refundMax}}" placeholder-style="color: #bdbdbd;" bindinput="changeRefundMoney" />
+            </view>
+            <view class="group-row group-row-form" bindtap="refundType" wx:if="{{isShowBank}}">
+                <label>退款方式</label>
+                <text>{{refundtypeText}}</text>
+                <view class="right-icon"></view>
+            </view>
+            <view wx:if="{{refundType == 0 && isShowBank}}" class="group-row group-row-form">
+                <input type="number" value="{{bankCard}}" placeholder="输入指定银行卡账号" placeholder-style="color: #bdbdbd;" bindinput="changeBankCard" />
+            </view>
+        </view>
+        <view class="explain">退款原因</view>
+        <input class="refund-reason" placeholder="在此输入退款原因" placeholder-style="color: #bdbdbd;" bindinput="changeRemark" />
+        <view class="tips">商家同意后，1-7个工作日内将最多{{refundMax}}元原路退回</view>
+        <view class="upload-certificate" wx:if="{{pageType==1}}">
+            <view class="title font-32">上传凭证</view>
+            <view class="certificate">
+                <view class="certificate-images">
+                    <block wx:for="{{picList}}">
+                        <view wx:if="{{picList.length > 0}}" class="certificate-image">
+                            <image src="{{item}}"></image>
+                            <view class="delete-img-icon" catchtap="deletePic" data-id="{{index}}"></view>
+                        </view>
+                    </block>
+                    <view hidden="{{picList.length >=8}}" class="certificate-add-image" bindtap="uploadRefundPic"></view>
+                </view>
+                <view class="certificate-text font-24 color-74">最多8张，每张不超过5M，支持IPG、PNG、JPEG、BMP</view>
+            </view>
+        </view>
+        <view class="padding-24" style="margin-top:50rpx;">
+            <button class="default-size font-36" type="primary" bindtap="requestSubmit">提交申请</button>
+        </view>
+        <!-- 售后类型弹窗 -->
+        <view class="mask {{popupIsShow}}" bindtap="closePopup"></view>
+        <view class="popup {{popupIsShow}}">
+            <view class="popup-header line">
+                <text>提现方式</text>
+                <icon class="cancel" type="cancel" bindtap="closePopup" size="22" color="#757575" />
+            </view>
+            <view class="select-group">
+                <view class="group-row line {{serviceType==0?'selected':''}}" data-serviceType="0" bindtap="selectService">
+                    仅退款
+                    <icon type="success_no_circle" size="18" color="#00A699" />
+                </view>
+                <view class="group-row {{serviceType==1?'selected':''}}" data-serviceType="1" bindtap="selectService">
+                    退款退货
+                    <icon type="success_no_circle" size="18" color="#00A699" />
+                </view>
+            </view>
+        </view>
+        <!-- 退款方式弹窗 -->
+        <view class="mask {{refundPopup}}" bindtap="closeRefundPopup"></view>
+        <view class="popup {{refundPopup}}">
+            <view class="popup-header line">
+                <text>退款方式</text>
+                <icon class="cancel" type="cancel" bindtap="closeRefundPopup" size="22" color="#757575" />
+            </view>
+            <view class="select-group">
+                <view class="group-row line {{refundType==0?'selected':''}}" data-refundType="0" bindtap="selectRefundType">
+                    指定银行卡
+                    <icon type="success_no_circle" size="18" color="#00A699" />
+                </view>
+                <view class="group-row {{refundType==1?'selected':''}}" data-refundType="1" bindtap="selectRefundType">
+                    退回账户余额
+                    <icon type="success_no_circle" size="18" color="#00A699" />
+                </view>
+            </view>
+        </view>
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

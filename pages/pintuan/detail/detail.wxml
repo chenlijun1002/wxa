@@ -1,0 +1,247 @@
+<!--pages/pintuan/detail/detail.wxml-->
+<import src="../../../wxparse/wxParse.wxml" />
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <template wx:if="{{isClose}}" is="close" />
+        <view wx:if="{{loadComplete}}">
+            <view class='probation-tips' wx:if="{{isProbationShop===0}}">试用店铺,请勿购买任何商品</view>
+            <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#FFE07F" indicator-active-color="#FFA200">
+                <block wx:if="{{productInfo.VideoUrl}}">
+                      <swiper-item>
+                            <video src="{{productInfo.VideoUrl}}"  poster="{{productInfo.VideoImgUrl}}" objectFit="cover" style="width:100%;height:100%" bindplay="playVideo" bindended="endVideo">
+                            </video>
+                        </swiper-item>
+                    </block>
+                <block wx:for="{{productInfo.ImageUrls}}" wx:key="*this">
+                    <swiper-item>
+                        <image mode="aspectFill" src="{{item}}" class="slide-image" width="100%" />
+                    </swiper-item>
+                </block>
+            </swiper>
+            <view class="swiper-table-view">
+                <view class="table-view-cell swiper-table-left">
+                    <view class="price">
+                        <text class="font-24">￥</text> {{productInfo.Price}}
+                    </view>
+                    <view class="original-price-num">
+                        <view class="num">{{productInfo.GroupNumber}}人团</view>
+                        <view class="original-price">￥{{productInfo.MarketPrice}}</view>
+                    </view>
+                </view>
+                <view class="table-view-cell" style="width:232rpx;">
+                    <view class="end-date-time">
+                        <view wx:if="{{AllowJoin==2}}" class="date-time-content">
+                            <view class="end-text">距离开始</view>
+                            <view class="time">{{ActivityStart}}</view>
+                        </view>
+                        <view wx:if="{{AllowJoin!=2}}" class="date-time-content">
+                            <view class="end-text">距离结束</view>
+                            <view class="time">{{ActivityEnd}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="activity-prodcut-name">
+                <view class="name text-ellipsis-2">
+                    <text class="activitytag">{{productInfo.ActivityTag}}</text>{{productInfo.ProductName}}</view>
+                <button class="share-icon" open-type="share"></button>
+            </view>
+            <view wx:if="{{AllowJoin==0}}" class="select-rows font-28 prodcut-specifications" bindtap="selectSpecifications">
+                <label class="color-75">选择</label>
+                <!--<view class="select-text text-ellipsis">佳能50 1.8人像定焦镜头</view>-->
+                <view class="specifications-text select-text text-ellipsis">
+                    <view class="line1" wx:for="{{selectedSku.selectedSkuName}}" wx:key="*this">{{item}}
+                        <view class="line1" wx:if="{{index!=selectedSku.selectedSkuName.length-1}}">/</view>
+                    </view>
+                </view>
+                <view class="select-row-right"></view>
+            </view>
+            <view wx:if="{{AllowJoin!=0}}" class="select-rows font-28 prodcut-specifications">
+                <label class="color-75">选择</label>
+                <!--<view class="select-text text-ellipsis">佳能50 1.8人像定焦镜头</view>-->
+                <view class="specifications-text select-text text-ellipsis">
+                    <view class="line1" wx:for="{{selectedSku.selectedSkuName}}" wx:key="*this">{{item}}
+                        <view class="line1" wx:if="{{index!=selectedSku.selectedSkuName.length-1}}">/</view>
+                    </view>
+                </view>
+                <view class="select-row-right"></view>
+            </view>
+            <view class="section-box bg-white margin-t-24">
+                <view class="section-box-header">拼团规则</view>
+                <view class="activity-rule clearfix">
+                    <view class="step">
+                        <view class="step-text">选择商品</view>
+                        <view class="step-text">付款开/参团</view>
+                        <view class="progress-number">1</view>
+                    </view>
+                    <view class="arrow"></view>
+                    <view class="step">
+                        <view class="step-text">邀请好友</view>
+                        <view class="step-text">支付参团</view>
+                        <view class="progress-number">2</view>
+                    </view>
+                    <view class="arrow"></view>
+                    <view class="step">
+                        <view class="step-text">达到人数</view>
+                        <view class="step-text">拼团成功</view>
+                        <view class="progress-number">3</view>
+                    </view>
+                </view>
+                <view class="activity-rule-rompt">
+                    <label>{{productInfo.GroupNumber}}人团</label> 满足{{productInfo.GroupNumber}}人可成团，人数不足自动退款</view>
+            </view>
+            <view class="group" wx:if="{{spellGroupRecordId>0}}">
+                <view class="group-bottom padding-32-23">
+                    <view class="users">
+                        <view class="captain inline-block" bindtap="showModel">
+                            <image class="userImg" src="{{spellGroupInfo.BossUserHead}}"></image>
+                        </view>
+                        <view class="inline-block" wx:for="{{participantList}}">
+                            <image class="userImg" src="{{item}}"></image>
+                        </view>
+                        <view class="inline-block" wx:if="{{moreUser}}">
+                            <text class="beyond">...</text>
+                        </view>
+                    </view>
+                    <view class="group-bottom-text">
+                        <text class="font-32 color-21" wx:if="{{spellGroupInfo.spellGroupStatu==0}}">离成团还差<text class="color-success">{{spellGroupInfo.GroupNumber-spellGroupInfo.JoinNum}}</text>人哦~</text>
+                    </view>
+                    <view class="time-box" wx:if="{{(spellGroupInfo.spellGroupStatu==0&&spellGroupInfo.IsJoin==0)||(spellGroupInfo.orderStatu==2&&spellGroupInfo.spellGroupStatu==0)||(spellGroupInfo.orderStatu==1&&spellGroupInfo.spellGroupStatu==0)}}">
+                        <text class="line"></text>
+                        <view class="surplus-time font-28">
+                            <text>剩余</text>
+                            <text class="bg-box font-24 bg-color-fd1d1d ml-16">{{dateTimeObj.hour}}</text>
+                            <text class="padding-5">:</text>
+                            <text class="bg-box font-24 bg-color-fd1d1d">{{dateTimeObj.minute}}</text>
+                            <text class="padding-5">:</text>
+                            <text class="bg-box font-24 bg-color-fd1d1d mr-16">{{dateTimeObj.second}}</text>
+                            <text>结束</text>
+                        </view>
+                        <text class="line"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="section-box bg-white margin-t-24" style="padding-bottom:0;" wx:if="{{allOtherSpellGroup.length>0&&spellGroupRecordId==0}}">
+                <view class="section-box-header relative">不想开团？直接参加下面的拼团吧
+                    <view wx:if="{{allOtherSpellGroup.length>3}}" class="look-more" bindtap='lookThserGroup'>查看全部
+                        <text>></text>
+                    </view>
+                </view>
+                <view class="open-group-ing">
+                    <view class="table-view-table bg-white" wx:for="{{therSpellGroupThree}}" wx:key="*this">
+                        <navigator url="/pages/pintuan/detail/detail?activityId={{item.ActivityId}}&spellGroupRecordId={{item.Id}}" open-type="redirect">
+                            <view class="table-view-cell clearfix">
+                                <image mode="aspectFill" class="media-object" src="{{item.UserHead||'http://img3.imgtn.bdimg.com/it/u=692761107,254455506&fm=26&gp=0.jpg'}}"></image>
+                                <view class="media-body">
+                                    <view class="text-ellipsis-2 product-name">{{item.UserName}}</view>
+                                    <view class="classname">
+                                        <text class="color-75 font-28">还差{{item.GroupNumber - item.JoinNum}}人，剩余{{item.endDataTime}}</text>
+                                    </view>
+                                    <view class="participate-in">去参团</view>
+                                </view>
+                            </view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+            <view class="section-box bg-white margin-t-24">
+                <view class="section-box-header">商品详情</view>
+                <view class="image-text">
+                    <view class="wxParse">
+                        <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
+                        <block wx:for="{{nodes}}" wx:key="*this" wx:for-item="item">
+                            <rich-text nodes="{{[item]}}" wx:if="{{item.name !='video'}}"></rich-text>
+                            <video style='width:100%' src="{{item.children.src}}" class="{{item.class}} wxParse-{{item.iframe}}-video" wx:else></video>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <view class="nav-fiexd-bottom">
+                <view class="nav-fiexd-bottom-item nav-icon" bindtap="goIndex">
+                    <view class="index-icon icon"></view>
+                    <text class="icon-text">专题</text>
+                </view>
+                <button class="nav-fiexd-bottom-item nav-icon" open-type='contact'>
+                    <view class="message-icon icon"></view>
+                    <text class="icon-text">客服</text>
+                </button>
+                <view class="nav-fiexd-bottom-item nav-icon" bindtap="goMember">
+                    <view class="member-icon icon"></view>
+                    <text class="icon-text">会员</text>
+                </view>
+                <button wx:if="{{IsJoin==0&&AllowJoin==0}}" class="nav-fiexd-bottom-item operation-btn go-open-group" type="primary" hover-class="payment-btn-hover" bindtap="selectSpecifications">{{submitText}}</button>
+                <button wx:if="{{IsJoin==1&&AllowJoin==0}}" class="nav-fiexd-bottom-item operation-btn go-open-group" type="primary" hover-class="payment-btn-hover" open-type="share">邀请好友参加</button>
+                <button wx:if="{{AllowJoin==1}}" class="nav-fiexd-bottom-item operation-btn go-open-group disable-btn" type="primary" hover-class="payment-btn-hover">活动已过期</button>
+                <button wx:if="{{AllowJoin==2}}" class="nav-fiexd-bottom-item operation-btn go-open-group disable-btn" type="primary" hover-class="payment-btn-hover">活动暂未开始</button>
+            </view>
+            <view class="mark {{specifications}}" bindtap="closePopup"></view>
+            <view class="rule-popup {{specifications}}">
+                <view class="rule-popup-herder">
+                    <image class="product-imag" mode="aspectFill" src="{{selectedSku.selectedSkuImg}}"></image>
+                    <view class="price">
+                        <text>￥</text>{{selectedSku.selectedSkuPrice}}</view>
+                    <view class="selected-specifications">剩余数量{{selectedSkuStock}}件</view>
+                    <icon class="cancel" type="cancel" bindtap="closePopup" size="28" color="#757575" />
+                </view>
+                <view class="rule-popup-body">
+                    <scroll-view scroll-y style="max-height:400rpx;">
+                        <view class="specifications-list" wx:for-index="pidx" wx:for="{{productInfo.ProductSKU.skuData}}" wx:for-item="sku" wx:key="*this">
+                            <view class="specifications-title">{{sku.pname}}</view>
+                            <view class="specifications-list-group">
+                                <view class="specifications-item {{skuValue.selected}}" data-currentIndex="{{cidx}}" data-parentIndex="{{pidx}}" wx:for-index="cidx" wx:for="{{sku.values}}" wx:for-item="skuValue" bindtap="selectedSp" wx:key="*this">{{skuValue.vname}}</view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                    <view class="buy-number clearfix">
+                        <text class="number-text">购买数量</text>
+                        <view class="number-control clearfix">
+                            <text catchtap="minusStock">-</text>
+                            <input type="number" value="{{selectedCount}}" bindinput="validateCount" bindblur="blurValidateCount" bindconfirm="validateCount" />
+                            <text catchtap="addStock">+</text>
+                            <text class="stock-text">限购{{AmountLimit}}件</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="rule-popup-footer">
+                    <button class="block-btn-big" type="primary" hover-class="btn-hover" bindtap="buyNow">确定</button>
+                </view>
+            </view>
+            <view class="mark {{thserGroup}}" bindtap="closePopup"></view>
+            <view class='other-all-group {{thserGroup}}'>
+                <view class='section-box bg-white'>
+                    <view class='section-box-header relative'>正在开团<icon class="cancel" type="cancel" bindtap="closeThserGroup" size="28" color="#757575" /></view>
+                    <scroll-view class='other-all-group-scroll' scroll-y>
+                        <view class='open-group-ing'>
+                            <view class="table-view-table bg-white" wx:for="{{allOtherSpellGroup}}" wx:key="*this">
+                                <navigator url="/pages/pintuan/detail/detail?activityId={{item.ActivityId}}&spellGroupRecordId={{item.Id}}" open-type="redirect">
+                                    <view class="table-view-cell clearfix">
+                                        <image mode="aspectFill" class="media-object" src="{{item.UserHead||'http://img3.imgtn.bdimg.com/it/u=692761107,254455506&fm=26&gp=0.jpg'}}"></image>
+                                        <view class="media-body">
+                                            <view class="text-ellipsis-2 product-name">{{item.UserName}}
+                                                <text class="color-75 font-28">还差{{item.GroupNumber - item.JoinNum}}人</text>
+                                            </view>
+                                            <view class="classname">
+                                                <text class="color-75 font-28">剩余{{item.endDataTime}}</text>
+                                            </view>
+                                            <view class="participate-in">去参团</view>
+                                        </view>
+                                    </view>
+                                </navigator>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

@@ -1,0 +1,63 @@
+<!--pages/userset/userset.wxml-->
+<import src="../../template/logo.wxml" />
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="userset">
+            <view class="userset-img">
+                <view class="userset-img-text">
+                    <text class="font-32">头像</text>
+                    <!--<text class="font-28 color-main">获取微信头像</text>-->
+                </view>
+                <view class="userset-image" bindtap="editHeadImg">
+                    <image mode="aspectFill" src="{{memberInfo.UserHead}}"></image>
+                    <view class="prompt">点击图片上传</view>
+                </view>
+            </view>
+
+            <view class="group-row" bindtap="bindCellPhone">
+                <label>手机号</label>
+                <text class="right-text color-strong" wx:if="{{memberInfo.CellPhone==null}}">非常重要！去绑定！</text>
+                <text class="right-text" wx:if="{{memberInfo.CellPhone!=null}}">{{memberInfo.CellPhone}}</text>
+                <view class="right-icon" wx:if="{{memberInfo.CellPhone==null}}"></view>
+            </view>
+            <view class="group-row" bindtap="editDetail" data-type="nickname" data-editvalue="{{memberInfo.UserBindName?memberInfo.UserBindName:''}}">
+                <label>昵称</label>
+                <text class="right-text">{{memberInfo.UserBindName?memberInfo.UserBindName:''}}</text>
+                <view class="right-icon"></view>
+            </view>
+            <view class="group-row" bindtap="editDetail" data-type="realname" data-editvalue="{{memberInfo.RealName?memberInfo.RealName:''}}">
+                <label>真实姓名</label>
+                <text class="right-text">{{memberInfo.RealName?memberInfo.RealName:''}}</text>
+                <view class="right-icon"></view>
+            </view>
+            <view class="group-row" bindtap="editDetail" data-type="qq" data-editvalue="{{memberInfo.QQ?memberInfo.QQ:''}}">
+                <label>QQ号</label>
+                <text class="right-text">{{memberInfo.QQ?memberInfo.QQ:''}}</text>
+                <view class="right-icon"></view>
+            </view>
+            <view class="group-row" bindtap="editDetail" data-type="idcard" data-editvalue="{{memberInfo.CardID?memberInfo.CardID:''}}">
+                <label>身份证号码</label>
+                <text class="right-text">{{memberInfo.CardID?memberInfo.CardID:''}}</text>
+                <view class="right-icon"></view>
+            </view>
+            <!--<view class="group-row">
+    <text>登录密码</text>
+    <text class="right-text">******</text>
+    <view class="right-icon"></view>
+  </view>-->
+            <view class="group-row clearfix" bindtap="editDetail" data-type="address" data-editvalue="{{memberInfo.Address?memberInfo.Address:''}}">
+                <label>现住地址</label>
+                <text class="right-text text-ellipsis my-address">{{memberInfo.Address?memberInfo.Address:''}}</text>
+                <view class="right-icon"></view>
+            </view>
+        </view>
+        <!--<view class="padding-24" style="margin-top:50rpx;">
+  <button class="default-size" type="primary" bindtap="exit">退出登录</button>
+</view>-->
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+    </button>
+</form>

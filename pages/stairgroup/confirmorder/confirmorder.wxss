@@ -1,0 +1,2 @@
+/* pages/laddergroupon/confirmorder/confirmorder.wxss */
+@import '../../reduceauction/confirmorder/confirmorder.wxss';

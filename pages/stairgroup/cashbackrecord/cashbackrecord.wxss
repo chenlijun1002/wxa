@@ -1,0 +1,77 @@
+/* pages/stairgroup/cashbackrecord/cashbackrecord.wxss */
+
+@import "/pages/reduceauction/myauctiondetail/myauctiondetail.wxss";
+.flex-e {
+  padding-right: 24rpx;
+  justify-content: flex-end;
+}
+
+.cashback-description {
+  display: flex;
+  min-height: 200rpx;
+}
+
+.cashback-description-icon {
+  width: 96rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/stairgroup-cashback-description.png") no-repeat center;
+  background-size: cover;
+}
+
+.cashback-description-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24rpx;
+}
+
+
+.cashback-description-text text:last-child {
+  line-height: 40rpx;
+  margin-top: 16rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48rpx;
+  height: 80rpx;
+  margin-left: -24rpx;
+}
+
+.row.bg-f7 {
+  background: #f7f7f7;
+}
+
+.shop-cell.total {
+  padding: 0 80rpx 0 24rpx;
+}
+
+.shop-cell.total text:first-child {
+  flex: 1;
+}
+
+.bottom-link {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 112rpx;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24rpx;
+  background: #fff;
+}
+
+.bottom-link button {
+  height: 64rpx;
+  line-height: 64rpx;
+  padding: 0 24rpx;
+  font-size: 32rpx;
+  color: #ff7800;
+  border: 1px solid #ff7800;
+  border-radius: 8rpx;
+  background: #fff;
+}

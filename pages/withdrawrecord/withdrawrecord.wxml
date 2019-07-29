@@ -1,0 +1,40 @@
+<!--pages/withdrawrecord/withdrawrecord.wxml-->
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="nav-fixed-top">
+            <view class="nav-item {{witdrawState==0?'active':''}}" data-witdrawstate='0' bindtap='changeState'>所有</view>
+            <view class="nav-item {{witdrawState==1?'active':''}}" data-witdrawstate='1' bindtap='changeState'>处理中</view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view scroll-y lower-threshold="200" scroll-top="{{scrollTop}}" bindscrolltolower="pullLoadingData">
+                <view class='record-item' wx:for="{{recordList}}">
+                    <view class='witdraw-type-state'>
+                        <text>{{item.RequestTypeText}}</text>
+                        <!-- <text wx:if="{{item.requestType==1}}">支付宝提现</text>
+                        <text wx:if="{{item.requestType==2}}">线下提现</text> -->
+                        <view class='pull-right' wx:if="{{item.WithdrawState==0}}">{{item.WithdrawStateText}}</view>
+                        <view class='wait pull-right' wx:if="{{item.WithdrawState==1}}">{{item.WithdrawStateText}}</view>
+                        <view class='pull-right' wx:if="{{item.WithdrawState==2}}">{{item.WithdrawStateText}}</view>
+                    </view>
+                    <view class='witdraw-info'>
+                        <text>金额：¥{{item.WithdrawMoney}}</text>
+                        <view class='pull-right'>{{item.WithdrawTime}}</view>
+                    </view>
+                </view>
+                <view class="empty-data" wx:if="{{recordList.length<=0}}">
+                    <view class="empty-img-prompt">
+                        <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/empty-order.png"></image>
+                    </view>
+                    <text class="font-36">您还没有相关订单哦~</text>
+                </view>
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

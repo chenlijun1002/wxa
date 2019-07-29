@@ -1,0 +1,74 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.2",
+	"appid": "wx26b298ffe8497fd8",
+	"projectname": "wx26b298ffe8497fd8",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": -1,
+					"name": "立即购买降价拍",
+					"pathName": "pages/reduceauction/reduceauctiondetail/reduceauctiondetail",
+					"query": "activityId=115"
+				},
+				{
+					"id": -1,
+					"name": "价保申请",
+					"pathName": "pages/supportvalueservice/supportvalueservice",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "价保申请007",
+					"pathName": "pages/supportvalueapply/supportvalueapply",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "秒杀",
+					"pathName": "pages/seckilling/seckillingDetail/seckillingDetail?activityId=627",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "提现记录",
+					"pathName": "pages/withdrawrecord/withdrawrecord",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "掌柜名片",
+					"pathName": "pages/distributor/storecard/storecard",
+					"query": ""
+				}
+			]
+		}
+	}
+}

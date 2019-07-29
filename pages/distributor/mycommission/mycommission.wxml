@@ -1,0 +1,51 @@
+<!--我的佣金-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}">
+  <view class="total-commission">历史佣金总额：￥{{HistoryBlance}}</view>
+  <view class="commission-detail margin-b-24">
+    <view class="column column1">
+      <text class="text">可提现</text>
+      <text class="money-box">￥<text class="money">{{ReferralBlance}}</text></text>
+    </view>
+    <view class="column">
+      <text class="text">已提现</text>
+      <text class="money-box">￥<text class="money">{{RequestBlance}}</text></text>
+    </view>
+  </view>
+  <view class="commission-function">
+    <view class="row line"  bindtap="navigateUrl" data-url="/pages/distributor/commissiontobalance/commissiontobalance">
+      <view class="translate-icon"></view>
+      <text>佣金转余额</text>
+      <view class="right-icon"></view>
+    </view>
+    <view class="row line" bindtap="navigateUrl" data-url="/pages/distributor/commissionwithdraw/commissionwithdraw">
+      <view class="record-icon"></view>
+      <text>申请提现</text>
+      <view class="right-icon"></view>
+    </view>
+    <view class="row line" bindtap="navigateUrl" data-url="/pages/withdrawrecord/withdrawrecord">
+      <view class="withdrawrecord-icon"></view>
+      <text>提现记录</text>
+      <view class="right-icon"></view>
+    </view>
+    <view class="row" bindtap="navigateUrl" data-url="/pages/distributor/commissiondetail/commissiondetail">
+      <view class="balance_detail-icon"></view>
+      <text>佣金明细</text>
+      <view class="right-icon"></view>
+    </view>
+  </view>
+  <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+</view>
+<view wx:else class="load-prompt">
+  <template is="loadPrompt" />
+</view>
+<view wx:if="{{isShowToast}}">
+  <template is="toast" data="{{...toastText}}" />
+</view>
+</button>
+</form>

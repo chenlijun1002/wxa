@@ -1,0 +1,99 @@
+/* pages/pintuan/paymentok/paymentok.wxss */
+page{
+  background-color: #F0F0F0;
+}
+.payment-success-text{
+  background-color: #fff;
+  margin: 24rpx;
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-bottom: 56rpx;
+}
+.icon-prompt{
+  padding: 70rpx 0;
+  text-align: center;
+}
+.icon-prompt .icon{
+  width: 140rpx;
+  height: 140rpx;
+  margin: 0 auto 44rpx;
+  background:url('http://file.xiaokeduo.com/system/xkdxcx/system/images/payment-success-icon.png') no-repeat left top;
+  background-size: cover; 
+}
+.icon-prompt.error .icon {
+  background:url('http://file.xiaokeduo.com/system/xkdxcx/system/images/pintuan-error-icon.png') no-repeat left top;
+  background-size: cover;
+}
+.icon-prompt .prompt-text{
+  font-size: 44rpx;
+  line-height: 50rpx;
+}
+.parting-line{
+  position: relative;
+  border-bottom:1rpx dashed #DFDFDF;
+}
+.parting-line .semi-circle{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48rpx;
+  height: 48rpx;
+  background-color: #F0F0F0;
+  border-radius: 50%;
+}
+.parting-line .semi-circle-left{
+  left: -24rpx;
+}
+.parting-line .semi-circle-right{
+  right: -24rpx;
+}
+.payment-order-info{
+  padding: 66rpx 48rpx;
+}
+.payment-order-info view{
+  font-size: 32rpx;
+  line-height: 64rpx;
+}
+.share-friends .icon-share{
+  display: inline-block;
+  padding-left: 60rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/share-icon-white.png") no-repeat left center;
+  background-size: 44rpx auto;
+}
+button.share-friends{
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 36rpx;
+  margin-top: 50rpx;
+  background: #FFA200;
+  background: -moz-linear-gradient(left,  #FFA200 0%, #FF7800 100%);
+  background: -webkit-gradient(linear, left center, right center, color-stop(0%,#FFA200), color-stop(100%,#FF7800));
+  background: -webkit-linear-gradient(left,  #FFA200 0%,#FF7800 100%);
+  background: -ms-linear-gradient(left,  #FFA200 0%,#FF7800 100%);
+  background: linear-gradient(to right,  #FFA200 0%,#FF7800 100%);
+}
+.btn-hover{
+  background: #f09800 !important;
+  background: -moz-linear-gradient(left,  #f09800 0%, #f07200 100%) !important;
+  background: -webkit-gradient(linear, left center, right center, color-stop(0%,#f09800), color-stop(100%,#f07200)) !important;
+  background: -webkit-linear-gradient(left,  #f09800 0%,#f07200 100%) !important;
+  background: -ms-linear-gradient(left,  #f09800 0%,#f07200 100%) !important;
+  background: linear-gradient(to right,  #f09800 0%,#f07200 100%) !important;
+}
+.keep-looking{
+    display: block;
+    text-align: center;
+    height: 90rpx;
+    line-height: 90rpx;
+    border:1rpx solid #E3E2E3;
+    border-radius: 8rpx;
+    background-color: #fff;
+    font-size: 36rpx;
+    color: #424242;
+    margin-top: 24rpx;
+}
+
+.logo-content{
+  position: absolute;
+  bottom: 0;
+}

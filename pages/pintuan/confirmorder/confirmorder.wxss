@@ -1,0 +1,190 @@
+/* pages/pintuan/confirmorder/confirmorder.wxss */
+page{
+  padding-bottom: 124rpx;
+}
+.order-address{
+  padding: 35rpx 0;
+  font-size: 32rpx;
+  margin-bottom: 22rpx;
+  padding-left: 72rpx;
+  padding-right: 100rpx;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/address-line.jpg') no-repeat left bottom #fff;
+  background-size: 100% auto;
+}
+.order-address label{
+  display: inline-block;
+  font-size: 42rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+.order-address .address{
+  position: relative;
+  margin-top: 12rpx;
+  line-height: 44rpx;
+  font-size: 28rpx;
+}
+.table-view-cell .media-object{
+  width: 130rpx;
+  height: 130rpx;
+}
+.order-address .address-icon{
+  position: absolute;
+  left: -36rpx;
+  top: 6rpx;
+  width:26rpx;
+  height: 32rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/address-icon.png") no-repeat left top;
+  background-size: cover;
+}
+.order-address .right-icon{
+  position: absolute;
+  width: 40rpx;
+  height: 8rpx;
+  background: url("http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/select-row-right.png") no-repeat left top;
+  background-size: cover;
+  top: 15rpx;
+  right: -90rpx;
+}
+.order-price{
+  padding: 12rpx 24rpx;
+  background-color: #fff;
+}
+.order-price .row{
+  font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.nav-fiexd-bottom .price-text{
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
+}
+.nav-fiexd-bottom .price-total{
+  display: table;
+  height: 100rpx;
+}
+.nav-fiexd-bottom .price-total .table-cell{
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 30rpx;
+}
+.nav-fiexd-bottom .price-total .total{
+  color: #FD1D1D;
+  font-size: 36rpx;
+  margin-right: 10rpx;
+}
+.nav-fiexd-bottom .price-total .coin{
+  font-size: 28rpx;
+  color: #FA3F6E;
+}
+.nav-fiexd-bottom .price-total .balance{
+  font-size: 24rpx;
+  color: #999;
+}
+.total-info{
+  width: 510rpx;
+}
+.payment-btn{
+  width: 240rpx;
+}
+.payment-btn button{
+  border-radius: 0;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #FA3F6E;
+  font-size: 36rpx;
+  transition:all 0.4s;
+}
+.payment-btn-hover{
+  background-color: #ED5F83 !important;
+  color: #fff;
+}
+.popup-delivery-mode{
+  padding: 30rpx 70rpx;
+  margin-bottom: 60rpx;
+}
+.popup-delivery-mode .delivery-mode-item{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+}
+.order-info .media-body .product-name{
+  margin-bottom: 8rpx;
+}
+.order-info .media-body{
+  height: auto;
+}
+.order-info .media-body .product-name{
+  font-size: 28rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+  margin-bottom: 10rpx;
+}
+.order-info .media-body .prodcut-specifications{
+  line-height: 40rpx;
+  min-height: 30rpx;
+  font-size: 24rpx;
+  margin-bottom: 8rpx;
+}
+.group-row .pull-right{
+  max-width: 530rpx;
+}
+.order-info .table-view-cell{
+  background-color: #F6F6F6;
+}
+.inline-block{
+  display: inline-block;
+}
+.group-row .right-icon {
+background:url("http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/select-row-right.png") no-repeat left top;
+background-size:cover;
+}
+.balance-pay-icon, .wx-pay-icon {
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: 32rpx;
+  }
+.balance-pay-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/balance-pay-icon.png") no-repeat left top;
+  background-size: cover;
+}
+.wx-pay-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/wx-pay.png") no-repeat left top;
+  background-size: cover;
+}
+.pay-text {
+  flex: 1;
+}
+.popup-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+}
+
+.popup-btn button {
+  width: 100%;
+  height: 100%;
+  line-height: 100rpx;
+  border-radius: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  background: linear-gradient(to right, #FFA200, #FF7800);
+}
+.confirm-pay{
+  background: #FFA200;
+  background: -moz-linear-gradient(left,  #FFA200 0%, #FF7800 100%);
+  background: -webkit-gradient(linear, left center, right center, color-stop(0%,#FFA200), color-stop(100%,#FF7800));
+  background: -webkit-linear-gradient(left,  #FFA200 0%,#FF7800 100%);
+  background: -ms-linear-gradient(left,  #FFA200 0%,#FF7800 100%);
+  background: linear-gradient(to right,  #FFA200 0%,#FF7800 100%);
+}
+
+
+.logo-content{
+  margin-top: 24rpx;
+}

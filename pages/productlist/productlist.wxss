@@ -1,0 +1,118 @@
+/* pages/productlist/productlist.wxss */
+.search{
+  position: relative;
+  padding: 24rpx;
+  background-color: #fff;
+  height: 112rpx;
+  box-sizing: border-box;
+  transition: 0;
+}
+/*.search.hide{
+  padding: 0;
+  height: 0;
+  margin-bottom: 0;
+  display: none;
+}*/
+.search-input{
+  width: 600rpx;
+  height: 64rpx;
+  background-color: #DFDFDF;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.search input{
+  display: block;
+  background-color: #DFDFDF;
+  border-radius: 8rpx;
+  width: 532rpx;
+  height: 64rpx;
+  line-height: 34rpx;
+  font-size: 28rpx;
+  color: #757575;
+  box-sizing: border-box;
+  padding-left: 68rpx;
+}
+.search .search-icon{
+  position: absolute;
+  left: 48rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 32rpx;
+}
+.search .search-btn{
+  position: absolute;
+  right: 0;
+  top: 24rpx;
+  width: 126rpx;
+  text-align: center;
+  height: 64rpx;
+  line-height: 64rpx;
+  background-color: transparent;
+  border:none;
+  font-size: 32rpx;
+  color: #202020;
+}
+.search-btn-hover{
+  color: #00A699 !important;
+}
+.product-nav{
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  padding: 0 20rpx;
+}
+.product-nav .product-nav-item{
+  position: relative;
+  width: 238rpx;
+  text-align: center;
+  font-size: 32rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #757575;
+}
+.product-nav .product-nav-item .arrow-icon{
+  position: absolute;
+  top: 50%;
+  right: 60rpx;
+  width: 14rpx;
+  height: 24rpx;
+  margin-top: -10rpx;
+  background: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/arrow-default.png');
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
+}
+.product-nav .product-nav-item .arrow-icon.up{
+  background: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/arrow-up.png');
+  background-size: cover;
+}
+.product-nav .product-nav-item .arrow-icon.down{
+  background: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/arrow-down.png');
+  background-size: cover;
+}
+.product-nav .product-nav-item.active{
+  color: #00A699;
+}
+.add-cart{
+  position: absolute;
+  display: block;
+  width: 40rpx;
+  height: 48rpx;
+  right: 20rpx;
+  bottom: 4rpx;
+  background: url(http://testfile.xiaokeduo.com/system/xkdxcx/system/images/cart-icon.png) no-repeat left top;
+  background-size: 100% 100%;
+}
+scroll-view{
+  position: fixed;
+  left: 0;
+  top: 214rpx;
+  bottom: 0;
+  width: 100%;
+}
+
+
+.logo-content{
+  position: absolute;
+  bottom: 0;
+}

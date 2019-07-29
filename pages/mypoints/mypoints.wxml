@@ -1,0 +1,49 @@
+<!--pages/mypoints/mypoints.wxml-->
+<!-- 积分 -->
+<import src="../../template/loading.wxml" />
+<import src="../../template/empty-data.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view wx:if="{{loadComplete}}">
+            <view class="commission-detail margin-b-24">
+                <view class="column column1">
+                    <text class="points">{{remainingPoints}}</text>
+                    <text class="text color-74">剩余积分</text>
+                </view>
+                <view class="column">
+                    <text class="points">{{totalPoints}}</text>
+                    <text class="text color-74">获得的总积分</text>
+                </view>
+            </view>
+            <scroll-view lower-threshold="50" scroll-y bindscrolltolower="pullLoadingData" scroll-top="{{scrollTop}}">
+                <view class="balance-detail" wx:if="{{pointsList.length > 0}}">
+                    <block wx:for="{{pointsList}}">
+                        <view class="item line">
+                            <view class="item-row">
+                                <text class="text-ellipsis-2">{{item.IntegralSource}}</text>
+                                <text class="color-primary" wx:if="{{item.IntegralChange>0}}"><text>+</text>{{item.IntegralChange}}</text>
+                                <text wx:else>{{item.IntegralChange}}</text>
+                            </view>
+                            <view class="item-row">
+                                <text>{{item.TrateTime}}</text>
+                            </view>
+                        </view>
+                    </block>
+                    <view class="pull-loading" wx:if="{{isShowLoading}}">
+                        <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                        {{loadingText}}
+                    </view>
+                </view>
+                <view wx:else>
+                    <template is="emptyData" data="{{...emptyData}}"></template>
+                </view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt"></template>
+        </view>
+    </button>
+</form>

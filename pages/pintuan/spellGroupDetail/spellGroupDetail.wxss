@@ -1,0 +1,344 @@
+/* spellGroupDetail.wxss */
+.order-item{
+  background-color: #fff;
+  border-top: 1rpx solid #e0e0e0;
+}
+.table-view-cell .media-object {
+  float: left;
+  width: 201rpx;
+  height: 201rpx;
+  margin-right: 26rpx;
+}
+
+.table-view-cell .media-body {
+  position: relative;
+  overflow: hidden;
+  height: 201rpx;
+}
+.media-body .prodcut-specifications{
+  position:absolute;
+  bottom: 20rpx;
+  margin-bottom: 0;
+  width: 100%;
+}
+.ml30{
+  margin-left: 30rpx;
+}
+.color-21{
+  color:#212121;
+}
+.padding-32-23{
+  padding: 32rpx 23rpx;
+}
+.padding-23{
+  padding: 23rpx;
+}
+.color-success{
+  color: #fd1d1d;
+}
+.mb20{
+  margin-bottom: 20rpx;
+}
+.mb60{
+  margin-bottom: 60rpx;
+}
+.markdown-sale{
+  display: inline-block;
+  padding: 0 8rpx;
+  height: 41rpx;
+  border: 1rpx solid #FFA200;
+  border-radius: 8rpx;
+  font-size: 25rpx;
+  text-align: center;
+  line-height: 41rpx;
+  color: #FFA200;
+  margin-right: 10rpx;
+}
+.group{
+  background: #fff;
+  margin-top: 20rpx;
+}
+.group-top{
+  border-bottom: 1rpx solid #e0e0e0;
+}
+.users{
+  text-align: center;
+  padding-top: 46rpx;
+}
+.userImg{
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+  position: relative;
+  vertical-align: middle;
+}
+.captain{
+  position: relative;
+}
+.captain:after{
+  position: absolute;
+  top: -10rpx;
+  right: 0rpx;
+  content: "团长";
+  padding: 0 10rpx;
+  height: 41rpx;
+  line-height: 41rpx;
+  text-align: center;
+  background: #FFA200;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 41rpx;
+}
+.group-bottom-text{
+  text-align: center;
+}
+.color-bd{
+  color: #bdbdbd;
+}
+.inline-block{
+  display: inline-block;
+  padding: 0 12rpx;
+  margin-bottom: 24rpx;
+}
+.btns{
+  margin-top: 47rpx;
+  text-align: center;
+}
+.btns button{
+  margin: 0 auto;
+   width: 704rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.bg-color-ffa200{
+  background: #FFA200;
+}
+.look-detail{
+  margin-bottom: 24rpx !important;
+  color: #fff;
+}
+.stroll-around{
+  color: #424242;
+}
+.bg-color-fbfafc{ 
+  background: #fbfafc !important;
+}
+.font-36{
+  font-size: 36rpx;
+}
+.beyond{
+  display: inline-block;
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+  position: relative; 
+  line-height: 104rpx;
+  font-size: 86rpx;
+  color: #e0e0e0;
+}
+/* 拼团人数未满 */
+.spellSuccess{
+  background: transparent;
+  border-top: 0 none;
+  margin-top: 0;
+}
+.time-box{
+  text-align: center;
+  height: 40rpx;
+  line-height: 40rpx;
+  margin-top: 60rpx;
+}
+.line{
+  display: inline-block;
+  height: 1rpx;
+  width: 185rpx;
+  background: #e0e0e0;
+  vertical-align: middle;
+}
+.fr{
+  float: right
+}
+.surplus-time{
+  display: inline-block;
+  padding: 0 20rpx;
+}
+.bg-color-fd1d1d{
+  background: #fd1d1d;
+}
+.ml-16{
+  margin-left: 16rpx;
+}
+.mr-16{
+  margin-right: 16rpx;
+}
+.bg-box{
+  display: inline-block;
+  width: 41rpx;
+  height: 41rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 41rpx;
+  color: #fff;
+}
+.padding-5{
+  padding: 0 5rpx;
+}
+
+/* 弹框 */
+.showModal{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+.modal-content{
+  position: fixed;
+  width: 680rpx;
+  background: #fff;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  margin:0 auto;
+}
+.caputor{
+   margin-top: 48rpx;
+}
+.caputorImg{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  position: relative;
+}
+.modal-top{
+  text-align: center;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+.member{
+  margin-bottom: 30rpx;
+  height: 66rpx;
+}
+.member:last-child{
+    margin-bottom: 0;
+}
+.member .userName{
+  display: inline-block;
+  width: 240rpx;
+  padding-left:34rpx;
+}
+.member .inlineBlock{
+  display: inline-block;
+  height: 65rpx;
+  line-height: 65rpx;
+}
+.member .memberImg{
+  width: 65rpx;
+  height: 65rpx;
+  border-radius: 50%;
+  position: relative;
+}
+.member .time{ 
+   display: inline-block;
+}
+.modal-top .captain{
+  display: inline-block;
+}
+.modal-top .captain:after{
+   position: absolute;
+  top: 0;
+  right: -20rpx;
+  content: "团长";
+  padding: 0 10rpx;
+  height: 41rpx;
+  line-height: 41rpx;
+  text-align: center;
+  background: #FFA200;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 41rpx;
+}
+.wait{
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: -23rpx;
+  right: -23rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color:#757575;
+  background: #fffff0;
+}
+.waitImg{
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+.hover-btn{
+    background-color: #F7BC52 !important;
+}
+scroll-view{
+    max-height: 338rpx;
+}
+.modal-bottom{
+    padding: 50rpx 0;
+}
+.balance-pay-icon, .wx-pay-icon {
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: 32rpx;
+  }
+.balance-pay-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/balance-pay-icon.png") no-repeat left top;
+  background-size: cover;
+}
+.wx-pay-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/wx-pay.png") no-repeat left top;
+  background-size: cover;
+}
+.pay-text {
+  flex: 1;
+}
+.popup-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+}
+.popup-btn button {
+  width: 100%;
+  height: 100%;
+  line-height: 100rpx;
+  border-radius: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  background: linear-gradient(to right, #FFA200, #FF7800);
+}
+.xkd-cell.line,.popup-header.line{
+    display: flex;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+}
+.sepllgroup-detail-price{
+    position: relative;
+}
+.table-view-cell .media-body{
+    overflow-y: visible !important;
+}
+.sepllgroup-detail-price .freight{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 20rpx;
+}
+
+.logo-content{
+  margin-top: 48rpx;
+}

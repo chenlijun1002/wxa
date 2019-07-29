@@ -1,0 +1,7 @@
+<!--pages/statepage/statepage.wxml-->
+<state-page class='state-view'>
+    <view class='state-icon state-class'></view>
+    <view class='state-title'>{{stateTitle}}</view>
+    <view class='state-tips'>{{stateTips}}</view>
+    <button class='btn' bindtap='btnClick'>{{btnContent}}</button>
+</state-page>

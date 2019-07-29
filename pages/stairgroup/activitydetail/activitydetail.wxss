@@ -1,0 +1,85 @@
+/* pages/stairgroup/activitydetail/activitydetail.wxss */
+@import '../../reduceauction/reduceauctiondetail/reduceauctiondetail.wxss';
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  line-height: inherit;
+}
+
+.xkd-panel {
+  padding: 0 0 32rpx 0;
+}
+
+.xkd-cell {
+  padding: 0 24rpx;
+  height: 96rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.groupon-table .row {
+  position: relative;
+  display: flex;
+  height: 72rpx;
+  font-size: 28rpx;
+}
+
+.groupon-table .row.active {
+  background: #ffe8e8;
+}
+
+.groupon-table .row.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8rpx;
+  height: 100%;
+  background: #fd1d1d;
+}
+
+.groupon-table .row.active .col {
+  color: #fd1d1d;
+}
+
+.groupon-table .row .col {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  line-height: 72rpx;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+.groupon-table .row .col .p-text {
+  position: absolute;
+  left: 40rpx;
+  top: 0;
+  bottom: 0;
+}
+.groupon-table .row .col:last-child {
+  border-right: none;
+}
+
+.table-header {
+  background: #f7f7f7;
+  border-top: 1px solid #e0e0e0;
+}
+
+.end-date-time {
+  background: #fc9857;
+}
+
+.markdown-sale {
+  color: #ff7800;
+  border-color: #ff7800;
+}
+.wxParse {
+  padding:24rpx;
+}
+.rich-img{
+  vertical-align: top;
+  max-width: 100% !important;
+  height: auto !important;
+}

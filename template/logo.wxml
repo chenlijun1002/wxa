@@ -1,0 +1,6 @@
+<template name="copyright">
+    <view class='bottom-copyright {{copyright.position}}'>
+        <image mode="aspectFill" src='{{copyright.logoSrc}}' wx:if="{{copyright.isOpenCopyRight==3||copyright.isOpenCopyRight==1}}"></image>
+        <view class='aspectFill-text' wx:if="{{copyright.isOpenCopyRight==2||copyright.isOpenCopyRight==1}}">{{copyright.copyRightText}}</view>
+    </view>
+</template>

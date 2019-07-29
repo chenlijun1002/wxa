@@ -1,0 +1,11 @@
+{
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "我的拼团",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false,
+    "component": "true",
+    "usingComponents": {
+      "component-common": "/pages/components/commonComponent/commonComponent",
+      "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

@@ -1,0 +1,172 @@
+<!--pages/pintuan/activitylist/activitylist.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view class="search border-bottom">
+            <icon type="search" size="16" color="#747474" />
+            <input type="text" placeholder="挑选您想要的商品" confirm-type="搜索" bindinput="changeSearchValue" bindfocus="searchBtnShow" bindblur="searchBtnHide" />
+            <view class="screen" bindtap="screen" wx:if="{{!isResearch}}">
+                <view class="icon"></view>
+                <view class="screen-text">筛选</view>
+            </view>
+            <button class="search-btn research" type="primary" hover-class="search-btn-hover" bindtap="doSearch" wx:if="{{isResearch}}">确定</button>
+        </view>
+        <view class="activity-list-nav">
+            <view class="nav-item {{activityStatus==1?'active':''}}" data-status="1" bindtap="changeActivityStatus">活动进行时</view>
+            <view class="nav-item {{activityStatus==2?'active':''}}" data-status="2" bindtap="changeActivityStatus">即将开始</view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view scroll-y>
+                <view style="height:24rpx;"></view>
+                <view wx:if="{{activityList.length>0}}">
+                    <view class="activity-list clearfix {{item.ActivityType==2?'seckill':''}}" wx:for="{{activityList}}" wx:key="*this">
+                        <navigator wx:if="{{item.ActivityType==1}}" url="/pages/pintuan/detail/detail?activityId={{item.ActivityId}}">
+                            <view class="media-object">
+                                <image mode="aspectFill" src="{{item.ActivityImg}}" />
+                                <view class="label-title" wx:if="{{item.ActivityType==2}}">
+                                    <view class="label-text">
+                                        <view class="text">{{item.activityStatus==1?'距结束':'距开始'}}</view>
+                                        <view class="time">{{item.endDate}}</view>
+                                    </view>
+                                </view>
+                                <button class="search-btn research" type="primary" hover-class="search-btn-hover" bindtap="doSearch" wx:if="{{isResearch}}">确定</button>
+                            </view>
+                            <view class="activity-list-nav">
+                                <view class="nav-item {{activityStatus==1?'active':''}}" data-status="1" bindtap="changeActivityStatus">活动进行时</view>
+                                <view class="nav-item {{activityStatus==2?'active':''}}" data-status="2" bindtap="changeActivityStatus">即将开始</view>
+                            </view>
+                            <view wx:if="{{loadComplete}}">
+                                <scroll-view scroll-y>
+                                    <view style="height:24rpx;"></view>
+                                    <view wx:if="{{activityList.length>0}}">
+                                        <view class="activity-list clearfix {{item.ActivityType==2?'seckill':''}}" wx:for="{{activityList}}" wx:key="*this">
+                                            <navigator wx:if="{{item.ActivityType==1}}" url="/pages/pintuan/detail/detail?activityId={{item.ActivityId}}">
+                                                <view class="media-object">
+                                                    <image mode="aspectFill" src="{{item.ActivityImg}}" />
+                                                    <view class="label-title" wx:if="{{item.ActivityType==2}}">
+                                                        <view class="label-text">
+                                                            <view class="text">{{item.activityStatus==1?'距结束':'距开始'}}</view>
+                                                            <view class="time">{{item.endDate}}</view>
+                                                        </view>
+                                                    </view>
+                                                </view>
+                                                <view class="media-body">
+                                                    <view class="prodcut-name text-ellipsis-2">
+                                                        <label>{{item.ActivityName}}</label>{{item.ProductName}}</view>
+                                                    <view class="original-price-sold">
+                                                        <text class="original-price">￥{{item.ProductOldPrice}}</text>
+                                                        <text class="color-75">{{item.ActivityType==1?'已团':'仅剩'}}{{item.KilledOrderNum}}件</text>
+                                                    </view>
+                                                    <view class="activity-price clearfix">
+                                                        <view class="pull-left">
+                                                            <text class="present-price">￥{{item.SalePrice}}</text>
+                                                        </view>
+                                                        <view class="pull-right font-28 color-75">
+                                                            <button wx:if="{{item.ActivityType==1&&activityStatus==1}}" class="pull-right activity-btn activity-pintuan-btn" type="primary" hover-class="pintuan-btn-hover" data-activityid="{{item.ActivityId}}" bindtap="openGroup">去开团</button>
+
+                                                        </view>
+                                                    </view>
+                                                </view>
+                                            </navigator>
+                                            <navigator wx:if="{{item.ActivityType==2 && item.KilledOrderNum>0}}" url="{{item.ActivityType==2?'/pages/seckilling/seckillingDetail/seckillingDetail?activityId='+item.ActivityId:'/pages/pintuan/detail/detail?activityId='+item.ActivityId}}">
+                                                <view class="media-object">
+                                                    <image mode="aspectFill" src="{{item.ActivityImg}}" />
+                                                    <view class="label-title" wx:if="{{item.ActivityType==2}}">
+                                                        <view class="label-text">
+                                                            <view class="text">{{item.activityStatus==1?'距结束':'距开始'}}</view>
+                                                            <view class="time">{{item.endDate}}</view>
+                                                        </view>
+                                                    </view>
+                                                </view>
+                                                <view class="media-body">
+                                                    <view class="prodcut-name text-ellipsis-2">
+                                                        <label>{{item.ActivityName}}</label>{{item.ProductName}}</view>
+                                                    <view class="original-price-sold">
+                                                        <text class="original-price">￥{{item.ProductOldPrice}}</text>
+                                                        <text class="color-75">{{item.ActivityType==1?'已团':'仅剩'}}{{item.KilledOrderNum}}件</text>
+                                                    </view>
+                                                    <view class="activity-price clearfix">
+                                                        <view class="pull-left">
+                                                            <text class="present-price">￥{{item.SalePrice}}</text>
+                                                        </view>
+                                                        <view class="pull-right font-28 color-75">
+                                                            <button wx:if="{{item.ActivityType==1&&activityStatus==1}}" class="pull-right activity-btn activity-pintuan-btn" type="primary" hover-class="pintuan-btn-hover" data-activityid="{{item.ActivityId}}" bindtap="openGroup">去开团</button>
+                                                            <button wx:if="{{item.ActivityType==2&&activityStatus==1}}" class="pull-right activity-btn activity-miaosha-btn" type="primary" hover-class="miaosha-btn-hover" data-activityid="{{item.ActivityId}}" bindtap="buyNow">去抢购</button>
+                                                        </view>
+                                                    </view>
+                                                </view>
+                                            </navigator>
+                                            <navigator wx:if="{{item.ActivityType == 3}}" url="/pages/reduceauction/reduceauctiondetail/reduceauctiondetail?activityId={{item.ActivityId}}" open-type="redirect">
+                                                <view class="media-object">
+                                                    <image mode="aspectFill" src="{{item.ActivityImg}}" />
+                                                    <view class="label-title">
+                                                        <view class="label-text">
+                                                            <view class="text">{{item.activityStatus==1?'距结束':'距开始'}}</view>
+                                                            <view class="time">{{item.endDate}}</view>
+                                                        </view>
+                                                    </view>
+                                                </view>
+                                                <view class="media-body">
+                                                    <view class="prodcut-name text-ellipsis-2">
+                                                        <label>{{item.ActivityName}}</label>{{item.ProductName}}</view>
+                                                    <view class="original-price-sold">
+                                                        <text class="original-price">￥{{item.ProductOldPrice}}</text>
+                                                        <text class="color-75">仅剩{{item.KilledOrderNum}}件</text>
+                                                    </view>
+                                                    <view class="activity-price clearfix">
+                                                        <view class="pull-left">
+                                                            <text class="present-price">￥{{item.SalePrice}}</text>
+                                                        </view>
+                                                        <view class="pull-right font-28 color-75">
+                                                            <button wx:if="{{item.ActivityType==3&&activityStatus==1}}" class="pull-right activity-btn activity-miaosha-btn" type="primary" hover-class="miaosha-btn-hover">去竞拍</button>
+                                                        </view>
+                                                    </view>
+                                                </view>
+                                            </navigator>
+                                        </view>
+                                    </view>
+                                    <view class="empty-data" wx:else>
+                                        <view class="empty-img-prompt">
+                                            <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/empty-activitylist.png"></image>
+                                        </view>
+                                        <text class="font-36">暂无相关活动哦~</text>
+                                    </view>
+                                </scroll-view>
+                                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+                            </view>
+                            <view wx:else class="load-prompt" style="top:100rpx;">
+                                <template is="loadPrompt" />
+                            </view>
+                            <view class="mark {{showScreen}}" bindtap="closePopup"></view>
+                            <view class="screen-popup {{showScreen}}">
+                                <view class="screen-content">
+                                    <view class="screen-content-header">
+                                        <view class="header-text">筛选</view>
+                                    </view>
+                                    <view class="screen-nav-list">
+                                        <view class="nav-item all {{activityType==0?'select':''}}">
+                                            <view class="nav-text" data-type="0" bindtap="changeActivityType">全部</view>
+                                        </view>
+                                        <view class="nav-item {{activityType==1?'select':''}}">
+                                            <view class="nav-text" data-type="1" bindtap="changeActivityType">爱拼团</view>
+                                        </view>
+                                        <view class="nav-item {{activityType==2?'select':''}}">
+                                            <view class="nav-text" data-type="2" bindtap="changeActivityType">限时秒杀</view>
+                                        </view>
+                                        <view class="nav-item {{activityType==3?'select':''}}">
+                                            <view class="nav-text" data-type="3" bindtap="changeActivityType">降价拍</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </button>
+</form>

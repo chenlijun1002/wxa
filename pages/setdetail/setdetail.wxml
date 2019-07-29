@@ -1,0 +1,20 @@
+<!--pages/setdetail/setdetail.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="input-row">
+            <label>{{editTitle}}</label>
+            <input type="text" placeholder="{{editPlaceholder}}" bindinput="editInput" value="{{editValue}}" />
+        </view>
+        <view class="padding-24" style="margin-top:70rpx;">
+            <button class="default-size" type="primary" bindtap="editSave">保存</button>
+        </view>
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

@@ -1,0 +1,59 @@
+<!--pages/couponcenter/couponcenter.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<view wx:if="{{loadComplete}}" style='height:100%' class='{{StolenCouponList.length<=0&&UnfinishedCounponList.length<=0?"bg-white":""}}'>
+  <view class='coupon-header'>
+    <image src='http://testfile.xiaokeduo.com/system/xkdxcx/system/images/couponcenterheader.png'></image>
+  </view>
+  <view class='coupon-content'>
+    <view class='UnfinishedBusinessCounponList {{UnfinishedCounponList.length<=0?"bg-white":"p-l-r-24 pt24"}}' >
+      <view class='coupon-card coupon-card-enable {{index==(UnfinishedCounponList.length-1)?"":"margin-b-10"}}' wx:for="{{UnfinishedCounponList}}" key="*this" wx:for-item='item'>
+        <view class='coupon-card-content' data-a="{{item.ConditionValue}}">
+          <view class='content-item text-center color-ff5a5f font44'>
+          <span class="ml-24"><span class='font-24'>￥</span>{{item.CouponValue}}</span></view>
+          <view class='text-left padding-l-28 padding-t-50 padding-b-54 font-28'>
+            <view class="color-515151">
+              <text wx:if="{{item.ConditionValue>0}}">满{{item.ConditionValue}}可用</text>
+              <text wx:else>无限制</text>
+            </view>
+            <view class='font-24 color-bdbdbd'>{{item.BeginDate}}-{{item.EndDate}}</view>
+            <view class='font-24 color-bdbdbd'>{{item.IsAllProduct?'全店商品适用':'仅部分商品适用'}}</view>
+          </view>
+          <view class='content-item text-right padding-l-0'>
+            <button wx:if="{{!isCouponDetail}}" class='receive-btn {{item.ReceiveStatus==2?"bg-ff9800":""}}' bindtap="receiveRequest" data-status='{{item.ReceiveStatus}}' data-id='{{item.CouponId }}' data-index='{{index}}' data-productIds="{{item.PorductIds}}">{{item.ReceiveStatus==1?'立即领取':'去使用'}}</button>
+            <button wx:if="{{isCouponDetail}}" class='receive-btn {{item.Status==2?"bg-ff9800":item.Status==3||item.Status==1?"disabled":""}}' bindtap="receiveRequest" data-status='{{item.Status}}' data-id='{{item.CouponId }}' data-index='{{index}}' data-productIds="{{item.PorductIds}}">{{item.Status==0?'立即领取':item.Status==1?'已失效':item.Status==3?'已抢光':'去使用'}}</button>
+          </view>
+        </view>        
+      </view>
+      <view class='empty'wx:if="{{UnfinishedCounponList.length<=0}}">     
+        <image src='http://testfile.xiaokeduo.com/system/xkdxcx/system/images/emptyCoupon.png'></image>           <view class='empty-text color-bdbdbd font-28'>抱歉~优惠券已被抢光~</view>
+        <button bindtap='goIndex'>去首页逛逛</button>
+      </view>     
+    </view>    
+    <block wx:if="{{!isCouponDetail&&StolenCouponList.length>0}}">
+      <view class='Separated'>
+        已抢光
+      </view>
+      <view class='StolenCouponList {{StolenCouponList.length<=0?"bg-white":"p-l-r-24 mb24"}}'>
+        <view class='coupon-card {{index==(StolenCouponList.length-1)?"":"margin-b-24"}}' wx:for="{{StolenCouponList}}">
+          <view class='coupon-card-content'>
+            <view class='content-item text-center color-515151'><span class='font-24'>￥</span>{{item.CouponValue}}</view>
+            <view class='text-left padding-l-28 padding-t-50 padding-b-54 font-28'>
+              <view class='color-515151'>
+                <text wx:if="{{item.ConditionValue>0}}">满{{item.ConditionValue}}可用</text>
+                <text wx:else>无限制</text>
+              </view>
+              <view class='font-24 color-bdbdbd'>{{item.BeginDate}}-{{item.EndDate}}</view>
+              <view class='font-24 color-bdbdbd'>{{item.IsAllProduct?'全店商品适用':'仅部分商品适用'}}</view>
+            </view>
+            <view class='content-item padding-l-0'></view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <text class='buttom font28' bindtap='goCouponCenter' wx:if="{{isCouponDetail}}">去优惠券中心看看</text>
+</view>
+<view wx:else class="load-prompt">
+  <template is="loadPrompt" />
+</view>

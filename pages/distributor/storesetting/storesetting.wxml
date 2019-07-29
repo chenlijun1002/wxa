@@ -1,0 +1,33 @@
+<!--pages/distributor/storesetting/storesetting.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}">
+  <view class="store-name-edit" wx:if="{{editType == 0}}">
+    <view class="store-name-box font-32">
+      <text>店铺名称</text>
+      <input type="text" placeholder="{{storeInfo ? storeInfo : '请输入店铺名称'}}" placeholder-style="color: #bdbdbd;" bindinput="editStoreInfo" />
+    </view>
+  </view>
+  <view class="store-description-edit" wx:if="{{editType == 1}}">
+    <view class="store-description-box font-32">
+      <view>店铺简介</view>
+      <textarea placeholder="{{storeInfo ? storeInfo : '输入店铺简介信息'}}" placeholder-style="color: #bdbdbd;" bindinput="editStoreInfo" />
+    </view>
+  </view>
+  <view class="store-btn">
+    <button bindtap="saveInfo">保存</button>
+  </view>
+  <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+</view>
+<view wx:else class="load-prompt">
+  <template is="loadPrompt" />
+</view>
+<view wx:if="{{isShowToast}}">
+  <template is="toast" data="{{...toastText}}" />
+</view>
+</button>
+</form>

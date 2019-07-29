@@ -1,0 +1,53 @@
+<!--佣金明细-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/empty-data.wxml" />
+<import src="../../../template/logo.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="balance-detail-nav">
+            <view class="nav-item align-left" bindtap="tabRequest" data-type="0">
+                <text class="nav-bottom-line {{pageType == 0 ? 'active' : ''}}">全部</text>
+            </view>
+            <view class="nav-item" bindtap="tabRequest" data-type="1">
+                <text class="nav-bottom-line {{pageType == 1 ? 'active' : ''}}">支出</text>
+            </view>
+            <view class="nav-item align-right" bindtap="tabRequest" data-type="2">
+                <text class="nav-bottom-line {{pageType == 2 ? 'active' : ''}}">收入</text>
+            </view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view lower-threshold="50" scroll-y bindscrolltolower="pullLoadingData" scroll-top="{{scrollTop}}">
+                <view class="balance-detail" wx:if="{{amountList.length>0}}">
+                    <block wx:for="{{amountList}}">
+                        <view class="item">
+                            <view class="item-row1 clearfix">
+                                <text class="pull-left">{{item.CommTypeStr}}</text>
+                                <text class="pull-right {{item.ShowClass}}"><text>{{item.Sign}}</text>￥{{item.CommTotalStr}}</text>
+                            </view>
+                            <view class="item-row2 clearfix">
+                                <text class="pull-left">{{item.FromStore}}</text>
+                                <text class="pull-right">{{item.TradeTimeStr}}</text>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view wx:else>
+                    <template is="emptyData" data="{{...emptyData}}"></template>
+                </view>
+                <view class="pull-loading" wx:if="{{isShowLoading}}">
+                    <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                    {{loadingText}}
+                </view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt"></template>
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

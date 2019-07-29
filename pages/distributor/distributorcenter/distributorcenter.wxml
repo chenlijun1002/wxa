@@ -1,0 +1,198 @@
+<!--pages/distributor/distributorcenter/distributorcenter.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}">
+            <view class="membercenter-header" wx:if="{{pageNav==0}}" style="background-color:{{navigationBarBackgroundColor}}">
+                <image mode="aspectFill" src="{{userInfo.avatarUrl}}"></image>
+                <text class="member-name">{{userInfo.nickName}}</text>
+                <text class="member-title">{{userData.GradeName}}</text>
+                <view class="member-news" style="display:none"></view>
+                <view class="member-sign" style="display:none"></view>
+                <button class='contact-business' open-type='contact'></button>
+            </view>
+            <view class="membercenter-header" wx:if="{{pageNav==1}}" style="background-color:{{navigationBarBackgroundColor}}">
+                <image mode="aspectFill" src="{{distributorInfo.StoreImg}}"></image>
+                <text class="member-name">{{distributorInfo.StoreName}}</text>
+                <text class="member-title">{{distributorInfo.DistributorGradeName}}</text>
+                <view class="member-news" style="display:none"></view>
+                <view class="member-sign" style="display:none"></view>
+                <button class='contact-business' open-type='contact'></button>
+            </view>
+            <view class="center-nav" wx:if="{{isDistributor}}">
+                <view bindtap="changeNav" data-pagenav="0">
+                    <text class="nav-bottom-line {{pageNav==0 ? 'active' : ''}}">会员中心</text>
+                </view>
+                <view bindtap="changeNav" data-pagenav="1">
+                    <text class="nav-bottom-line {{pageNav==1 ? 'active' : ''}}">分销中心</text>
+                </view>
+            </view>
+            <!-- 申请成为分销商提示 -->
+            <view class="apply-distributor-tips" wx:if="{{isOpenDistributor}}" bindtap="navigateUrl" data-url="/pages/distributor/distributorexplain/distributorexplain">
+                <view class="voice-icon"></view>
+                <text class="font-28">您已达到分销条件，可以申请成为分销商</text>
+                <view class="arrow-right-icon"></view>
+            </view>
+            <view class="my-order" wx:if="{{pageNav==0}}">
+                <view class="order-detail margin-b-24">
+                    <view class="column column1" bindtap="navigateUrl" data-url="/pages/mypoints/mypoints">
+                        <view class="row1">{{userData.Points}}</view>
+                        <view class="row2">可用积分</view>
+                    </view>
+                    <view class="column column2" bindtap="navigateUrl" data-url="/pages/mycoupon/mycoupon">
+                        <view class="row1">{{userData.CoupnCount}}</view>
+                        <view class="row2">优惠券</view>
+                    </view>
+                    <view class="column" bindtap="navigateUrl" data-url="/pages/balance/balance">
+                        <view class="row1">
+                            <text>￥</text>{{userData.AvailableAmount}}</view>
+                        <view class="row2">账户余额</view>
+                    </view>
+                </view>
+                <view class="group-row my-order line" bindtap="navToOrder" data-nav-status="0">
+                    <text>我的订单</text>
+                    <view class="right-icon"></view>
+                </view>
+                <view class="order-nav margin-b-24">
+                    <view class="order-nav-item" bindtap="navToOrder" data-nav-status="1">
+                        <view class="order-nav-item-icon icon-a">
+                            <text class="badge" wx:if="{{navNumber.WaitBuyerPayNumber>0}}">{{navNumber.WaitBuyerPayNumber}}</text>
+                        </view>
+                        <text>待付款</text>
+                    </view>
+                    <view class="order-nav-item" bindtap="navToOrder" data-nav-status="2">
+                        <view class="order-nav-item-icon icon-b">
+                            <text class="badge" wx:if="{{navNumber.WaitSendNumber>0}}">{{navNumber.WaitSendNumber}}</text>
+                        </view>
+                        <text>待发货</text>
+                    </view>
+                    <view class="order-nav-item" bindtap="navToOrder" data-nav-status="3">
+                        <view class="order-nav-item-icon icon-c">
+                            <text class="badge" wx:if="{{navNumber.WaitReceiptNumber>0}}">{{navNumber.WaitReceiptNumber}}</text>
+                        </view>
+                        <text>待收货</text>
+                    </view>
+                    <view class="order-nav-item" bindtap="navToOrder" data-nav-status="4">
+                        <view class="order-nav-item-icon icon-d">
+                            <!--<text class="badge" wx:if="{{navNumber.FinishedNumber>0}}">{{navNumber.FinishedNumber}}</text>-->
+                        </view>
+                        <text>售后服务</text>
+                    </view>
+                </view>
+                <view class="common-module">
+                    <view class="common-module-title line">常用模块</view>
+                    <view class="common-module-items">
+                        <view wx:if="{{hasStairGroup}}" class="common-module-item" bindtap="navigateUrl" data-url="/pages/stairgroup/mygrouplist/mygrouplist">
+                            <view class="my-stairgroup-icon module-icon"></view>
+                            <text>我的返现团</text>
+                        </view>
+                        <view wx:if="{{hasReduceauction}}" class="common-module-item" bindtap="navigateUrl" data-url="/pages/reduceauction/myauctionlist/myauctionlist">
+                            <view class="my-jiangjiapai-icon module-icon"></view>
+                            <text>我的竞拍</text>
+                        </view>
+                        <view wx:if="{{hasSeckill}}" class="common-module-item" bindtap="navigateUrl" data-url="/pages/seckilling/mySeckilling/mySeckilling">
+                            <view class="my-miaosha-icon module-icon"></view>
+                            <text>我的秒杀</text>
+                        </view>
+                        <view wx:if="{{hasPintuan}}" class="common-module-item" bindtap="navigateUrl" data-url="/pages/pintuan/mySpellGroup/mySepllGroup">
+                            <view class="my-pintuan-icon module-icon"></view>
+                            <text>我的拼团</text>
+                        </view>
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/myaddress/myaddress">
+                            <view class="address-icon"></view>
+                            <text>收货地址</text>
+                        </view>
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/order/orderlist?status=4">
+                            <view class="after-sale-icon"></view>
+                            <text>售后服务</text>
+                        </view>
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/userset/userset">
+                            <view class="setting-icon"></view>
+                            <text>设置</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="fenxiao-center" wx:if="{{pageNav==1}}">
+                <view class="order-detail  margin-b-24">
+                    <view class="column column1">
+                        <view class="row1">{{distributorInfo.TotalOrder}}</view>
+                        <view class="row2">今日订单</view>
+                    </view>
+                    <view class="column column2">
+                        <view class="row1">
+                            <text>￥</text>{{distributorInfo.TodaySaleMoney}}</view>
+                        <view class="row2">今日销售额</view>
+                    </view>
+                    <view class="column">
+                        <view class="row1">
+                            <text>￥</text>{{distributorInfo.TodayFenxiaoDreamMoney}}</view>
+                        <view class="row2">预计收益</view>
+                    </view>
+                </view>
+                <view class="order-nav margin-b-24">
+                    <view class="order-nav-item" bindtap="navigateUrl" data-url="/pages/distributor/storeorder/storeorder?navId=0">
+                        <view class="order-nav-item-icon icon-e">
+                        </view>
+                        <text>本店订单</text>
+                    </view>
+                    <view class="order-nav-item" bindtap="navigateUrl" data-url="/pages/distributor/storeorder/storeorder?navId=1">
+                        <view class="order-nav-item-icon icon-f">
+                        </view>
+                        <text>下级订单</text>
+                    </view>
+                    <view class="order-nav-item" bindtap="navigateUrl" data-url="/pages/distributor/submember/submember?navId=1">
+                        <view class="order-nav-item-icon icon-g">
+                        </view>
+                        <text>下属会员</text>
+                    </view>
+                    <view class="order-nav-item" bindtap="navigateUrl" data-url="/pages/distributor/submember/submember?navId=2">
+                        <view class="order-nav-item-icon icon-h">
+                        </view>
+                        <text>下级分店</text>
+                    </view>
+                </view>
+                <view class="common-module">
+                    <view class="common-module-title line">常用模块</view>
+                    <view class="baseline"></view>
+                    <view class="common-module-items">
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/distributor/mycommission/mycommission">
+                            <view class="my-brokerage-icon"></view>
+                            <text>我的佣金</text>
+                        </view>
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/distributor/storeinfo/storeinfo">
+                            <view class="shop-setting-icon"></view>
+                            <text>店铺信息</text>
+                        </view>
+                        <view class="common-module-item" style="display:none;" bindtap="navigateUrl" data-url="/pages/distributor/storerank/storerank">
+                            <view class="shop-rank-icon"></view>
+                            <text>店铺排名</text>
+                        </view>
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/distributor/storecard/storecard">
+                            <view class="business-card-icon"></view>
+                            <text>掌柜名片</text>
+                        </view>
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/distributor/distributordescription/distributordescription">
+                            <view class="request-icon"></view>
+                            <text>申请分销说明</text>
+                        </view>
+                        <view class="common-module-item" bindtap="navigateUrl" data-url="/pages/userset/userset">
+                            <view class="setting-icon"></view>
+                            <text>设置</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

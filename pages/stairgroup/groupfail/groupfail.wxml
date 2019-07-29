@@ -1,0 +1,19 @@
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/empty-data.wxml" />
+<import src="../../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <template wx:if="{{isClose}}" is="close" />
+        <view>
+            <template is="emptyData" data="{{...emptyData}}"></template>
+        </view>
+        <view wx:if="{{pageStatus == 0 || pageStatus == 3}}" class="empty-link">
+            <navigator class="bg-main" url="../mygrouplist/mygrouplist" open-type="redirect">查看详情</navigator>
+            <navigator class="bg-wh" url="../../pintuan/index/index" open-type="redirect">查看其他活动</navigator>
+        </view>
+        <view wx:if="{{pageStatus == 1 || pageStatus == 2 || pageStatus == 4}}" class="empty-link">
+            <navigator class="bg-main" url="../../pintuan/index/index" open-type="redirect">去看看其他活动</navigator>
+        </view>
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+    </button>
+</form>

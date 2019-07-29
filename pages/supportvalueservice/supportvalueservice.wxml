@@ -1,0 +1,86 @@
+<!--pages/supportvalueservice/supportvalueservice.wxml-->
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="nav-fixed-top">
+            <label class='tip-icon' bindtap='showRult'></label>
+            <view class="nav-item {{applyState==0?'active':''}}" data-applystate='0' bindtap='changeState'>价保申请</view>
+            <view class="nav-item {{applyState==1?'active':''}}" data-applystate='1' bindtap='changeState'>申请记录</view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view scroll-y lower-threshold="200" scroll-top="{{scrollTop}}" bindscrolltolower="pullLoadingData">
+                <view style="height:24rpx;"></view>
+                <block wx:if="{{applyState==0}}">
+                    <view class='supportvalue-panel bg-white' wx:for="{{dataList}}" wx:key="*this">
+                        <view class='order-info'>
+                            <view>订单编号：{{item.OrderNumber}}</view>
+                            <view>下单时间：{{item.CreateOrderTime}}</view>
+                        </view>
+                        <block wx:for="{{item.OrderProduct}}" wx:key="*this" wx:for-item="pItem">
+                            <view class='product-info'>
+                                <image class='product-pic' mode="aspectFill" src='{{pItem.ProductImg}}'></image>
+                                <view class='product-name text-ellipsis'>{{pItem.ProductName}}</view>
+                                <view class='spec-text'>{{pItem.SKUContent}}</view>
+                                <view class='price-quantity'>¥{{pItem.ProductPrice}} ×{{pItem.Quantity}}</view>
+                                <button class="btn {{pItem.protectState==1?'apply-in':''}}" data-protectState="{{pItem.protectState}}" data-orderItemId="{{pItem.OrderItemId}}" bindtap='apply'>{{pItem.protectState==0?'申请':'申请中'}}</button>
+                            </view>
+                        </block>
+                    </view>
+                </block>
+                <block wx:if="{{applyState==1}}">
+                    <view class='supportvalue-panel bg-white' wx:for="{{dataList}}" wx:key="*this">
+                        <view class='order-info'>
+                            <view>申请单号：{{item.ApplicationId}}</view>
+                            <view>申请时间：{{item.ApplyTime}}</view>
+                        </view>
+                        <view class='product-info'>
+                            <image class='product-pic' mode="aspectFill" src='{{item.OrderProduct.ProductImg}}'></image>
+                            <view class='product-name text-ellipsis'>{{item.OrderProduct.ProductName}}</view>
+                            <view class='spec-text'>{{item.OrderProduct.SKUContent}}</view>
+                            <view class='price-quantity'>¥{{item.OrderProduct.ProductPrice}} ×{{item.OrderProduct.Quantity}}</view>
+                        </view>
+                        <view class='apply-state-panel clearfix'>
+                            <view class='apply-state' wx:if="{{item.protectState==0}}">
+                                <label class='apply-icon in'></label>待处理
+                            </view>
+                            <view class='apply-msg' wx:if="{{item.protectState==0}}">请耐心的等待商家审核哦~</view>
+                            <view class='apply-state' wx:if="{{item.protectState==1}}">
+                                <label class='apply-icon in'></label>申请成功
+                            </view>
+                            <view class='apply-msg' wx:if="{{item.protectState==1||item.protectState==3}}">{{item.protectState==1?'系统退款成功，退款金额为':'系统正在为您退款，退款金额为'}}：{{item.RefundPrice}}元</view>
+                            <view class='apply-state' wx:if="{{item.protectState==2}}">
+                                <label class='apply-icon in'></label>申请失败
+                            </view>
+                            <view class='apply-msg' wx:if="{{item.protectState==2}}">{{item.Remarks}}</view>
+                        </view>
+                    </view>
+                </block>
+                <view class="empty-data" wx:if="{{dataLen<=0}}">
+                    <view class="empty-img-prompt">
+                        <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/empty-order.png"></image>
+                    </view>
+                    <text class="font-36">没有相关数据~</text>
+                </view>
+                <view class="pull-loading" wx:if="{{isShowLoading}}">
+                    <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                    {{loadingText}}
+                </view>
+            </scroll-view>
+            <view class="mask {{popup}}" bindtap="closePopup"></view>
+            <view class="popup {{popup}}">
+                <view class="popup-header line">
+                    <text>价保规则</text>
+                    <icon class="cancel" type="cancel" bindtap="closePopup" size="22" color="#757575" />
+                </view>
+                <view class='popup-body'>
+                    {{supportValueRult}}
+                </view>
+                <view class='popup-footer rule-btn' bindtap="closePopup">我知道了</view>
+            </view>
+        </view>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <template wx:if="{{isShowToast}}" is="toast" data="{{...toastText}}" />
+    </button>
+</form>

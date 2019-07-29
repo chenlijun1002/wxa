@@ -1,0 +1,85 @@
+/* pages/storeorder/storeorder.wxss */
+
+.order-detail {
+  display: flex;
+  padding: 24rpx 26rpx;
+  justify-content: space-between;
+  background: #fff; 
+}
+.order-detail .column {
+  display: flex;
+  flex-direction: column;
+}
+.order-detail .column text { 
+  line-height: 48rpx;
+  font-size: 28rpx;
+  color: #212121;
+}
+.order-info {
+  background: #f7f7f7;
+}
+.order-info-item {
+  position: relative;
+  box-sizing: border-box;
+  padding: 24rpx;
+  height: 200rpx;
+}
+.order-info-item image {
+  float: left;
+  width: 152rpx;
+  height: 152rpx;
+}
+.order-info-item .order-info-body {
+  overflow: hidden;
+}
+.order-info-item .order-info-body view {
+  line-height: 48rpx;
+}
+.expect-commission {
+  height: 104rpx;
+  line-height: 104rpx;
+  padding:0 24rpx;
+  background: #fff;
+}
+scroll-view{
+  position: fixed;
+  left: 0;
+  top: 218rpx;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+.order-count-tab{
+    display: flex;
+    flex-flow: row nowrap;
+    background-color: #F7F7F7;
+}
+.order-count-tab>.count-item{
+    flex-flow: column nowrap;
+    flex: 1;
+    align-items: center;
+    text-align: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 24rpx;
+    color: #747474;
+    position: relative;
+}
+.order-count-tab>.count-item:first-child:after{
+    position: absolute;
+    display: block;
+    content: "";
+    height: 50rpx;
+    width: 2rpx;
+    right: -1rpx;
+    top: 15rpx;
+    background-color: #bdbdbd;
+}
+.order-count-tab>.count-item label{
+    margin-right: 16rpx;
+    color: #515151;
+    font-size: 32rpx;
+}
+.order-count-tab>.count-item label text{
+    font-size: 24rpx;
+}

@@ -1,0 +1,327 @@
+<!--pages/detail/detail.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <template wx:if="{{isClose}}" is="close" />
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}" class="box">
+            <view class='probation-tips' wx:if="{{isProbationShop===0}}">试用店铺,请勿购买任何商品</view>
+            <view class='detail-content' wx:if="{{!isDel}}">
+                <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#fff">
+                    <block wx:if="{{productInfo.VideoUrl}}">
+                      <swiper-item>
+                            <image src="{{productInfo.VideoImgUrl}}" mode="aspectFill" class="slide-image" bindtap="showVideoClick" width="100%" />
+                            <image class="playIcon" bindtap="showVideoClick" src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/play.png" />
+                        </swiper-item>
+                    </block>
+                    <block wx:for="{{productInfo.ImageUrls}}" wx:for-index="idx" wx:key="*this">
+                        <swiper-item>
+                            <image src="{{item}}" mode="aspectFill" class="slide-image" bindload="imageLoad{{idx}}" width="100%" />
+                        </swiper-item>
+                    </block>
+                </swiper>
+                <view class='videoWrap' hidden="{{!showVideo}}">
+                  <video src="{{productInfo.VideoUrl}}" loop autoplay='true' objectFit="cover" style="width:100%;height:100%" bindplay="playVideo" bindended="endVideo"></video>
+                  <view class='exitVideo' bindtap="exitVideo">退出视频</view>
+                </view>
+                <view class="swiper-text-info margin-b-24">
+                    <view class="product-name">
+                        <view class="text-ellipsis-2">
+                            <text class="xkd-label label-primary lh0" wx:if="{{!buyOriginal}}">{{timeLimitDiscount.ActivityName}}</text> {{productInfo.ProductName}}
+                        </view>
+                        <button class="share-icon" open-type="share"></button>
+                    </view>
+                    <view class="product-price clearfix">
+                        <view class="present-price" wx:if="{{buyOriginal}}">
+                            <text>￥</text>{{productInfo.MarketPrice}}
+                        </view>
+                        <view class="present-price" wx:else>
+                            <text>￥</text>{{timeLimitPrice}}
+                        </view>
+                        <text class="original-price">￥{{productInfo.OldPrice}}</text>
+                        <text class="return-commission pull-left font-28 color-75" wx:if="{{showCommission}}">返佣{{CommissionValue}}</text>
+                        <text class="sales-volume">销量{{productInfo.SaleCounts}}</text>
+                    </view>
+                </view>
+                <view class="xkd-panel margin-b-24" wx:if="{{showCoupons && couponList.length>0}}">
+                    <view class="xkd-cell xkd-cell-single" bindtap="showCouponPopup">
+                        <text class="left-words font-32 color-75">优惠券</text>
+                        <view class="right-icon"></view>
+                    </view>
+                </view>
+                <view class="product-configure" wx:if="{{selectedSku.selectedSkuName.length > 0}}">
+                    <view class="configure-row line" bindtap="selectSpecifications">
+                        <label class="configure-label">选择</label>
+                        <view class="specifications-text">
+                            <view class="line1" wx:for="{{selectedSku.selectedSkuName}}" wx:key="*this">{{item}}
+                                <view class="line1" wx:if="{{index!=selectedSku.selectedSkuName.length-1}}">/</view>
+                            </view>
+                        </view>
+                        <view class="right-icon"></view>
+                    </view>
+                </view>
+                <view class="product-configure">
+                    <view class="configure-row" bindtap="selectAddress" style="padding-right:24rpx;">
+                        <label class="configure-label">送至</label>
+                        <view class="address">
+                            <view class="address-icon"></view>{{selectedAddress.ProvinceName}} {{selectedAddress.CityName}} {{selectedAddress.CountyName}} {{selectedAddress.StreetName}}</view>
+                        <view class="right-icon"></view>
+                    </view>
+                    <view class="configure-row">
+                        <label class="configure-label">运费</label> {{freight}}
+                    </view>
+                </view>
+                <view class="product-configure">
+                    <view class="border-b">
+                        <view class="border-b-line" wx:if="{{commentItems.length>0}}"></view>
+                        <view class="configure-row clearfix-box" bindtap="lookCommentDetail" style="padding-right:24rpx;">
+                            <label class="configure-label">评价（{{total}}）</label>
+                            <text class="fr mr72">好评度<text class="color-FF4757">{{goodRate}}%</text></text>
+                            <view class="right-icon"></view>
+                        </view>
+                    </view>
+                    <block wx:for="{{commentItems}}" wx:key="*this" wx:for-item="itemComment">
+                        <view class="font32 padding-32-0 pr24">
+                            <label class="configure-label font28">{{itemComment.UserName}}</label>
+                            <view class="fr star">
+                                <block>
+                                    <image src="{{itemComment.StarRating>0?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                    <image src="{{itemComment.StarRating>1?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                    <image src="{{itemComment.StarRating>2?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                    <image src="{{itemComment.StarRating>3?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                    <image src="{{itemComment.StarRating>4?'http://file.xiaokeduo.com/system/xkdxcx/system/images/star1.png':'http://file.xiaokeduo.com/system/xkdxcx/system/images/star2.png'}}"></image>
+                                </block>
+                            </view>
+                            <view class="text-ellipsis-2 mt24 margin-b-24 font32">
+                                <text>{{itemComment.Content}}</text>
+                            </view>
+                            <view class="img-boxes">
+                                <block wx:for="{{itemComment.ImageUrl}}" wx:key="*this" wx:for-item="itemName">
+                                    <view class="pull-left mr16 {{index==3||index==7?'mr-none':''}}" data-images="{{itemComment.ImageUrl}}" bindtap="imagesPreview">
+                                        <image src="{{itemName}}" data-target="{{itemName}}"></image>
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                        <view class="reply font-32" wx:if="{{itemComment.ReplyContent}}">
+                            <text class="color-FF4757">商家回复：</text>{{itemComment.ReplyContent}}
+                            <view class="mt24 line-height-40 font-28 color-74">
+                                <text>{{commentInfo.AddTime}}</text>
+                            </view>
+                        </view>
+                    </block>
+                    <view class="lookAll font32" bindtap="lookCommentDetail" wx:if="{{commentItems.length>0}}">
+                        查看全部评价
+                        <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/arrow-right.png"></image>
+                    </view>
+                </view>
+                <view class="product-image-text bg-white">
+                    <view class="image-text-title border-bottom color-21">
+                        <view class="nav">
+                            <view class="nav-item" bindtap="tabDetail" data-types="0">
+                                <text class="nav-bottom-line {{types == 0 ? 'active' : ''}}">图文详情</text>
+                            </view>
+                            <view class="nav-item" bindtap="tabDetail" data-types="1">
+                                <text class="nav-bottom-line {{types == 1 ? 'active' : ''}}">商品参数</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="image-text">
+                        <view class="wxParse" wx:if="{{types==0}}">
+                            <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
+                            <block wx:for="{{nodes}}" wx:key="*this" wx:for-item="item" >
+                                <rich-text style='width:100%;max-width:100%!important;' nodes="{{[item]}}" wx:if="{{item.name !='video'}}" ></rich-text>
+                                <video style='width:100%;max-width:100%!important;' src="{{item.children.src}}" class="{{item.class}} wxParse-{{item.iframe}}-video" wx:else></video>
+                            </block>
+                        </view>
+                        <view class="wxParse" wx:else>
+                            <view wx:for="{{ProductAttrs}}" wx:for-item="itemAttr">
+                                <text class='productAttr'>{{itemAttr.Name}}</text>
+                                <text class='productAttrValue'>{{itemAttr.PropValue}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="rule-popup {{specifications}}">
+                    <view class="rule-popup-herder">
+                        <image class="product-imag" src="{{selectedSku.selectedSkuImg}}"></image>
+                        <view class="price font-28">
+                            <text class="color-main">￥</text>
+                            <text class="color-main">{{selectedSku.selectedSkuPrice}}</text>
+                            <!-- <text>送69积分</text> -->
+                        </view>
+                        <view class="selected-specifications font-28" wx:if="{{selectedSku.selectedSkuName.length>0}}">已选：
+                            <view class="line1" wx:for="{{selectedSku.selectedSkuName}}" wx:key="*this">"{{item}}"
+                                <view class="line1" wx:if="{{index!=selectedSku.selectedSkuName.length-1}}">，</view>
+                            </view>
+                            <view class="limit-buy" wx:if="{{!buyOriginal}}">限购{{timeLimitDiscount.MaxNum}}件</view>
+                        </view>
+                        <icon class="cancel" type="cancel" bindtap="closePopup" size="28" color="#757575" />
+                    </view>
+                    <view class="rule-popup-body">
+                        <scroll-view scroll-y style="max-height:350rpx;">
+                            <view class="specifications-list" wx:for-index="pidx" wx:for="{{productInfo.ProductSKU.skuData}}" wx:for-item="sku" wx:key="*this">
+                                <view class="specifications-title">{{sku.pname}}</view>
+                                <view class="specifications-list-group">
+                                    <view class="specifications-item {{skuValue.selected}}" data-currentIndex="{{cidx}}" data-parentIndex="{{pidx}}" wx:for-index="cidx" wx:for="{{sku.values}}" wx:for-item="skuValue" bindtap="selectedSp" wx:key="*this">{{skuValue.vname}}</view>
+                                </view>
+                            </view>
+                        </scroll-view>
+                        <view class="buy-number clearfix">
+                            <text class="number-text">购买数量</text>
+                            <view class="number-control clearfix">
+                                <text catchtap="minusStock">-</text>
+                                <input type="number" value="{{selectedCount}}" bindinput="validateCount" bindblur="blurValidateCount" bindconfirm="validateCount" />
+                                <text catchtap="addStock">+</text>
+                                <text class="stock-text">剩余{{selectedSkuStock}}件</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="rule-popup-footer">
+                        <button wx:if="{{buyNow}}" class="font-36" type="primary" hover-class="btn-hover" bindtap="buyNow">立即购买</button>
+                        <button wx:if="{{goCart}}" class="font-36" type="primary" hover-class="btn-hover" bindtap="goCart">加入购物车</button>
+                    </view>
+                </view>
+                <view class="mark {{specifications}}" bindtap="closePopup"></view>
+                <view class="nav-fiexd-bottom">
+                    <view class="nav-fiexd-bottom-item nav-icon" bindtap="goIndex">
+                        <view class="index-icon icon"></view>
+                        <text class="icon-text">首页</text>
+                    </view>
+                    <button class="nav-fiexd-bottom-item nav-icon" open-type='contact'>
+                        <view class="message-icon icon"></view>
+                        <text class="icon-text">客服</text>
+                    </button>
+                    <view class="nav-fiexd-bottom-item nav-icon" bindtap="goShopCart">
+                        <view class="cart-icon icon">
+                            <text class="badge" wx:if="{{showCartNum}}">{{cartNum}}</text>
+                            <text class="addnum {{isAddnum}}">+1</text>
+                        </view>
+                        <text class="icon-text">购物车</text>
+                    </view>
+                    <view class="nav-fiexd-bottom-item operation-btn add-cart" bindtap="addCart" wx:if="{{buyOriginal}}">
+                        <text>加入购物车</text>
+                    </view>
+                    <view class="nav-fiexd-bottom-item operation-btn add-cart" bindtap="buyOriginal" wx:else>
+                        <text>原价购买</text>
+                    </view>
+                    <view class="nav-fiexd-bottom-item operation-btn buy-now" bindtap="selectSpecifications">
+                        <text>立即购买</text>
+                    </view>
+                </view>
+
+                <view class="mask {{popupStatus}}" bindtap="closeCouponPopup"></view>
+                <view class="popup {{popupStatus}}">
+                    <view class="popup-header line">
+                        <text>优惠券</text>
+                        <icon class="cancel" type="cancel" bindtap="closeCouponPopup" size="22" color="#757575" />
+                    </view>
+                    <view class="popup-content">
+                        <scroll-view class="scroll-view" scroll-y>
+                            <view class="coupon-scroll-box" wx:for="{{couponList}}" bindtap="receiveCoupon" data-couponid="{{item.Id}}" data-isused="{{item.isUsed}}">
+                                <view class="xkd-card coupon-card coupon-card-enable margin-t-24 clearfix">
+                                    <view class="xkd-card-left coupon-card-left">
+                                        <text class="text-56"><text class="font-28">￥</text>{{item.CouponValue}}</text>
+                                        <text class="font-24" wx:if="{{item.ConditionValue>0}}">满{{item.ConditionValue}}可用</text>
+                                        <text class="font-24" wx:else>无限制</text>
+                                    </view>
+                                    <view class="xkd-card-content padding-l-32">
+                                        <view class="xkd-card-title text-ellipsis coupon-card-title font-32 color-33">{{item.CouponName}}</view>
+                                        <view class="wrapper font-28 color-66">
+                                            <!-- <text>全部商品适用</text> -->
+                                            <text>{{item.bdate}}至</text>
+                                            <text>{{item.edate}}</text>
+                                        </view>
+                                        <view class="coupon-tip disable-tip" wx:if="{{!item.isUsed}}">已领取</view>
+                                        <view class="coupon-tip" wx:else>可领取</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </scroll-view>
+
+                    </view>
+                </view>
+
+                <view class="popup {{integralStatus}}">
+                    <view class="popup-header line">
+                        <text>积分</text>
+                        <icon class="cancel" type="cancel" bindtap="closeIntegral" size="22" color="#757575" />
+                    </view>
+                    <view class="popup-content font32">
+                        <view class="coupon-scroll-box">
+                            <view class="mt24 mb48">
+                                <text class="integral-tip mr25">积分</text> 购买最少可得10积分，额外赠送5积分
+                            </view>
+                            <view class="classname">
+                                <text class="">赠送规则</text>
+                                <view class="mt35 line-height-48">
+                                    1. 签到送积分：会员签到或连续签到赠送积分
+                                </view>
+                                <view class="line-height-48">
+                                    2. 购物送积分：按订单金额赠送积分，部分商品除外
+                                </view>
+                            </view>
+                            <view class="mt48">
+                                <text class="">使用规则</text>
+                                <view class="mt35 line-height-48">
+                                    1. 积分抵现：在订单提交页，可使用积分抵扣一部分现金。
+                                </view>
+                                <view class="line-height-48">
+                                    2. 积分兑换：可在积分兑换活动中，使用积分+现金或纯积分的方式兑换商品。
+                                </view>
+                            </view>
+                        </view>
+                        <view class="close-btn" bindtap="closeIntegral">关闭</view>
+                    </view>
+                </view>
+                <view class="mask {{showAddress}}" bindtap="closeAddressPopup"></view>
+                <view class="popup {{showAddress}}">
+                    <view class="popup-header line">
+                        <text>收货地址</text>
+                        <icon class="cancel" type="cancel" bindtap="closeAddressPopup" size="22" color="#757575" />
+                    </view>
+                    <view class="select-group">
+                        <view wx:if="{{addressList.length>0}}">
+                            <view class="group-row line" wx:for="{{addressList}}" bindtap="changeAddress" data-index="{{index}}">
+                                {{item.ProvinceName}} {{item.CityName}} {{item.CountyName}} {{item.StreetName}}
+                                <icon type="success_no_circle" size="18" color="#00A699" wx:if="{{item.selected}}" />
+                            </view>
+                        </view>
+                        <view class="empty-data" wx:else>
+                            <view class="empty-img-prompt">
+                                <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/empty-address.png"></image>
+                            </view>
+                            <text class="font-36 color-75">您还没有添加收货地址~</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='fixed' wx:if="{{isDel}}">
+                <text class='mb60'>哎呀！这个商品已经下架了</text>
+                <view class='return-link mt60' data-index="0" bindtap='navigate'>返回首页</view>
+                <view class='return-link border-color-c m-t-b20' data-index="1" bindtap='navigate'>个人中心逛逛</view>
+                <view class='return-link border-color-c' data-index="2" bindtap='navigate'>去购物车结算</view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <canvas canvas-id='poster'></canvas>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+        <view wx:if="{{posterShow}}" class="codeBtn" bindtap="showCode">
+            <view class="code"></view>
+        </view>
+    </button>
+</form>
+<!-- <view class="share-poster" wx:if="{{showCode}}">
+  <view class="poster-img">
+  <icon class="cancel" type="cancel" size="28" color="#fff" bindtap="hideCode"> </icon >
+    <image src="{{imageSrc||'https://file.xiaokeduo.com/system/phone/images/i_blank.jpg'}}" bindload="imageLoad" style="width: {{imagewidth}}rpx; height: {{imageheight}}rpx;"></image>
+  </view>
+</view> -->

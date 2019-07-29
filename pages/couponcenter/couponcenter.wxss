@@ -1,0 +1,174 @@
+/* pages/couponcenter/couponcenter.wxss */
+page{
+  height: 100%;
+}
+.coupon-header{
+  width: 100%;
+  height: 280rpx;
+}
+.coupon-header image{
+  width: 100%;
+  height: 100%;
+}
+.Separated{
+  font-size: 28rpx;
+  color: #bdbdbd;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+.Separated::before{
+  content: '';
+  position: absolute;
+  top:50%;
+  left: 24rpx;
+  width: 35%;
+  height: 1rpx;
+  border-top: 1rpx dashed #ccc;
+}
+.Separated::after{
+  content: '';
+  position: absolute;
+  top:50%;
+  right: 24rpx;
+  width: 35%;
+  height: 1rpx;
+  border-top: 1rpx dashed #ccc;
+}
+.coupon-card {
+  height: 204rpx;
+  background: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/unableCoupon.png') no-repeat;
+  background-size: 100% 100%;
+}
+.coupon-card-enable {
+  background: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/coupons.png') no-repeat;
+  background-size: 100% 100%;
+}
+.coupon-card-content{
+  height: 204rpx;
+  display:flex; 
+  box-sizing: border-box;
+}
+.coupon-card-content .content-item{
+  flex: 1;
+  line-height: 204rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+.receive-btn{
+  display: inline-block;
+  width: 128rpx;
+	height: 44rpx;
+  line-height: 44rpx;
+	background-color: #ff5a5f;
+	border-radius: 22rpx;
+  font-size: 24rpx;
+  color: #fff;
+  padding: 0 14rpx;
+}
+.color-ff5a5f{
+  color:#ff5a5f;
+}
+.font-24{
+  font-size: 24rpx;
+}
+.font-28{
+  font-size: 28rpx;
+}
+.padding-0{
+  padding: 0 !important;
+}
+.padding-l-0{
+  padding-left: 0 !important;
+}
+.padding-r-24{
+  padding-right:24rpx;
+}
+.padding-t-50{
+  padding-top: 50rpx;
+} 
+.padding-b-54{
+  padding-bottom: 54rpx;
+}
+.padding-l-28{
+  padding-left: 28rpx;
+}
+.color-bdbdbd{
+  color:#bdbdbd;
+}
+.color-515151{
+  color:#515151;
+}
+.bg-ff9800{
+  background-color: #ff9800;
+}
+.UnfinishedBusinessCounponList{
+  position: relative;
+  min-height: 600rpx;
+}
+.empty{
+  min-height: 600rpx;  
+}
+.empty image{
+   width: 224rpx;
+  height: 250rpx;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-left: -112rpx;
+  margin-top: -133rpx;  
+}
+.empty button{
+  width: 200rpx;
+	height: 64rpx;
+	border-radius: 16rpx;
+	border: solid 1rpx #00a699;
+  background-color: #fff;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-left: -112rpx;
+  margin-top: 218rpx; 
+  font-size: 28rpx;	
+	color: #00a699; 
+}
+.empty-text{  
+  position: absolute;
+  top:72%;
+  width: 100%;
+  text-align: center;    
+}
+.p-l-r-24{
+  padding: 0 24rpx;
+}
+.mb24{
+  margin-bottom: 24rpx;
+}
+.pt24{
+  padding-top: 24rpx;
+}
+.disabled{
+  background-color: #ccc;
+}
+.ml-24{
+  margin-left: -24rpx;
+}
+.font44{
+  font-size: 44rpx;
+}
+.font28{
+  font-size: 28rpx;
+}
+.buttom{
+  position: absolute;
+  bottom: 48rpx;
+  width: 100%;
+  text-align: center;
+  text-decoration: underline;
+  color: #515151;
+}
+.margin-b-10{
+  margin-bottom: 10rpx;
+}

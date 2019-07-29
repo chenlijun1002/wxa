@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "降价拍",
+  "component": "true",
+  "usingComponents": {
+    "component-common": "/pages/components/commonComponent/commonComponent",
+    "login-authorization": "/pages/components/launchLogin/launchLogin"
+  }
+}

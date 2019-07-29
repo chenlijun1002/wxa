@@ -1,0 +1,80 @@
+/* pages/binduser/binduser.wxss */
+.nav-fixed-top .nav-item{
+  width: 50%;
+}
+.bind-user-form{
+  height: 340rpx;
+  padding-top: 24rpx;
+  margin-bottom: 70rpx;
+}
+.bind-user-form .input-group{
+  background-color: #fff;
+  padding-left: 80rpx;
+}
+.input-row{
+  position: relative;
+  height: 110rpx;
+  line-height: 110rpx;
+  border-bottom: 1px solid #DFDFDF;
+  padding-left: 74rpx;
+}
+.input-row input{
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size: 32rpx;
+}
+.input-row .input-icon{
+  position: absolute;
+  width: 48rpx;
+  height: 48rpx;
+  left: 4rpx;
+  top: 50%;
+  margin-top: -24rpx;
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+.input-row .code{
+  background-image: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/input-code.png');
+  background-size: cover;
+}
+.input-row .pass{
+  background-image: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/input-pass.png');
+  background-size: cover;
+}
+.input-row .topass{
+  background-image: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/input-topass.png');
+  background-size: cover;
+}
+.input-row .tel{
+  background-image: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/input-tel.png');
+  background-size: cover;
+}
+.input-row:last-child{
+  border-bottom: none;
+}
+.input-row button.getcode{
+  position: absolute;
+  font-size: 28rpx;
+  color: #FA3F6E;
+  border:1px solid #FA3F6E;
+  right: 24rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+.bind-user-explain{
+  padding-top: 30rpx;
+  margin: 0 24rpx;
+  border-top:1px solid #DFDFDF;
+}
+.bind-user-explain text{
+  display: block;
+  margin-bottom: 30rpx;
+  color: #757575;
+}
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+}

@@ -1,0 +1,44 @@
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view class="bind-user-form">
+  <view class="input-group {{haveUser}}">
+    <view class="input-row">
+      <label class="input-icon code"></label>
+      <input type="number" placeholder="请输入验证码" bindinput="code" />
+      <button class="getcode" type="default" bindtap="getcode" disabled="{{isDisabled}}">{{second}}</button>
+    </view>
+    <view class="input-row" style="display:none;">
+      <label class="input-icon pass"></label>
+      <input type="password" placeholder="请输入密码" bindinput="password" />
+    </view>
+    <view class="input-row" style="display:none;">
+      <label class="input-icon topass"></label>
+      <input type="password" placeholder="请输入确认密码" bindinput="toPassword" />
+    </view>
+  </view>
+  <view class="input-group {{newUser}}">
+    <view class="input-row">
+      <label class="input-icon tel"></label>
+      <input type="number" placeholder="请输入手机号码" bindinput="tel"/>
+    </view>
+  </view>
+</view>
+<view class="padding-24 {{haveUser}}" style="margin-bottom:64rpx;">
+  <button class="default-size" type="primary" bindtap="bindImmediately">立即绑定</button>
+</view>
+<view class="padding-24 {{newUser}}" style="margin-bottom:64rpx;">
+  <button class="default-size" type="primary" bindtap="telVerification">手机号验证</button>
+</view>
+<view class="bind-user-explain">
+  <text class="font-32 text-center">手机号绑定</text>
+  <text class="font-28">1. 账户更安全，微信授权和系统用户名双重保障您的帐 号安全；</text>
+  <text class="font-28">2. 管理更便捷，微信不能用了怎么办？手机端浏览器也 可以登录店铺；</text>
+  <text class="font-28">3. 操作更省心，资料遗失了怎么办？用户名和密码就能 快速找回了；</text>
+</view>
+<view wx:if="{{isShowToast}}">
+  <template is="toast" data="{{...toastText}}" />
+</view>
+</button>
+</form>

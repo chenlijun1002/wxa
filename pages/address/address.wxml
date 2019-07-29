@@ -1,0 +1,66 @@
+<!--pages/address/address.wxml-->
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="table-view bg-white">
+            <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+            <view class="table-view bg-white">
+                <view class="table-view-cell">
+                    <label class="title">收货人</label>
+                    <input class="input-ctrl" type="text" placeholder="姓名" bindinput="usernameinput" value="{{shipTo}}" />
+                </view>
+                <view class="table-view-cell">
+                    <label class="title">联系电话</label>
+                    <input class="input-ctrl" type="number" placeholder="手机号" bindinput="telinput" value="{{cellPhone}}" />
+                </view>
+                <view class="table-view-cell" bindchange="bindPickerChange">
+                    <label class="title">省</label>
+                    <picker class="input-ctrl color-main" id="province" bindchange="bindProvinceChange" value="{{index}}" range="{{provinceArray}}">
+                        <view class="picker">
+                            {{province}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="table-view-cell">
+                    <label class="title">市</label>
+                    <picker class="input-ctrl color-main" id="city" bindchange="bindCityChange" value="{{index}}" range="{{cityArray}}">
+                        <view class="picker">
+                            {{city}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="table-view-cell">
+                    <label class="title">区/县</label>
+                    <picker class="input-ctrl color-main" id="country" bindchange="bindCountryChange" value="{{index}}" range="{{countryArray}}">
+                        <view class="picker">
+                            {{country}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="table-view-cell">
+                    <label class="title">街道</label>
+                    <picker class="input-ctrl color-main" id="street" bindchange="bindStreetChange" value="{{index}}" range="{{streetArray}}">
+                        <view class="picker">
+                            {{street}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="table-view-cell">
+                    <label class="title">详细地址</label>
+                    <input class="input-ctrl" type="text" placeholder="楼栋楼层或门牌号" bindinput="detailedinput" value="{{address}}" />
+                </view>
+            </view>
+            <view class="group-row margin-t-24">
+                设为默认
+                <switch class="pull-right" color="#00A699" checked="{{isDefault}}" bindchange="switchChange" />
+            </view>
+            <view class="form-btn padding-24">
+                <button class="add-btn" type="primary" hover-class="add-btn-hover" bindtap="savedAddress">确定</button>
+                <button class="delete-btn" type="default" wx:if="{{id>0}}" bindtap="deleteAddress">删除</button>
+            </view>
+            <view wx:if="{{isShowToast}}">
+                <template is="toast" data="{{...toastText}}" />
+            </view>
+        </view>
+    </button>
+</form>

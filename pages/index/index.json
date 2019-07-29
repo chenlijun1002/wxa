@@ -1,0 +1,8 @@
+{
+ "enablePullDownRefresh": true,
+  "component": "true",
+  "usingComponents": {
+    "login-authorization": "/pages/components/launchLogin/launchLogin",
+    "getCouponModal": "/pages/components/getCouponModal/getCouponModal"
+  }
+}

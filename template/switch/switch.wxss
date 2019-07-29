@@ -1,0 +1,67 @@
+.xkd-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 24px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: #00A191;
+}
+.xkd-switch-circle {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 21px;
+  height: 21px;
+  display: inline-block;
+  background: #fff;
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
+  transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+  z-index: 2;
+}
+.xkd-switch-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 24px;
+  background: #c7c7c7;
+  border-radius: 26px;
+  display: inline-block;
+  box-sizing: border-box;
+  transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+  transform: scale(0);
+  transform-origin: 20px 10px;
+}
+.xkd-switch-on .xkd-switch-circle {
+  transform: translateX(12px);
+}
+.xkd-switch-off .xkd-switch-bg {
+  transform: scale(1);
+}
+.xkd-swtich-disabled {
+  opacity: 0.4;
+}
+.xkd-switch-loading {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 16px;
+  height: 16px;
+  background: url(https://img.yzcdn.cn/public_files/2017/02/24/9acec77d91106cd15b8107c4633d9155.png) no-repeat;
+  background-size: 16px 16px;
+  animation: xkd-switch-loading 0.8s infinite linear;
+}
+
+@keyframes xkd-switch-loading {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

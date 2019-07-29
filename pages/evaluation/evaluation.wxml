@@ -1,0 +1,100 @@
+<!--evaluation.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <block wx:if="{{loadComplete}}">
+            <view class="box">
+                <navigator url="../detail/detail?productId={{commentInfo.ProductId}}">
+                    <view class="padding-32-24 bgcolor-ff product">
+                        <view class="line"></view>
+                        <view class="productImg inline-block">
+                            <image mode="scaleToFill" src="{{commentInfo.productImg}}"></image>
+                        </view>
+                        <view class="pull-right font-28 productName">
+                            <view class="text-ellipsis-2">
+                                <text class="color-51 text-ellipsis-2">{{commentInfo.productName}}</text>
+                            </view>
+                            <text class="text-ellipsis color-74 sku">{{commentInfo.skuName}}</text>
+                        </view>
+                        <!--<view class="button" wx:if="{{selectIndex==-1}}">评价晒单</view>          -->
+                    </view>
+                </navigator>
+                <view class="look-comment">
+                    <view class="pull-left line-height-112 mr16 font-32">
+                        <text>商品相符</text>
+                    </view>
+                    <view class="pull-left star mr16">
+                        <image mode="scaleToFill" src="{{star1}}" data-index="1" bindtap="{{status==2?'changeStar':''}}" class="ml16 {{status==2?'ml32':''}}"></image>
+                        <image mode="scaleToFill" src="{{star2}}" data-index="2" bindtap="{{status==2?'changeStar':''}}" class="ml16 {{status==2?'ml32':''}}"></image>
+                        <image mode="scaleToFill" src="{{star3}}" data-index="3" bindtap="{{status==2?'changeStar':''}}" class="ml16 {{status==2?'ml32':''}}"></image>
+                        <image mode="scaleToFill" src="{{star4}}" data-index="4" bindtap="{{status==2?'changeStar':''}}" class="ml16 {{status==2?'ml32':''}}"></image>
+                        <image mode="scaleToFill" src="{{star5}}" data-index="5" bindtap="{{status==2?'changeStar':''}}" class="ml16 {{status==2?'ml32':''}}"></image>
+                    </view>
+                    <view class="line-height-112">
+                        <text class="color-FF4757 font-32">{{starText}}</text>
+                    </view>
+                </view>
+                <view class="padding-32-24 font-32 overflow-hidden">
+                    <block wx:if="{{status==1}}">
+                        <view class="classname">
+                            <text class="line-height-48">{{commentInfo.ReviewText}}</text>
+                        </view>
+                        <view class="mt32 img-boxes">
+                            <block wx:for="{{images}}" wx:key="*this">
+                                <view class="pull-left mr16 {{index==3||index==7?'mr-none':''}}" wx:if="{{item !=''}}" data-images="{{images}}" bindtap="imagesPreview">
+                                    <image mode="scaleToFill" src="{{item}}"></image>
+                                </view>
+                            </block>
+                        </view>
+                        <view class="mt24 line-height-40 font-28 color-74">
+                            <text>{{commentInfo.AddDate}}</text>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <textarea class="textarea" placeholder="商品满足您的期待吗？快写下您的商品评价，分享给想买的朋友吧！" placeholder-class="placeholder" bindinput="textareaBlur" />
+                    </block>
+                </view>
+                <view class="bgcolor-ff padding-32-24 font-32 overflow-hidden" wx:if="{{status==2}}">
+                    <view class="imgs-box">
+                        <block>
+                            <block wx:for="{{imgPath}}" wx:key="*this">
+                                <view class="pull-left mr16 position-relative upload-content {{index==3||index==7?'mr-none':''}} {{index>3?'mt24':''}}">
+                                    <image src="{{item}}"></image>
+                                    <view class="close" data-index="{{index}}" bindtap="removeImages"></view>
+                                </view>
+                            </block>
+                            <view class="pull-left camera-box {{imgPath.length>3?'mt24':''}}" bindtap="upload" wx:if="{{imgPath.length<=7}}">
+                                <image class="camera" mode="scaleToFill" src="http://file.xiaokeduo.com/system/xkdxcx/system/images/camera.png"></image>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+                <view class="anonymous" wx:if="{{status==2}}">
+                    <view class="line"></view>
+                    <view class="classname">
+                        <view class="pull-left selected {{isAnonymous?'isAnonymous':'noAnonymous'}}" bindtap="isAnonymous"></view>
+                        <text>匿名评价</text>
+                    </view>
+                </view>
+                <view class="reply font-32" wx:if="{{status==1 && commentInfo.ReplyContent}}">
+                    <text class="color-FF4757">商家回复：</text>{{commentInfo.ReplyContent}}
+                    <view class="mt24 line-height-40 font-28 color-74">
+                        <text>{{commentInfo.AddTime}}</text>
+                    </view>
+                </view>
+            </view>
+            <button type="primary" size="" bindtap="submit" class="submit-btn" wx:if="{{status==2}}"> 提交 </button>
+            <!-- <button type="primary" size="" bindtap="back" class="submit-btn" wx:if="{{status==1}}"> 返回 </button> -->
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </block>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

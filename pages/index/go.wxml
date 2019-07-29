@@ -1,0 +1,3 @@
+<!--pages/guide/go.wxml-->
+<!--<text>过渡页面，用于从其他地方跳转到小程序锁粉，需要带参数shopId</text>-->
+<view>...</view>

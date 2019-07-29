@@ -1,0 +1,10 @@
+{
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "批量购买",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false,
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

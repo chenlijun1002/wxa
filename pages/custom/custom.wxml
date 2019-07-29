@@ -1,0 +1,30 @@
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<template wx:if="{{isClose}}" is="close" />
+<getCouponModal bind:action="closeGetCouponModal" wx:if="{{isShowCouponModal}}" couponData="{{couponData}}"></getCouponModal>
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <!-- <page-state wx:if="{{showPageState}}" state-class="state-success-icon" stateTitle="成功" stateTips="成功提示文字" btnContent="确定" bindstatePageBtnClick="btnClick"></page-state>
+         <button bindtap='setPageState'>页面状态</button>  -->
+        <view wx:if="{{loadComplete}}">
+            <view class="search-product" style="background-color:{{navigationBarBackgroundColor}}">
+                <view class="search-content">
+                    <!--<input placeholder="搜索" type="text" bindfocus="sear
+      chFocus" />-->
+                    <view class="inputsearch" bindtap="searchFocus">搜索</view>
+                    <icon class="search" type="search" size="20" />
+                </view>
+            </view>
+            <import src="../common/templeates.wxml" />
+            <block wx:for="{{TopicData}}" wx:key="id" wx:for-index="index">
+                <template is="{{'temp_'+item.type}}" data="{{...item,RequestUrl,index}}"></template>
+            </block>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            <button class='customer-service' open-type='contact'></button>
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+    </button>
+</form>

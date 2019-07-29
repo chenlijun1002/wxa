@@ -1,0 +1,108 @@
+.balance-head {
+    box-sizing: border-box;
+    padding: 50rpx 24rpx 50rpx 40rpx;
+    background: #fff;
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/balance-header-icon.png') no-repeat 606rpx center #fff;
+    background-size: 96rpx 98rpx;
+}
+.balance-head-money view {
+    font-size: 28rpx;
+}
+.balance-head-money .tip{
+    color: #747474;
+}
+.balance-head-money .money {
+    font-size: 32rpx;
+    color: #212121;
+    font-weight: 600;
+}
+
+.balance-head-money view text {
+    font-size: 56rpx;
+}
+
+.balance-btns {
+    display: table;
+    width: 100%;
+    padding: 32rpx 0;
+    background-color: #fff;
+    border-top:1px solid #E0E0E0;
+}
+.balance-btns .btn{
+    display: table-cell;
+    width: 50%;
+    height: 48rpx;
+    line-height: 48rpx;
+    font-size: 36rpx;
+    text-align: center;
+    color: #212121;
+}
+.balance-btns .btn.disable{
+    color: #dbdbdb;
+}
+.balance-btns .recharge-btn{
+    border-left: 1px solid #D8D8D8;
+    color: #00A699;
+}
+.balance-btns .white-btn{
+  margin-right: 40rpx;
+}
+.balance-btns .green-btn {
+    background: #00A191;
+    color: #fff;
+    border: 2rpx solid #00A191;
+}
+
+.balance-info {
+    margin-top: 26rpx;
+    background: #fff;
+}
+
+.balance-info .balance-info-item {
+    position: relative;
+    box-sizing: border-box;
+    height: 112rpx;
+    padding: 36rpx 28rpx;
+    font-size: 32rpx;
+    color: #515151;
+}
+
+.balance-info-item .record-icon,
+.balance-info-item .balance_detail-icon {
+    float: left;
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 20rpx;
+    background-size: cover;
+}
+.balance-info-item text {
+  float: left;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.record-icon {
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/record.png') no-repeat;
+}
+.balance_detail-icon {
+   background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/balance_detail.png') no-repeat;
+}
+.balance-info-item .right-icon {
+    float: right;
+    transform:translateY(20rpx);
+}
+
+.balance-info-item.record::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 96%;
+    height: 1px;
+    transform: scaleY(.5); 
+    background: #e0e0e0;
+}
+
+.logo-content{
+  position: absolute;
+  bottom: 0;
+}

@@ -1,0 +1,56 @@
+/* pages/withdrawrecord/withdrawrecord.wxss */
+.nav-fixed-top{
+    border-bottom:1px solid #E0E0E0;
+    box-sizing: border-box;
+    z-index: 20;
+}
+.nav-fixed-top .nav-item.active{
+    border-bottom: none;
+}
+.nav-fixed-top .nav-item{
+    position: relative;
+}
+.nav-fixed-top .nav-item.active::after{
+    position: absolute;
+    content: "";
+    display: block;
+    width: 80rpx;
+    height: 4rpx;
+    left: 50%;
+    margin-left: -40rpx;
+    bottom: 0;
+    background-color: #00A699;
+}
+scroll-view{
+  position: fixed;
+  top: 102rpx;
+  bottom: 0;
+  width: 100%;
+}
+.record-item{
+    position: relative;
+    background-color: #fff;
+    padding: 24rpx;
+}
+.record-item:after{
+    position: absolute;
+    left: 24rpx;
+    bottom: 0;
+    right: 0;
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: #E0E0E0;
+}
+.record-item .witdraw-type-state{
+    font-size: 36rpx;
+    color:#212121; 
+    line-height: 48rpx;
+}
+.record-item .witdraw-type-state .wait{
+    color: #00A191;
+}
+.record-item .witdraw-info{
+    color: #747474;
+    font-size: 28rpx;
+}

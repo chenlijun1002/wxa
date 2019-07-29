@@ -1,0 +1,2 @@
+/* pages/stairgroup/auctionfail/auctionfail.wxss */
+@import '/pages/reduceauction/auctionfail/auctionfail.wxss';

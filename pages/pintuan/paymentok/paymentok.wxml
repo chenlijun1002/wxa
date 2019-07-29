@@ -1,0 +1,49 @@
+<!--pages/pintuan/paymentok/paymentok.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view class="payment-success-text">
+  <view class="icon-prompt" wx:if="{{!IsPayFail}}">
+    <view class="icon"></view>
+    <view class="prompt-text">支付成功</view>
+  </view>
+  <view class="icon-prompt error" wx:if="{{IsPayFail}}">
+    <view class="icon"></view>
+    <view class="prompt-text">{{FailMsg}}</view>
+  </view>
+  <view class="parting-line">
+    <view class="semi-circle-left semi-circle"></view>
+    <view class="semi-circle-right semi-circle"></view>
+  </view>
+  <view class="payment-order-info">
+    <view>活动状态：{{JoinMsg}}</view>
+    <view>支付金额：￥{{payPrice}}</view>
+  </view>
+</view>
+<view class="line-has-text-box" wx:if="{{!IsPayFail && short>0}}">
+  <view class="line-has-text">
+    <view class="text-box">
+      <view class="text">还差{{short}}人，赶紧邀请好友来参团吧~</view>
+    </view>
+  </view>
+</view>
+<view class="line-has-text-box" wx:if="{{!IsPayFail && short==0}}">
+  <view class="line-has-text">
+    <view class="text-box">
+      <view class="text">拼团成功，等待商家发货~</view>
+    </view>
+  </view>
+</view>
+<view class="padding-lr-24">
+  <button wx:if="{{!IsPayFail && short>0}}" class="share-friends" type="primary" hover-class="btn-hover" bindtap="shareFriends"><view class="icon-share">分享给好友</view></button>
+  <button wx:if="{{!IsPayFail && short==0}}" class="share-friends" type="primary" hover-class="btn-hover" bindtap="lookOrderDetail">查看订单详情</button>
+  <navigator wx:if="{{IsPayFail || short==0}}" class="keep-looking" url="/pages/pintuan/index/index" open-type="navigate">随便逛逛</navigator>
+</view>
+
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+    </button>
+</form>

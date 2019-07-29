@@ -1,0 +1,46 @@
+/* pages/order/orderlist.wxss */
+scroll-view{
+  position: fixed;
+  top: 100rpx;
+  bottom: 0;
+  width: 100%;
+}
+scroll-view .order-item{
+  margin-top: 24rpx;
+  background-color: #fff;
+}
+scroll-view .order-item:first-child{
+  margin-top: 0;
+}
+.order-btns{
+  height: 96rpx;
+  background-color: #fff;
+  padding: 15rpx 24rpx;
+  box-sizing:border-box;
+}
+.order-btns button{
+  margin-left: 24rpx;
+}
+.order-btn-hover{
+  border-color: #D6748E !important;
+  color: #D6748E !important;
+}
+.media-body .product-name{
+  margin-bottom: 8rpx;
+}
+.media-body .product-name .name{
+    width: 350rpx;
+}
+.table-view-cell .media-body{
+  height: auto;
+  min-height: 174rpx;
+}
+.media-body .prodcut-specifications{
+  line-height: 40rpx;
+  min-height: 80rpx;
+  margin-bottom: 4rpx;
+}
+
+.logo-content {
+  margin-top: 24rpx;
+} 

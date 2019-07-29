@@ -1,0 +1,123 @@
+<!--pages/stairgroup/mygroupdetail/mygroupdetail.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view wx:if="{{loadComplete}}">
+            <view wx:if="{{OrderStatus == 1}}" class="time-tips text-left color-74 font-28">
+                <view class="timer-icon"></view> 订单失效时间：{{payEndTime}}</view>
+            <view class="pay-status margin-b-24 bg{{OrderStatus}}">
+                <view class="lack-stock" wx:if="{{OrderStatus == 2}}">
+                    <text>团购成功！</text>
+                    <text class="font-28">活动结束后统一发货~</text>
+                </view>
+                <text wx:if="{{OrderStatus == 1}}">等待买家付款</text>
+                <view class="lack-stock" wx:if="{{OrderStatus == 4}}">
+                    <block wx:if="{{stairGroupInfo.CloseMark == 101}}">
+                        <text>库存不足</text>
+                        <text class="font-28">返现团商品已售罄！</text>
+                    </block>
+                    <block wx:if="{{stairGroupInfo.CloseMark == 102}}">
+                        <text>订单关闭</text>
+                        <text class="font-28">确认订单超时了~</text>
+                    </block>
+                    <block wx:if="{{stairGroupInfo.CloseMark == 103}}">
+                        <text>您晚了一步</text>
+                        <text class="font-28">由于库存不足，货款已原路返回~</text>
+                    </block>
+                </view>
+            </view>
+            <view class="shop-panel margin-b-24">
+                <view class="shop-cell">商品详情</view>
+                <navigator url="/pages/stairgroup/activitydetail/activitydetail?activityId={{stairGroupInfo.ActivityId}}">
+                    <view class="shop-detail clearfix">
+                        <view class="shop-detail-img pull-left">
+                            <image mode="aspectFill" src="{{stairGroupInfo.ProductImg}}"></image>
+                        </view>
+                        <view class="shop-detail-content">
+                            <view class="shop-name text-ellipsis font-28">
+                                <text class="activity-tag">{{stairGroupInfo.ActivityTag}}</text>{{stairGroupInfo.ProductName}}</view>
+                            <view class="shop-specification font-24">
+                                <text>{{stairGroupInfo.SkuName}}</text>
+                            </view>
+                            <view class="shop-price">
+                                <text class="font-28">
+              <text class="font-24">￥</text>{{stairGroupInfo.SalePrice}}</text>
+                                <text>x{{stairGroupInfo.Quantity}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <view class="shop-cell line">
+                    <text class="shop-cell-left color-74">支付方式</text>
+                    <text class="shop-cell-center text-right">{{stairGroupInfo.PaymentType}}</text>
+                </view>
+                <view class="shop-cell line">
+                    <text class="shop-cell-left color-74">配送方式</text>
+                    <text class="shop-cell-center text-right">{{stairGroupInfo.ShippingMode}}</text>
+                </view>
+                <view class="shop-cell line">
+                    <text class="shop-cell-left color-74">订单备注</text>
+                    <text class="shop-cell-center text-ellipsis text-right">{{stairGroupInfo.Remark}}</text>
+                </view>
+                <view class="shop-cell">
+                    <text class="shop-cell-left color-74">下单时间</text>
+                    <text class="shop-cell-center text-right">{{stairGroupInfo.CreateDateTime}}</text>
+                </view>
+            </view>
+            <view class="price-detail line">
+                <view class="shop-cell-small">
+                    <text class="shop-cell-left color-74">团购价格</text>
+                    <text class="shop-cell-center text-right">￥{{stairGroupInfo.total}}</text>
+                </view>
+                <view class="shop-cell-small">
+                    <text class="shop-cell-left color-74">运费</text>
+                    <text class="shop-cell-center text-right">￥{{freight}}</text>
+                </view>
+            </view>
+            <view class="shop-cell bg-white line">
+                <text wx:if="{{OrderStatus != 1}}" class="shop-cell-center text-right font-28">实付款：<text class="font-32">￥{{stairGroupInfo.PayMoney}}</text></text>
+                <text wx:else class="shop-cell-center text-right font-28">应付款：<text class="font-32">￥{{AmountPayable}}</text></text>
+            </view>
+            <view class="submit-btn {{IsJobOverduePayment == 1 ? '' : 'flex-e'}}" wx:if="{{OrderStatus == 2}}">
+                <navigator url="/pages/stairgroup/cashbackrecord/cashbackrecord?orderId={{orderId}}" open-type="redirect">查看返现记录</navigator>
+                <navigator wx:if="{{IsJobOverduePayment == 1}}" url="/pages/orderdetail/orderdetail?orderId={{orderId}}" open-type="redirect">查看订单详情</navigator>
+            </view>
+            <view wx:if="{{OrderStatus == 1}}" class="buy-now">
+                <button bindtap="buyNow">立即支付</button>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+        <!-- 支付弹窗 -->
+        <view class="mask {{showPayPopup}}" bindtap="closePayPopup"></view>
+        <view class="popup {{showPayPopup}}">
+            <view class="popup-header line">
+                <text>选择支付方式</text>
+                <icon class="cancel" type="cancel" bindtap="closePayPopup" size="22" color="#757575" />
+            </view>
+            <view class="popup-content">
+                <view class="xkd-panel">
+                    <view class="xkd-cell font-32 line" data-payType="0" bindtap="selectPayType">
+                        <view class="balance-pay-icon"></view>
+                        <text class="pay-text {{isBalance ? '' : 'color-74'}}">余额支付（可用余额￥{{Balance}}）</text>
+                        <icon wx:if="{{payType == 0 && isBalance}}" type="success_no_circle" size="18" color="#00A699" />
+                    </view>
+                    <view class="xkd-cell font-32" data-payType="1" bindtap="selectPayType">
+                        <view class="wx-pay-icon"></view>
+                        <text class="pay-text">微信支付</text>
+                        <icon wx:if="{{payType == 1}}" type="success_no_circle" size="18" color="#00A699" />
+                    </view>
+                </view>
+            </view>
+            <view class="popup-btn">
+                <button bindtap="requestPay">确认支付</button>
+            </view>
+        </view>
+    </button>
+</form>

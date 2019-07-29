@@ -1,0 +1,26 @@
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view>
+            <view class="balancerecharge-head">
+                <view class="money-icon pull-left"></view>
+                <view class="wx-pay pull-left">
+                    微信支付
+                </view>
+            </view>
+            <view class="item">
+                <label>充值金额</label>
+                <input bindinput="bindKeyInput" bindfocus="iptFocus" type="digit" placeholder="请输入充值金额" placeholder-style="color:#dbdbdb"></input>
+            </view>
+            <view class="recharge-btn">
+                <button class="{{blur}}" bindtap="doRecharge">支付{{rechargeMoney}}</button>
+            </view>
+        </view>
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

@@ -1,0 +1,25 @@
+/* pages/setdetail/setdetail.wxss */
+page{
+  padding-top: 24rpx;
+}
+.input-row{
+  position: relative;
+  height: 110rpx;
+  line-height: 110rpx;
+  padding-left: 200rpx;
+  background-color: #fff;
+}
+.input-row input{
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size: 32rpx;
+}
+.input-row label{
+  position: absolute;
+  width: 176rpx;
+  left: 24rpx;
+  top: 0;
+  font-size: 32rpx;
+  background-repeat: no-repeat;
+  background-position: left top;
+}

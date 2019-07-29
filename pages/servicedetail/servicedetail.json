@@ -1,0 +1,10 @@
+{
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "售后详情",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false,
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

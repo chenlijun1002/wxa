@@ -1,0 +1,64 @@
+/* pages/seckilling/submitorder/submitorder.wxss */
+
+@import '../confirmorder/confirmorder.wxss';
+.xkd-textarea-panel .xkd-textarea-title,
+.xkd-textarea-panel textarea {
+  font-size: 28rpx;
+}
+
+.popup-delivery-mode {
+  padding: 30rpx 70rpx;
+  margin-bottom: 60rpx;
+}
+
+.popup-delivery-mode .delivery-mode-item {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+}
+
+.right-icon.select-delivery-icon {
+  background: url("http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/select-row-right.png") no-repeat left top;
+  background-size: cover;
+}
+
+.popup-bottom {
+  min-height: 340rpx;
+  max-height: 880rpx;
+}
+
+.logo-content{
+  margin-top: 40rpx;
+}
+
+.nav-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 96rpx;
+  z-index: 10;
+}
+
+.nav-footer .pay-price {
+  flex: 1;
+  text-align: right;
+  padding-right: 32rpx;
+  color: #515151;
+}
+
+.nav-footer .pay-price .price {
+  color: #FD1D1D;
+}
+
+.nav-footer .pay-btn {
+  width: 256rpx;
+  height: 100%;
+  line-height: 96rpx;
+  font-size: 36rpx;
+  color: #fff;
+  background: linear-gradient(to right, #FFA200, #FF7800);
+  border-radius: 0;
+}

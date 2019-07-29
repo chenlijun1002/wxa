@@ -1,0 +1,142 @@
+/* pages/supportvalueapply/supportvalueapply.wxss */
+.product-panel{
+    padding-left: 24rpx;
+    background-color: #fff;
+    margin-bottom: 24rpx;
+}
+.product-panel .title{
+    height: 88rpx;
+    line-height: 88rpx;
+    font-size: 28rpx;
+    color: #747474;
+    border-bottom: 1px solid #E0E0E0;
+}
+.product-info{
+    position: relative;
+    background-color: #fff;
+    height: 225rpx;
+    padding:32rpx 24rpx 32rpx 176rpx;
+    box-sizing: border-box;
+}
+.product-info .product-pic{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 160rpx;
+    height: 160rpx;
+    margin-top: -80rpx;
+}
+.product-info .product-name{
+    font-size: 32rpx;
+    color: #515151;
+    line-height: 43rpx;
+}
+.product-info .spec-text{
+    font-size: 28rpx;
+    color: #747474;
+    height: 30rpx;
+    line-height: 30rpx;
+    margin-top: 16rpx;
+    margin-bottom: 20rpx;
+}
+.product-info .price-quantity{
+    color: #212121;
+    font-size: 32rpx;
+}
+.form-panel{
+    padding-left: 24rpx;
+    background-color: #fff;
+    margin-bottom: 24rpx;
+}
+.input-group{
+    position: relative;
+    padding-left: 184rpx;
+    height: 92rpx;
+    line-height: 92rpx;
+    border-bottom: 1px solid #E0E0E0;
+}
+.input-group:last-child{
+    border:none;
+}
+.input-group .tip{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 92rpx;
+    line-height: 92rpx;
+    font-size: 28rpx;
+    color: #212121;
+}
+.input-group .required::after{
+    content: "*";
+    color: red;
+    margin-left: 8rpx;
+}
+.input-group input{
+    height: 92rpx;
+    line-height: 92rpx;
+    color: #212121;
+    font-size: 28rpx;
+}
+.upload-img-panel{
+    padding: 0 24rpx;
+    padding-bottom: 24rpx;
+}
+.upload-img-panel .up-header{
+    height: 84rpx;
+    line-height: 84rpx;
+    font-size: 24rpx;
+    color: #212121;
+}
+.upload-img-panel .up-header .pull-right{
+    color: #BDBDBD;
+}
+.img-item{
+    float: left;
+    position: relative;
+    width: 154rpx;
+    height: 154rpx;
+    margin-right: 16rpx;
+    margin-bottom: 14rpx;
+    border:1px solid #E0E0E0;
+}
+.img-item .remove-img{
+    position: absolute;
+    right: -10rpx;
+    top: -10rpx;
+    width: 30rpx;
+    height: 30rpx;
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/close-img.png') no-repeat left top;
+    background-size: cover;
+}
+.img-item .up-pic{
+    width: 154rpx;
+    height: 154rpx;
+}
+.upload-img-btn{
+    float: left;
+    width: 158rpx;
+    height: 158rpx;
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/photograph-icon.png') no-repeat left top;
+    background-size: cover;
+}
+.fiexd-bottom{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 16rpx 24rpx;
+}
+.apply-btn{
+    display: block;
+    float: right;
+    background-color: #fff;
+    border: 1px solid #00A191;
+    border-radius: 16rpx;
+    color: #00A191;
+    font-size: 28rpx;
+    height: 64rpx;
+    line-height: 58rpx;
+    padding: 0 32rpx;
+}

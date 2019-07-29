@@ -1,0 +1,170 @@
+/* pages/pintuan/index/index.wxss */
+swiper {
+  width: 100%;
+  height: 320rpx;
+}
+swiper image {
+  width: 100%;
+  height: 320rpx;
+}
+.nav-group{
+    display: table;
+    width: 100%;
+    padding-top: 24rpx;
+    padding-bottom: 30rpx;
+    flex-direction: row;
+    background-color: #fff;
+    margin-bottom: 24rpx;
+}
+.nav-group .nav-item{
+    display: table-cell;
+    min-width: 20%;
+}
+.nav-group .nav-item .nav-item-icon{
+    display: block;
+    width: 96rpx;
+    height: 96rpx;
+    margin: 0 auto 18rpx;
+}
+.nav-group .nav-item .nav-item-text{
+    font-size: 24rpx;
+    line-height: 24rpx;
+    height: 24rpx;
+    text-align: center;
+}
+.activity-list-item{
+    background-color: #fff;
+    margin-bottom: 24rpx;
+}
+.activity-list-item .media-object{
+    position: relative;
+    margin-bottom: 16rpx;
+}
+.activity-list-item .media-object image{
+    width: 100%;
+    height: 314rpx;
+}
+.label-title{
+    position: absolute;
+    top: 24rpx;
+    left: 0;
+    width: 160rpx;
+    height: 90rpx;
+    display: table;
+    background: #FF7800;
+    background: -moz-linear-gradient(left,  #FF7800 0%, #FFA200 100%);
+    background: -webkit-gradient(linear, left center, right center, color-stop(0%,#FF7800), color-stop(100%,#FFA200));
+    background: -webkit-linear-gradient(left,  #FF7800 0%,#FFA200 100%);
+    background: -ms-linear-gradient(left,  #FF7800 0%,#FFA200 100%);
+    background: linear-gradient(to right,  #FF7800 0%,#FFA200 100%);
+    color: #fff;
+    padding-left: 24rpx;
+    border-top-right-radius: 45rpx;
+    border-bottom-right-radius: 45rpx;
+}
+.seckill .label-title{
+    background: #FD1D1D;
+    background: -moz-linear-gradient(left,  #FD1D1D 0%, #FF7800 100%);
+    background: -webkit-gradient(linear, left center, right center, color-stop(0%,#FD1D1D), color-stop(100%,#FF7800));
+    background: -webkit-linear-gradient(left,  #FD1D1D 0%,#FF7800 100%);
+    background: -ms-linear-gradient(left,  #FD1D1D 0%,#FF7800 100%);
+    background: linear-gradient(to right,  #FD1D1D 0%,#FF7800 100%);
+}
+.label-title .label-text{
+    display: table-cell;
+    vertical-align: middle;
+}
+.label-title .label-text .text{
+    padding-top: 10rpx;
+    height: 30rpx;
+    font-size: 24rpx;
+    line-height: 30rpx;
+}
+.label-title .label-text .time{
+    font-size: 28rpx;
+    height: 45rpx;
+    line-height: 45rpx;
+}
+.activity-info{
+    padding: 0 24rpx 16rpx;
+}
+.activity-list-item .activity-name{
+    font-size: 28rpx;
+    line-height: 48rpx;
+    margin-bottom: 16rpx;
+    word-break:break-all;
+}
+.activity-list-item .activity-name label{
+    padding: 2rpx 10rpx;
+    font-size: 24rpx;
+    border:1rpx solid #FF7800;
+    color: #FF7800;
+    border-radius: 6rpx;
+    margin-right: 14rpx;
+}
+.activity-list-item.seckill .activity-name label{
+    border:1rpx solid #FD1D1D;
+    color: #FD1D1D;
+}
+.activity-price .present-price{
+    font-size: 32rpx;
+    color: #FD1D1D;
+}
+.activity-price .original-price{
+    font-size: 28rpx;
+    color: #BDBDBD;
+    text-decoration: line-through;
+    margin-left: 24rpx;
+}
+.activity-list-item .activity-price{
+    line-height: 66rpx;
+}
+button.activity-btn{
+    font-size: 28rpx;
+    margin-left: 26rpx;
+    background-color: #FD1D1D;
+    line-height: 64rpx;
+}
+button.activity-pintuan-btn{
+    background-color: #FD1D1D;
+}
+button.activity-miaosha-btn{
+    background-color: #FFA200;
+}
+.miaosha-btn-hover{
+    background-color: #e59100 !important;
+}
+.pintuan-btn-hover{
+    background-color: #e31a1a !important;
+}
+
+.activity-list-nav {
+  display: table;
+  width: 100%;
+  background-color: #fff;
+}
+
+.activity-list-nav .nav-item {
+  position: relative;
+  display: table-cell;
+  width: 50%;
+  text-align: center;
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 32rpx;
+}
+
+.activity-list-nav .nav-item.active {
+  color: #ffa200;
+}
+
+.activity-list-nav .nav-item.active:after {
+  position: absolute;
+  content: "";
+  height: 4rpx;
+  background-color: #ffa200;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 130rpx;
+}

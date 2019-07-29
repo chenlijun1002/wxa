@@ -1,0 +1,81 @@
+<!--pages/shopcart/shopcart.wxml-->
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <template wx:if="{{isClose}}" is="close" />
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}">
+            <view wx:if="{{shopcartOrderList.length>0}}">
+                <view class="cart-group bg-white margin-b-24" wx:for="{{shopcartOrderList}}" wx:key="*this" wx:for-index="index" wx:for-item="orderItem">
+                    <view class="group-row border-bottom">
+                        <label class="checkbox-box" bindtap="shopOrderCheck" data-index="{{index}}">
+                            <view class="checkbox {{orderItem.checked}}"></view>我的订单{{index+1}}</label>
+                        <button class='contact-business' open-type='contact'>
+                            <text>联系商家</text>
+                        </button>
+                    </view>
+                    <scroll-view scroll-x="{{false}}" wx:for="{{orderItem.ShoppingCarts}}" wx:key="*this" wx:for-index="idx" wx:for-item="item">
+                        <view class="cart-group-item" style="left:{{item.moveLeft}}rpx;" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" data-index="{{idx}}" data-pindex="{{index}}">
+                            <view class="checkbox {{item.checked}}" bindtap="shopItemCheck" data-index="{{idx}}" data-pindex="{{index}}"></view>
+                            <view class="table-view-table">
+                                <view class="table-view-cell">
+                                    <navigator url="/pages/detail/detail?productId={{item.ProductId}}">
+                                        <image mode="aspectFill" class="media-object" src="{{item.Product.ImageUrl1}}"></image>
+                                    </navigator>
+                                    <view class="media-body">
+                                        <navigator url="/pages/detail/detail?productId={{item.ProductId}}">
+                                            <view class="text-ellipsis product-name">{{item.Product.ProductName}}</view>
+                                            <view class="color-75 font-28 specifications">{{item.skuContent}}</view>
+                                        </navigator>
+                                        <view class="price-number-control">
+                                            <navigator class="inline-block" url="/pages/detail/detail?productId={{item.ProductId}}">
+                                                <text class="font-36">￥{{item.skuPrice}}</text>
+                                            </navigator>
+                                            <view class="number-control clearfix pull-right">
+                                                <text bindtap="minusNum" data-shopcartid="{{item.Id}}" data-index="{{idx}}" data-pindex="{{index}}">-</text>
+                                                <input type="number" value="{{item.Quantity}}" bindinput="changeCount" bindblur="changeCount" bindconfirm="changeCount" data-index="{{idx}}" data-pindex="{{index}}" data-shopcartid="{{item.Id}}" />
+                                                <text bindtap="addNum" data-shopcartid="{{item.Id}}" data-index="{{idx}}" data-pindex="{{index}}">+</text>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <button class="delete" hover-class="delete-hover" type="primary" bindtap="deleteCart" data-shopcartid="{{item.Id}}" data-index="{{idx}}" data-pindex="{{index}}">删除</button>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view class="cart-settlement">
+                    <view class="cart-total">
+                        <view class="group-row border-bottom">
+                            <label class="checkbox-box" bindtap="allCheck">
+                                <view class="checkbox {{allChecked}}"></view>全选</label>
+                            <view class="total-text">
+                                <view>合计:
+                                    <text class="font-32 color-strong">￥</text>
+                                    <text class="font-40 color-strong">{{totalMoney}}</text>
+                                </view>
+                                <view class="color-75 font-24">(不含运费)</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="settlement-btn">
+                        <button type="primary" hover-class="settlement-hover" bindtap="balanceCart">结算({{totalCheckLength}})</button>
+                    </view>
+                </view>
+            </view>
+            <view class="empty-data" wx:else>
+                <view class="empty-img-prompt">
+                    <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/empty-cart.png"></image>
+                </view>
+                <text class="font-36">购物车空空如也~</text>
+                <navigator class="empty-btn" url="/pages/index/index" open-type="switchTab">随便逛逛</navigator>
+            </view>
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

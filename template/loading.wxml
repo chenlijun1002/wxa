@@ -1,0 +1,23 @@
+<template name="loadPrompt">
+    <view class="load-prompt-content">
+      <view class="pull-loading-icon"></view>
+      <view class="load-prompt-img">
+        <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/load-prompt-img.png"></image>
+      </view>
+    </view>
+</template>
+<template name="toast">
+    <view class="prompt-toast">
+      <view class="{{successIcon ? 'success-toast-icon' : 'prompt-toast-icon'}}"></view>
+      <view class="prompt-toast-text">{{text}}</view>
+    </view>
+</template>
+<template name="close">
+    <view class='close-state'>
+        <view class="close-img">
+        <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/close-tips-icon.png"></image>
+        </view>
+        <view class="tips">店铺已关闭~</view>
+        <navigator class="close-btn" url="/pages/membercenter/membercenter" open-type="switchTab">前往会员中心</navigator>
+    </view>
+</template>

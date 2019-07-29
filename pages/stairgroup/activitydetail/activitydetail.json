@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "返现团",
+  "component": "true",
+  "usingComponents": {
+    "component-common": "/pages/components/commonComponent/commonComponent",
+    "login-authorization": "/pages/components/launchLogin/launchLogin"
+  }
+}

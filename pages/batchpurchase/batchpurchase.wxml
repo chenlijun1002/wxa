@@ -1,0 +1,104 @@
+<!--pages/batchpurchase/batchpurchase.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<template wx:if="{{isClose}}" is="close" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<block wx:if="{{loadComplete}}">
+    <view class="search border-bottom" bindtap="searchProduct">
+  <view class="search-input">
+    <text class="inputf">搜索商品名称</text>
+  </view>
+  <icon class="search-icon" type="search" size="16" color="#999" />
+</view>
+    <view class='product-content clearfix'>        
+        <view class='left-categorys pull-left'>            
+            <scroll-view scroll-y style="height: 100%;" scroll-top="{{leftScrollTop}}">
+                <view wx:if="{{sortType == 'category'}}" class='category-items' bindtap="toggleCategoryType">
+                    <view wx:for="{{categorys}}" class="category-item text-ellipsis line {{categoryId == index ? 'active': ''}}" data-info="{{item}}" data-key="{{index}}" wx:key="{{index}}">{{item.Name}}
+                        <view wx:if="{{item.IsHot}}" class='hot'></view>
+                    </view>
+                </view>
+                <view wx:if="{{sortType == 'brand'}}" class='category-items' bindtap="toggleCategoryType">
+                    <view wx:for="{{brandList}}" class="category-item text-ellipsis line {{categoryId == index ? 'active': ''}}" data-info="{{item}}" data-key="{{index}}" wx:key="{{index}}">{{item.Name}}
+                    </view>
+                </view>
+                <view class='category-mode {{sortType=="category"?"brand-icon":"class-icon"}}' bindtap='changSortType'>
+                    <text>{{sortType=="category"?"按品牌":"按分类"}}</text>
+                </view>
+            </scroll-view>
+        </view>
+        <view class='right-categorys pt0'>
+            <view class='filter-condition'>
+              <view class='{{productQuery.sortField==0?"color-f54336":""}}' bindtap='productSort' data-sortType='0'>综合排序</view>
+              <view class='by-price {{productQuery.sortField==1?productQuery.isDesc?"color-f54336 descending":"color-f54336 ascending":""}}' bindtap='productSort' data-sortType='1'>按价格</view>
+              <view class='by-sales {{productQuery.sortField==2?productQuery.isDesc?"color-f54336 descending":"color-f54336 ascending":""}}' bindtap='productSort' data-sortType='2'>按销量</view>
+            </view>
+            <view class="toggleShowChild" bindtap='toggleShowChildCategory' wx:if="{{midCategory.length&&!isShowChildCategory}}">
+                  <text class='toggleShowChild-btn {{isShowChildCategory?"folding":""}}'>全部分类</text>
+                </view>
+            <view class='mid-categorys' wx:if="{{midCategory.length&&isShowChildCategory}}">
+                    <view class="mid-category-item {{midCategoryId == -1 ? 'active': ''}}" data-key="-1" bindtap='toggleMidCategory'>全部</view>
+                    <view class="mid-category-item text-ellipsis {{midCategoryId == index ? 'active': ''}} {{index>=2?'mt24':''}}" wx:for="{{subMidCategory}}" data-id="{{item.Id}}" data-key="{{index}}" wx:key="{{index}}" bindtap='toggleMidCategory'><text class="{{item.IsHot ? 'fire' : ''}}"></text>{{item.Name}}</view>                    
+                </view>
+            <scroll-view scroll-y style="height: 100%;" bindscrolltolower="scrollToLower" scroll-top="{{rightScrollTop}}" bindscroll="getTop" bindtouchend="handletouchend">
+                <view class='product-item line' wx:for="{{productList}}" wx:key="{{index}}" bindtap='goDetail' data-id="{{item.Id}}">
+                    <image class='product-img pull-left' src='{{item.ImageUrl1}}'></image>
+                    <view class='product-info'>
+                        <view class='product-name text-ellipsis-2'>{{item.ProductName}}</view>
+                        <view class='product-price'>￥{{item.MarketPrice}}</view>
+                        <view class='operation-box'>
+                            <view wx:if="{{item.ShoppingCartNum > 0}}" class='minus-icon' data-info="{{item}}" catchtap='reduceFromCar'></view>
+                            <view wx:if="{{item.ShoppingCartNum > 0}}" class='count'>{{item.ShoppingCartNum}}</view>
+                            <view class='add-icon' data-info="{{item}}" catchtap='addToCar'></view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view class='placeholder1'></view>
+    <view class='placeholder2'></view>
+    <view class='circle-box' bindtap='goCar'>
+        <view class='car-badge' wx:if="{{carInfo.quantity > 0}}">{{carInfo.quantity >= 100 ? '99+' : carInfo.quantity}}</view>
+        <view class='car-icon'></view>
+    </view>
+    <view class='bottom-content'>
+        <view class='go-buycar pull-right' bindtap='goPurchase'>去结算</view>
+        <view class='price-box'>
+            <text class='font-40 fw-700 {{carInfo.quantity <= 0 ? "color-99" : "color-e9"}}'>￥{{carInfo.money}}</text>
+            <text class='font-24 color-99 freight'>运费￥{{carInfo.freidhtMoney}}</text>
+        </view>
+    </view>
+    <!-- 规格popup -->
+    <view class="mark {{rulePopup}}" bindtap="closePopup"></view>
+    <view class="rule-popup {{rulePopup}}">
+        <view class="rule-popup-herder">
+            <image class="product-imag" mode="aspectFill" src="{{selectedSku.selectedSkuImg}}"></image>
+            <view class="price">
+                <text>￥</text>{{selectedSku.selectedSkuPrice}}</view>
+            <view class="selected-specifications">剩余数量{{selectedSku.selectedSkuStock}}件</view>
+            <label class='cancel' bindtap="closePopup"></label>
+        </view>
+        <view class="rule-popup-body">
+            <scroll-view scroll-y style="max-height:400rpx;">
+                <view class="specifications-list" wx:for-index="pidx" wx:for="{{productSku.skuData}}" wx:for-item="sku" wx:key="{{pidx}}">
+                    <view class="specifications-title">{{sku.pname}}</view>
+                    <view class="specifications-list-group">
+                        <view class="specifications-item {{skuValue.selected}}" data-currentIndex="{{cidx}}" data-parentIndex="{{pidx}}" wx:for-index="cidx" wx:for="{{sku.values}}" wx:for-item="skuValue" bindtap="selectedSp" wx:key="{{cidx}}">{{skuValue.vname}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="buy-number clearfix">
+            <text class="number-text">购买数量</text>
+            <view class="number-control clearfix">
+                <text class='minus' data-operation="minus" data-num="{{selectedSku.selectedSkuStock}}" data-selectnum="{{selectedSku.selectedSkuNumber}}" catchtap="hasSkuControllerNumber"></text>
+                <view class='selectedSkuNumber'>{{selectedSku.selectedSkuNumber}}</view>
+                <text class='plus' data-operation="plus" catchtap="hasSkuControllerNumber" data-num="{{selectedSku.selectedSkuStock}}" data-selectnum="{{selectedSku.selectedSkuNumber}}"></text>
+            </view>
+        </view>
+    </view>
+</block>
+<view wx:else class="load-prompt">
+    <template is="loadPrompt" />
+</view>

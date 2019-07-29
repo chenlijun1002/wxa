@@ -1,0 +1,241 @@
+/* pages/orderdetail/orderdetail.wxss */
+
+page {
+  padding-bottom: 100rpx;
+}
+
+.order-logistics {
+  position: relative;
+  padding: 35rpx 0;
+  font-size: 32rpx;
+  background-color: #fff;
+ border-bottom: 1rpx solid #e0e0e0;
+  padding-left: 72rpx;
+  padding-right: 22rpx;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.logistics-name{
+  position: relative;
+}
+.order-logistics .logistics-info {
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  line-height: 42rpx;
+  flex: 1;
+}
+
+.order-logistics .logistics-icon {
+  position: absolute;
+  left: -36rpx;
+  top: 7rpx;
+  width: 26rpx;
+  height: 32rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/address-icon.png") no-repeat left top;
+  background-size: cover;
+}
+.iphone-icon{
+  position: absolute;
+  left: -40rpx;
+  top: 7rpx;
+  width: 32rpx;
+  height: 32rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/car.png") no-repeat left top;
+  background-size: cover;
+}
+.phone-icon{
+  position: absolute;
+  right:24rpx;
+  top:40rpx;
+  width:40rpx;
+  height:40rpx;
+  background: url("https://img.xiaokeduo.com/system/wxamy/images/icon-phone.png") no-repeat left top;
+  background-size: cover;
+}
+
+.order-address {
+  padding: 35rpx 0;
+  font-size: 32rpx;
+  background-color: #fff;
+  margin-bottom: 24rpx;
+  padding-left: 72rpx;
+  padding-right: 22rpx;
+}
+
+.order-address .address {
+  position: relative;
+  margin-top: 12rpx;
+  line-height: 44rpx;
+  font-size: 28rpx;
+  min-height: 44rpx;
+}
+
+.order-address .address-icon {
+  position: absolute;
+  left: -36rpx;
+  top: 14rpx;
+  width: 26rpx;
+  height: 32rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/address-icon.png") no-repeat left top;
+  background-size: cover;
+}
+
+.order-price {
+  padding: 12rpx 24rpx;
+  background-color: #fff;
+}
+
+.order-price .row {
+  font-size: 32rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.fiexd-bottom-btns button {
+  width: 170rpx;
+  margin-left: 24rpx;
+  background-color: transparent;
+}
+
+.fiexd-bottom-btns .padding-lr-24 {
+  padding: 16rpx 24rpx;
+}
+
+button.apply-service-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 134rpx;
+  height: 56rpx;
+  line-height: 52rpx;
+  font-size: 28rpx;
+  padding: 0;
+}
+
+.apply-service-text {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 134rpx;
+  height: 46rpx;
+  line-height: 52rpx;
+  font-size: 28rpx;
+  padding: 0;
+}
+
+.order-info .media-body .product-name {
+  margin-bottom: 8rpx;
+}
+
+.order-info .media-body {
+  height: auto;
+}
+
+.order-info .media-body .prodcut-specifications {
+  line-height: 40rpx;
+  min-height: 80rpx;
+  margin-bottom: 4rpx;
+}
+
+.integral-mark{
+  padding:4rpx;
+  color:#FFA200;
+  border:1px solid #FFA200;
+  border-radius:4rpx;
+  margin-right:10rpx;
+}
+.padding-32-24{
+  padding: 32rpx 24rpx;
+}
+.color-FF4757{
+  color: #ff4757;
+}
+.frieghtName{
+  width: 136rpx;
+  height:56rpx;
+  background: #00A699;
+  border-radius: 8rpx;
+  line-height: 56rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 28rpx;
+}
+.line-height-56{
+  line-height: 56rpx;
+}
+
+.logo-content{
+ margin-top: 24rpx;
+}
+.button-box{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 134rpx;
+  height: 80rpx;
+}
+.remark {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+  min-height: 64rpx;
+  padding: 28rpx 24rpx;
+  font-size: 32rpx;
+  box-sizing: border-box;
+}
+.remark label {
+  display: flex;
+  align-self: flex-start;
+  white-space: nowrap;
+  color: #757575;
+  line-height: 40rpx;
+}
+.remark .remark-input {
+  display: flex;
+  align-self: flex-start;
+  flex: 1;
+  word-break: break-all;
+  line-height: 40rpx;
+}
+.mb0{
+  margin-bottom: 0;
+}
+.border-top{
+  border-top:1rpx solid #dfdfdf;
+}
+.mr24{
+  margin-right: 24rpx;
+}
+.top14{
+  top: 14rpx !important;
+}
+.color-202020{
+  color: #202020 !important;
+  font-weight: 700;  
+}
+
+.pickup-info .address-icon {
+  position: absolute;
+  left: -36rpx;
+  top: 10rpx;
+  width: 26rpx;
+  height: 32rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/pickup.png") no-repeat left top;
+  background-size: 100%;
+}
+.pickup-time .address-icon {
+  position: absolute;
+  left: -36rpx;
+  top: 12rpx;
+  width: 26rpx;
+  height: 32rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/pickup-time.png") no-repeat left top;
+  background-size: 100%;
+}
+.font-32{
+  font-size: 32rpx;
+}
+.mr-124{
+  margin-right: -124rpx;
+}

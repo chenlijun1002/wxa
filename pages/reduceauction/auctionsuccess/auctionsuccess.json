@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "竞拍成功",
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

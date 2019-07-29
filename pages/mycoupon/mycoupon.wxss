@@ -1,0 +1,75 @@
+/* pages/mycoupon/mycoupon.wxss */
+.coupon-container {
+  padding: 0 24rpx;
+}
+.coupon-card {
+  height: 232rpx;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/coupon-disable-icon.png') no-repeat;
+  background-size: cover;
+}
+.coupon-card.coupon-card-enable {
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/coupon-enable-icon.png') no-repeat;
+  background-size: cover;
+}
+.xkd-card-left {
+  float: left;
+  height: 100%;
+}
+.coupon-card-left {
+  display: flex;
+  width: 224rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.coupon-card-left .text-56 {
+  margin-bottom: 16rpx;
+  font-size: 56rpx;
+  font-weight: 700;
+}
+.xkd-card-content {
+  position: relative;
+  overflow: hidden;
+}
+.coupon-card-title {
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+}
+.coupon-card-title, .wrapper {
+  color: #bdbdbd;
+}
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  line-height: 40rpx;
+}
+.tips-icon {
+  position: absolute;
+  bottom: 32rpx;
+  right: 12rpx;
+  width: 112rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border: 1px solid #212121;
+  color: #212121;
+  transform: rotateZ(30deg)
+}
+.tips-icon.color-ff {
+  color: #ff4757;
+  border-color: #ff4757;
+}
+.color-33 {
+  color: #333333;
+}
+.color-66 {
+  color: #666666;
+}
+.scroll-view {
+  position: fixed;
+  top: 114rpx;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

@@ -1,0 +1,348 @@
+/* pages/membercenter/membercenter.wxss */
+
+.membercenter-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #00a699;
+  padding-top: 24rpx;
+  padding-bottom: 74rpx;
+}
+
+.membercenter-header image {
+  display: block;
+  width: 136rpx;
+  height: 136rpx;
+  margin: 0 50rpx 0 64rpx;
+  border-radius: 50%;
+}
+
+.membercenter-header .member-name {
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
+  max-width:200rpx;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.membercenter-header .contact-business{
+    position: absolute;
+    right: 24rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40rpx;
+    height: 40rpx;
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/message-icon2.png') no-repeat left top;
+    background-size: cover;
+    margin-top: -20rpx;
+}
+.membercenter-header .member-title {
+  display: inline-block;
+  height: 42rpx;
+  line-height: 42rpx;
+  margin-top: 8rpx;
+  margin-left: 16rpx;
+  padding: 0 16rpx;
+  background: #fc6;
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #212121;
+  max-width:176rpx;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+.membercenter-header  .member-news, .membercenter-header .member-sign {
+  position: absolute;
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.membercenter-header  .member-news {
+  top: 74rpx;
+  right: 48rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/member-news-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.membercenter-header  .member-sign {
+  bottom: 40rpx;
+  right: 48rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/sign-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.center-nav {
+  display: flex;
+  height: 114rpx;
+  line-height: 114rpx;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.center-nav view {
+  flex: 1;
+  text-align: center;
+}
+.my-order {
+  display: block;
+}
+
+.order-nav {
+  display: table;
+  width: 100%;
+  padding: 40rpx 0;
+  background-color: #fff;
+}
+
+.order-nav-item {
+  position: relative;
+  display: table-cell;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.order-nav-item:first-child::before {
+  display: none;
+}
+
+.order-nav-item::before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 1px;
+  height: 54rpx;
+  background-color: #e5e5e5;
+  left: 1rpx;
+  top: 50%;
+  margin-top: -27rpx;
+}
+
+.order-nav-item-icon {
+  position: relative;
+  display: block;
+  width: 48rpx;
+  height: 48rpx;
+  margin: 0 auto 10rpx;
+  background-repeat: no-repeat;
+  background-origin: left top;
+  background-size: cover;
+}
+
+.icon-a {
+  background-image: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/member-a-icon.png");
+}
+
+.icon-b {
+  background-image: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/member-b-icon.png");
+}
+
+.icon-c {
+  background-image: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/member-c-icon.png");
+}
+
+.icon-d {
+  background-image: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/comment.png");
+}
+
+.icon-e {
+  background-image: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/shop-order-icon.png");
+}
+
+.icon-f {
+  background-image: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/nextLevel-order-icon.png");
+}
+
+.icon-g {
+  background-image: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/nextLevel-member-icon.png");
+}
+
+.icon-h {
+  background-image: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/nextLevel-shop-icon.png");
+}
+
+.order-nav-item-icon .badge {
+  position: absolute;
+  right: -6rpx;
+  top: -6rpx;
+}
+
+.order-detail {
+  display: flex;
+  align-items: center;
+  height: 178rpx;
+  background: #fff;
+}
+
+.order-detail .column {
+  flex: 1;
+}
+
+.order-detail .row1, .order-detail .row2 {
+  text-align: center;
+}
+
+.order-detail .row1 {
+  margin: 14rpx 0 14rpx 0;
+  font-size: 44rpx;
+  color: #212121;
+}
+
+.order-detail .row1 text {
+  font-size: 32rpx;
+}
+
+.order-detail .row2 {
+  font-size: 28rpx;
+  color: #515151;
+}
+
+.order-detail .column1, .order-detail .column2 {
+  border-right: 1px solid #e0e0e0;
+}
+
+.common-module {
+  position: relative;
+  background: #fff;
+}
+
+.common-module-title {
+  height: 98rpx;
+  line-height: 98rpx;
+  padding-left: 26rpx;
+  font-size: 32rpx;
+  color: #202020;
+}
+.line.my-order {
+  height: 112rpx;
+  line-height: 112rpx;
+}
+.line.my-order .right-icon {
+  transform: translateY(10rpx);
+}
+.line::after {
+  width: 97%;
+}
+
+.common-module-items {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 4rpx;
+}
+
+.common-module-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  height: 160rpx;
+}
+
+.common-module-item text {
+  font-size: 28rpx;
+  color: #212121;
+}
+
+.common-module .baseline {
+  position: absolute;
+  top: 260rpx;
+  right: 0;
+  width: 96%;
+  height: 1px;
+  background: #dfdfdf;
+  transform: scaleY(.5);
+}
+
+.my-brokerage-icon, .shop-setting-icon, .shop-rank-icon, .business-card-icon,
+.request-icon, .setting-icon, .address-icon, .after-sale-icon,.module-icon,.supportvalueservice-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin: 34rpx 0 24rpx 0;
+}
+.my-stairgroup-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/stairgroup-icon.png") no-repeat;
+  background-size: cover;
+}
+.my-pintuan-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/pintuan-icon.png") no-repeat;
+  background-size: cover;
+}
+.my-jiangjiapai-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/reduceauction-icon.png") no-repeat;
+  background-size: cover;
+}
+.my-miaosha-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/sekilling-icon.png") no-repeat;
+  background-size: cover;
+}
+.my-brokerage-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/commission-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.shop-setting-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/shop-setting-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.shop-rank-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/shop-rank-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.business-card-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/business-card-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.request-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/fenxiao-description-icon2.png") no-repeat;
+  background-size: cover;
+}
+
+.setting-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/setting-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.address-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/address-icon.png") no-repeat;
+  background-size: cover;
+}
+
+.after-sale-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/after-sale-icon.png") no-repeat;
+  background-size: cover;
+}
+.supportvalueservice-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/supportvalueservice.png") no-repeat;
+  background-size: cover;
+}
+.apply-distributor-tips {
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  padding: 0 24rpx;
+  background: #FCDC9C;
+}
+.apply-distributor-tips text {
+  flex: 1;
+}
+.voice-icon {
+  width: 48rpx;
+  height: 48rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/voice-icon.png") no-repeat;
+  background-size: cover;
+  margin-right: 8rpx;
+}
+.arrow-right-icon {
+  width: 28rpx;
+  height: 28rpx;
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/arrow-right-icon.png") no-repeat;
+  background-size: cover;
+  margin-top: 4rpx;
+}

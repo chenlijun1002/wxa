@@ -1,0 +1,19 @@
+<!--pages/error/error.wxml-->
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class="empty-data">
+            <view class="empty-img-prompt">
+                <view class='error-icon error-icon-{{errorStatus}}'></view>
+            </view>
+            <view class="empty-data-text">{{errorTitle}}</view>
+            <view class='empty-second-text' wx:if="{{errorStatus==700||errorStatus==404}}">{{errorSecond}}</view>
+            <view style='margin-top:48rpx;'>
+                <text class='link-text link-icon-back' bindtap='goIndex' wx:if="{{errorStatus==404||errorStatus==500||errorStatus==503||errorStatus==600}}">返回首页</text>
+                <text class='link-text link-icon-back' bindtap='goIndex' wx:if="{{errorStatus==700}}">返回</text>
+                <!-- <text class='link-text link-icon-message' wx:if="{{errorStatus==600||errorStatus==500}}">联系商家</text> -->
+            </view>
+        </view>
+        <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+    </button>
+</form>

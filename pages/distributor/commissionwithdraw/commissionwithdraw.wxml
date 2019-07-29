@@ -1,0 +1,80 @@
+<!--提现申请-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view wx:if="{{loadComplete}}">
+            <view class="depositrequest-head" bindtap="showPopup">
+                <view class="money-icon pull-left" wx:if="{{requestType==0}}"></view>
+                <view class="money-package-icon pull-left" wx:if="{{requestType==1}}"></view>
+                <view class="offline-icon pull-left" wx:if="{{requestType==2}}"></view>
+                <text wx:if="{{requestType==-1}}">请选择提现方式</text>
+                <text wx:if="{{requestType==0}}">微信支付</text>
+                <text wx:if="{{requestType==1}}">微信红包提现</text>
+                <text wx:if="{{requestType==2}}">线下提现</text>
+                <view class="right-icon pull-right"> </view>
+            </view>
+            <view class="request-info">
+                <view class="item line">
+                    <label class="title">收款人</label>
+                    <input class="input-ctrl" type="text" placeholder="用户已设置的真实姓名" placeholder-style="color:#dbdbdb" bindinput="changeaccountName" />
+                </view>
+                <view class="item line" wx:if="{{requestType==2}}">
+                    <label class="title">账号说明</label>
+                    <input class="input-ctrl" type="text" placeholder="账号说明，如开户银行/支付宝/财付通" placeholder-style="color:#dbdbdb" bindinput="changeBank" />
+                </view>
+                <view class="item line" wx:if="{{requestType==2}}">
+                    <label class="title">提现账号</label>
+                    <input class="input-ctrl" type="text" placeholder="输入提现账号信息" placeholder-style="color:#dbdbdb" bindinput="changeAccount" />
+                </view>
+                <view class="item {{requestType==1 ? 'line' : ''}}">
+                    <label class="title">提现金额</label>
+                    <input class="input-ctrl" type="digit" placeholder="本次可提现￥{{maxCash}}" placeholder-style="color:#dbdbdb" bindinput="changeCash" />
+                </view>
+                <view class="item" wx:if="{{requestType==1}}">
+                    <label class="title">微信红包限额200元</label>
+                </view>
+            </view>
+            <view class="remark" wx:if="{{requestType==1}}">
+                <view class="remark-title">备注</view>
+                <textarea placeholder="请输入备注信息" placeholder-style="color:#dbdbdb" bindinput="changeRemark" />
+            </view>
+            <view class="depositrequest-btn">
+                <button bindtap="doRequest">确认提现</button>
+            </view>
+            <view class="mark {{popupStatus}}" bindtap="closePopup"></view>
+            <view class="popup-bottom {{popupStatus}}">
+                <view class="popup-header">
+                    <text>提现方式</text>
+                    <icon class="cancel" type="cancel" bindtap="closePopup" size="22" color="#757575" />
+                </view>
+                <view class="popup-body">
+                    <view class="request-type line" bindtap="changeRequestType" data-requesttype="0" wx:if="{{config.EnableWeixinDraw}}">
+                        <view class="money-icon-31"></view>
+                        <text>微信支付</text>
+                        <icon class="pull-right" type="success_no_circle" size="20" color="green" hidden="{{requestType !=0}}" />
+                    </view>
+                    <view class="request-type line" bindtap="changeRequestType" data-requesttype="1" wx:if="{{config.EnableRedpaperDraw}}">
+                        <view class="money-package-icon"></view>
+                        <text>微信红包提现</text>
+                        <icon class="pull-right" type="success_no_circle" size="20" color="green" hidden="{{requestType !=1}}" />
+                    </view>
+                    <view class="request-type line" bindtap="changeRequestType" data-requesttype="2" wx:if="{{config.EnableOtherDraw}}">
+                        <view class="offline-icon"></view>
+                        <text>线下提现</text>
+                        <icon class="pull-right" type="success_no_circle" size="20" color="green" hidden="{{requestType !=2}}" />
+                    </view>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

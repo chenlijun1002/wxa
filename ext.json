@@ -1,0 +1,78 @@
+{
+	"extAppid": "wx9d725dc9887b38f4",
+	"extEnable": true,
+	"ext": {
+		"wx_debug": "debug",
+		"wx_appid": "wx9d725dc9887b38f4",
+		"default_domain": {
+			"url": "https://wxaapi.xiaokeduo.com"
+		},
+		"ymf_domain": {
+			"url": "https://spellapi.xiaokeduo.com"
+		},
+		"fxs_domain": {
+			"url": "https://wxaapi.xiaokeduo.com"
+		},
+		"seckilling_domain": {
+			"url": "https://seckillapi.xiaokeduo.com"
+		},
+		"token_domain": {
+			"url": "https://tokenapi.xiaokeduo.com"
+		},
+		"permissions": [
+			"xkd_wxaapp",
+			"xkd_fenxiao",
+			"xkd_supplier",
+			"xkd_agents",
+			"ymf_pintuan",
+			"ymf_seckill",
+			"ymf_reduceauction",
+			"ymf_stairgroup"
+		],
+		"tabBarList": [
+			"pages/index/index",
+			"pages/category/category",
+			"pages/shopcart/shopcart",
+			"pages/membercenter/membercenter"
+		],
+		"navigationBarBackgroundColor": "#cc3946"
+	},
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#cc3946",
+		"backgroundColor": "#cc3946",
+		"navigationBarTitleText": "",
+		"navigationBarTextStyle": "white"
+	},
+	"tabBar": {
+		"backgroundColor": "#fff",
+		"selectedColor": "#cc3946",
+		"borderStyle": "white",
+		"list": [
+			{
+				"iconPath": "pages/images/icon02.png",
+				"selectedIconPath": "pages/images/icon02-s-02.png",
+				"pagePath": "pages/index/index",
+				"text": "首页"
+			},
+			{
+				"iconPath": "pages/images/icon09.png",
+				"selectedIconPath": "pages/images/icon09-s-02.png",
+				"pagePath": "pages/category/category",
+				"text": "商品分类"
+			},
+			{
+				"iconPath": "pages/images/icon12.png",
+				"selectedIconPath": "pages/images/icon12-s-02.png",
+				"pagePath": "pages/shopcart/shopcart",
+				"text": "购物车"
+			},
+			{
+				"iconPath": "pages/images/icon06.png",
+				"selectedIconPath": "pages/images/icon06-s-02.png",
+				"pagePath": "pages/membercenter/membercenter",
+				"text": "会员"
+			}
+		]
+	}
+}

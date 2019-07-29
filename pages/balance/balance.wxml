@@ -1,0 +1,38 @@
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}">
+            <view class="balance-head">
+                <!-- <view class="overage-icon"></view> -->
+                <view class="balance-head-money">
+                    <view class='font-28 tip'>账户余额(元)</view>
+                    <view class="money">￥
+                        <text>{{balance}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="balance-btns" wx:if="{{isEnableApplyAmount||isEnableRechargeState}}">
+                <view class='withdraw-btn btn {{isEnableApplyAmount?"":"disable"}}' bindtap="goDeposit">提现</view>
+                <view class='recharge-btn btn {{isEnableRechargeState?"":"disable"}}' bindtap="goRecharge">充值</view>
+            </view>
+            <view class="balance-info">
+                <view class="balance-info-item record" bindtap="navigateTo" data-url="../balancerecord/balancerecord">
+                    <view class="record-icon"></view>
+                    <text>提现记录</text>
+                    <view class="right-icon"></view>
+                </view>
+                <view class="balance-info-item" bindtap="navigateTo" data-url="../balancedetail/balancedetail">
+                    <view class="balance_detail-icon"></view>
+                    <text>余额明细</text>
+                    <view class="right-icon"></view>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+    </button>
+</form>

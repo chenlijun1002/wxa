@@ -1,0 +1,149 @@
+/* pages/shopcart/shopcart.wxss */
+.cart-group-item{
+  position: relative;
+  padding-left: 24rpx;
+  transition: all 0.3s;
+}
+.cart-group-item .table-view-table{
+  margin-left: 70rpx;
+  padding: 30rpx 24rpx 30rpx 0;
+}
+.cart-group-item .media-object{
+  width: 168rpx;
+  height: 168rpx;
+}
+.cart-group-item .media-body{
+  overflow-x: hidden;
+  height: auto;
+}
+.cart-group-item .product-name{
+  margin-bottom: 4rpx;
+}
+.cart-group-item .checkbox{
+  left: 24rpx;
+  top: 96rpx;
+  margin-top: 0;
+}
+.price-number-control{
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.cart-group-item .specifications{
+  min-height: 40rpx;
+  margin-bottom: 16rpx;
+}
+.number-control{
+  padding-bottom: 10rpx;
+}
+.number-control text{
+  float: left;
+  width: 56rpx;
+  height: 56rpx;
+  text-align: center;
+  line-height: 56rpx;
+  color: #999;
+  border-radius: 4rpx;
+  border:1px solid #DFDFDF;
+}
+.number-control input{
+  float: left;
+  width: 70rpx;
+  height: 56rpx;
+  border:1px solid #DFDFDF;
+  margin: 0 8rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #202020;
+}
+.cart-group-item .table-view-table{
+  border-bottom: 1px solid #DFDFDF;
+}
+.cart-group-item:last-child .table-view-table{
+  border-bottom: none;
+}
+page{
+  padding-bottom: 124rpx;
+}
+.cart-settlement{
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 100rpx;
+  background-color: #fff;
+  width: 754rpx;
+  border-bottom:1px solid #DFDFDF;
+  z-index: 20;
+  flex-direction: row;
+}
+.cart-settlement .group-row{
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.cart-settlement .cart-total{
+  width: 540rpx;
+}
+.settlement-btn button{
+  width: 214rpx;
+  height: 100rpx;
+  background-color: #FA3F6E;
+  border-radius: 0;
+  font-size: 36rpx;
+  line-height: 100rpx;
+}
+.cart-settlement .checkbox-box{
+  padding-left: 54rpx;
+}
+.cart-settlement .cart-total .total-text{
+  position: absolute;
+  left: 200rpx;
+  top: 0;
+  line-height: 40rpx;
+  padding-top: 12rpx;
+  text-align: center;
+}
+.cart-group-item button.delete{
+  position: absolute;
+  display: block;
+  left: 100%;
+  top: 0;
+  width: 124rpx !important;
+  height: 228rpx;
+  line-height: 228rpx;
+  font-size: 36rpx;
+  border-radius: 0;
+  background-color: #FA3F6E;
+}
+.delete-hover,.settlement-hover{
+  background-color: #F57193 !important;
+}
+.empty-btn{
+  display: block;
+  width: 208rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 60rpx auto 0;
+  border:1px solid #00A699;
+  border-radius: 10rpx;
+  color: #00A699;
+  font-size: 36rpx;
+}
+navigator.inline-block{
+    display: inline-block;
+}
+.contact-business{
+    position: absolute;
+    right: 24rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #747474;
+    background: transparent;
+}
+.contact-business text{
+    display: block;
+    padding-left: 56rpx;
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/message-icon1.png') no-repeat left center;
+    background-size: 48rpx;
+    line-height: 56rpx;
+}

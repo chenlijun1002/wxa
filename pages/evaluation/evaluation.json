@@ -1,0 +1,11 @@
+{
+  
+    "backgroundTextStyle": "light",
+    "navigationBarTitleText": "商品评价",
+    "navigationBarTextStyle": "#fff",
+    "backgroundColor": "",
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

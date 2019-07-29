@@ -1,0 +1,10 @@
+<!--pages/transitionpage/transitionpage.wxml-->
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <template wx:if="{{isClose}}" is="close" />
+        <view class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+    </button>
+</form>

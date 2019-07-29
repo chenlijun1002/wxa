@@ -1,0 +1,47 @@
+<!--pages/supportvalueapply/supportvalueapply.wxml-->
+<import src="../../template/loading.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <page-state wx:if="{{showPageState}}" state-class="state-success-icon" stateTitle="价保服务申请成功" stateTips="" btnContent="查看申请进度" bindstatePageBtnClick="btnClick"></page-state>
+        <view class='product-panel'>
+            <view class='title'>申请价保的商品</view>
+            <view class='product-info'>
+                <image class='product-pic' mode="aspectFill" src='{{productInfo.ProductImg}}'></image>
+                <view class='product-name text-ellipsis'>{{productInfo.ProductName}}</view>
+                <view class='spec-text'>{{productInfo.SKUContent}}</view>
+                <view class='price-quantity'>¥{{productInfo.ProductPrice}} ×{{productInfo.Quantity}}</view>
+            </view>
+        </view>
+        <view class='form-panel'>
+            <view class='input-group'>
+                <label class='tip required'>您的姓名</label>
+                <input type='text' placeholder='请输入您的姓名' bindinput="changeUserName"></input>
+            </view>
+            <view class='input-group'>
+                <label class='tip required'>联系电话</label>
+                <input type='text' placeholder='请输入您的联系方式' bindinput="changeTel"></input>
+            </view>
+            <view class='input-group'>
+                <label class='tip'>商品链接</label>
+                <input type='text' placeholder='请输入价格更低的商品链接' bindinput="changeLink"></input>
+            </view>
+        </view>
+        <view class='upload-img-panel bg-white'>
+            <view class='up-header'>
+                <label>上传图片</label>
+                <view class='pull-right'>{{imgFilePath.length}}/9</view>
+            </view>
+            <view class='up-body clearfix'>
+                <view class='img-item' wx:for="{{imgFilePath}}" wx:key="*this" wx:for-index="idx">
+                    <view class='remove-img' data-index="{{idx}}" bindtap='deleteImg'></view>
+                    <image class='up-pic' mode="aspectFill" src='{{item}}'></image>
+                </view>
+                <view wx:if="{{imgFilePath.length<9}}" class='upload-img-btn' bindtap='uploadImg'></view>
+            </view>
+        </view>
+        <view class='fiexd-bottom clearfix'>
+            <button class='apply-btn' bindtap='setPageState'>提交申请</button>
+        </view>
+        <template wx:if="{{isShowToast}}" is="toast" data="{{...toastText}}" />
+    </button>
+</form>

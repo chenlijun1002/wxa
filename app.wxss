@@ -1,0 +1,982 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+page {
+  background-color: #f0f0f0;
+  font-family: "微软雅黑";
+  box-sizing: border-box;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.text-ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.clearfix::after {
+  display: block;
+  content: '';
+  width: 0;
+  height: 0;
+  clear: both;
+}
+
+.nav-fiexd-bottom {
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  background-color: #fff;
+  border-top: 1px solid #dfdfdf;
+  z-index: 9;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.table-view-cell .media-object {
+  float: left;
+  width: 174rpx;
+  height: 174rpx;
+  margin-right: 26rpx;
+}
+
+.table-view-cell .media-body {
+  position: relative;
+  overflow: hidden;
+  height: 174rpx;
+}
+
+.border-bottom {
+  border-bottom: 1rpx solid #dfdfdf;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.nav-fixed-top {
+  position: fixed;
+  display: table;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100rpx;
+  background-color: #fff;
+}
+
+.nav-fixed-top .nav-item {
+  display: table-cell;
+  text-align: center;
+  line-height: 96rpx;
+  font-size: 32rpx;
+}
+
+.nav-fixed-top .nav-item.active {
+  border-bottom: 4rpx solid #00a699;
+}
+
+.color-strong {
+  color: #fa3f6e;
+}
+.color-21 {
+  color: #212121;
+}
+.color-f0 {
+  color: #FF0000;
+}
+.color-fd {
+  color: #FD1D1D;
+}
+.color-main {
+  color: #00a699;
+}
+.color-fa {
+  color: #FFA200;
+}
+.color-75 {
+  color: #757575;
+}
+.color-74 {
+  color: #747474;
+}
+.color-66 {
+  color: #666;
+}
+.color-bd {
+  color: #BDBDBD;
+}
+.color-primary {
+  color: #00A191;
+}
+.color-99 {
+  color: #999;
+}
+.delivery-mode {
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0 24rpx;
+  font-size: 32rpx;
+}
+
+.media-body .product-name {
+  font-size: 32rpx;
+  line-height: 48rpx;
+  margin-bottom: 16rpx;
+}
+
+.media-body .prodcut-specifications {
+  font-size: 28rpx;
+  line-height: 24rpx;
+  color: #757575;
+  margin-bottom: 40rpx;
+  min-height: 24rpx;
+}
+
+.group-row {
+  position: relative;
+  font-size: 32rpx;
+  height: 97rpx;
+  line-height: 96rpx;
+  padding: 0 24rpx;
+  background-color: #fff;
+}
+
+.group-row .right-icon {
+  position: absolute;
+  width: 40rpx;
+  height: 8rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/right-icon.png") no-repeat left top;
+  background-size: cover;
+  top: 44rpx;
+  right: 24rpx;
+}
+
+.padding-24 {
+  padding: 24rpx;
+}
+
+.padding-lr-24 {
+  padding: 0 24rpx;
+}
+.padding-l-32 {
+  padding-left: 32rpx;
+}
+.padding-l-24 {
+  padding-left: 24rpx;
+}
+.padding-l-26 {
+  padding-left: 26rpx;
+}
+.padding-b-48 {
+  padding-bottom: 48rpx;
+}
+.margin-b-24 {
+  margin-bottom: 24rpx !important;
+}
+.margin-b-8 {
+  margin-bottom: 8rpx !important;
+}
+.margin-b-16 {
+  margin-bottom: 16rpx;
+}
+.margin-r-26 {
+  margin-right: 26rpx;
+}
+.margin-r-24 {
+  margin-right: 24rpx;
+}
+.margin-r-32 {
+  margin-right: 32rpx;
+}
+.margin-l-24 {
+  margin-left: 24rpx;
+}
+.margin-l-26 {
+  margin-left: 26rpx;
+}
+.margin-l-10 {
+  margin-left: 10rpx;
+}
+
+.margin-l-28 {
+  margin-left: 28rpx;
+}
+
+.margin-t-24 {
+  margin-top: 24rpx;
+}
+
+.font-24 {
+  font-size: 24rpx;
+}
+.font-28, .price-num .num {
+  font-size: 28rpx;
+}
+
+.font-32, .price-num .price {
+  font-size: 32rpx;
+}
+
+.font-36 {
+  font-size: 36rpx;
+}
+
+.font-40 {
+  font-size: 40rpx;
+}
+.fw-700 {
+  font-weight: 700;
+}
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.line-height-96 {
+  line-height: 96rpx;
+}
+
+.padding-lr-24 {
+  padding: 0 24rpx;
+}
+.padding-r-24 {
+  padding-right: 24rpx;
+}
+button {
+  transition: all 0.3s;
+  margin: 0;
+  padding: 0 18rpx;
+  font-size: 32rpx;
+  border-radius: 8rpx;
+  height: 67rpx;
+  line-height: 60rpx;
+  color: #424242;
+}
+button.sendformid-btn{
+    padding: 0 !important;
+    border-radius: 0;
+    height: auto;
+    line-height: auto;
+    color: #333;
+    background-color: transparent;
+    text-align: left;
+}
+button[type="default"] {
+  border: 1px solid #757575;
+}
+
+button[type="default"].btn-outline-strong {
+  color: #fa3f6e;
+  border: 1px solid #fa3f6e;
+  background-color: #fff;
+}
+
+button[disabled][type="primary"] {
+  background-color: #f07c9b;
+}
+
+button::after {
+  display: none;
+}
+
+.block-btn-big {
+  font-size: 38rpx;
+  line-height: 100rpx;
+}
+/* 缺省页 */
+.empty-data {
+  padding-top: 180rpx;
+  text-align: center;
+}
+
+.empty-img-prompt,.close-state .close-img {
+  margin-bottom: 30rpx;
+}
+.close-state .close-img image{
+    width: 200rpx;
+    height: 128rpx;
+}
+.empty-img-prompt image {
+  width: 256rpx;
+  height: 256rpx;
+}
+.empty-btn{
+  display: flex;
+  justify-content: center;
+  margin-top: 96rpx;
+}
+.empty-btn button {
+  box-sizing: border-box;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0 80rpx;
+  border-radius: 16rpx;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.block {
+  display: block !important;
+}
+/* 徽章 */
+.badge {
+  font-size: 20rpx;
+  line-height: 1;
+  display: inline-block;
+  padding: 2rpx 8rpx;
+  color: #fff;
+  border-radius: 100px;
+  background-color: #fa3f6e;
+}
+/* 上拉加载 */
+.pull-loading {
+  height: 40px;
+  line-height: 40px;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.pull-loading-icon {
+  display: inline-block;
+  width: 38rpx;
+  height: 38rpx;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 1px solid #757575;
+  border-bottom-color: transparent;
+  margin-right: 6rpx;
+  animation: pullloading 0.8s step-end infinite;
+}
+
+@keyframes pullloading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  8.33333333% {
+    transform: rotate(30deg);
+  }
+
+  16.66666667% {
+    transform: rotate(60deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  33.33333333% {
+    transform: rotate(120deg);
+  }
+
+  41.66666667% {
+    transform: rotate(150deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  58.33333333% {
+    transform: rotate(210deg);
+  }
+
+  66.66666667% {
+    transform: rotate(240deg);
+  }
+
+  75% {
+    transform: rotate(270deg);
+  }
+
+  83.33333333% {
+    transform: rotate(300deg);
+  }
+
+  91.66666667% {
+    transform: rotate(330deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* 数据加载loading状态 */
+.load-prompt {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: -200rpx;
+}
+
+.load-prompt .pull-loading-icon {
+  border-width: 6rpx;
+  width: 42rpx;
+  height: 42rpx;
+  border-color: #dfdfdf;
+  border-bottom-color: transparent;
+  margin-left: 40rpx;
+}
+
+.load-prompt-content {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.load-prompt-img {
+  margin-top: 20rpx;
+}
+
+.load-prompt-img image {
+  width: 371rpx;
+  height: 72rpx;
+}
+
+.height-96 {
+  height: 96rpx;
+}
+
+.checkbox-box {
+  position: relative;
+  padding-left: 70rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  overflow: hidden;
+}
+
+.checkbox {
+  position: absolute;
+  width: 44rpx;
+  height: 44rpx;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-image: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/checkbox.png');
+  background-size: 44rpx 90rpx;
+  left: 0;
+  top: 50%;
+  margin-top: -22rpx;
+}
+
+.checkbox.checked {
+  background-position: left -45rpx;
+}
+/* popup */
+.mask, .mark {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  display: none;
+}
+
+.mask.show, .mark.show {
+  display: block;
+}
+.popup-bottom, .popup {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 30;
+  transform: translateY(120%);
+  transition: all 0.4s ease;
+}
+.popup {
+  height: 880rpx;
+}
+.popup-bottom.show, .popup.show {
+  transform: translateY(0);
+}
+.popup-header {
+  position: relative;
+  height: 112rpx;
+  line-height: 112rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #202020;
+}
+.popup-header icon {
+  position: absolute;
+  right: 24rpx;
+  top: 20%;
+}
+
+button.popup-bottom-btn {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 36rpx;
+  border-radius: 0;
+  background-color: #fa3f6e;
+}
+
+.popup-bottom-btn-hover {
+  background-color: #f57193 !important;
+}
+
+.prompt-toast {
+  position: fixed;
+  top: 400rpx;
+  left: 50%;
+  width: 250rpx;
+  min-height: 250rpx;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin-left: -125rpx;
+  border-radius: 10rpx;
+  padding: 30rpx 24rpx 24rpx;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.prompt-toast-icon,.success-toast-icon {
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto 26rpx;
+}
+.prompt-toast-icon {
+  background: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/prompt-icon.png') no-repeat left top;
+  background-size: cover;
+}
+.success-toast-icon {
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/success-toast-icon.png') no-repeat left top;
+  background-size: cover;
+}
+.prompt-toast-text {
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 40rpx;
+}
+
+button[type="primary"] {
+  background-color: #00a699;
+}
+
+.button-hover[type="primary"] {
+  background-color: #58aaa5 !important;
+}
+
+button.default-size {
+  height: 90rpx;
+  line-height: 90rpx;
+}
+
+.group-row-form {
+  border-top: 1px solid #dfdfdf;
+  padding-left: 155rpx;
+}
+
+.group-row-form:first-child {
+  border-top: none;
+}
+
+.group-row-form label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.group-row-form input {
+  height: 96rpx;
+  line-height: 96rpx;
+}
+
+.money-icon {
+  float: left;
+  width: 82rpx;
+  height: 82rpx;
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/wx-pay.png')no-repeat;
+  background-size: cover;
+}
+
+.money-icon-31 {
+  float: left;
+  width: 62rpx;
+  height: 62rpx;
+  margin-right: 30rpx;
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/wx-pay.png')no-repeat;
+  background-size: cover;
+}
+
+.right-icon {
+  width: 40rpx;
+  height: 8rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/right-icon.png") no-repeat left top;
+  background-size: cover;
+}
+.select-rows{
+  position: relative;
+  height: 98rpx;
+  padding-left: 150rpx;
+  line-height: 98rpx;
+  padding-right: 26rpx;
+}
+.select-rows label{
+  position: absolute;
+  left: 26rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.select-rows .select-text{
+  line-height: 98rpx;
+}
+.select-rows .select-row-right{
+  position: absolute;
+  right: 26rpx;
+  top: 50%;
+  margin-top: -4rpx;
+  width:40rpx;
+  height: 8rpx;
+  background: url('http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/select-row-right.png') no-repeat left top;
+  background-size: cover;
+}
+.section-box-header{
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 32rpx;
+  color: #212121;
+  padding: 0 26rpx;
+  border-bottom:1rpx solid #E0E0E0;
+}
+.line-has-text{
+  position: relative;
+  height: 2rpx;
+  background-color: #BDBDBD;
+}
+.line-has-text .text-box{
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  height: 32rpx;
+  line-height: 32rpx;
+  margin-top: -18rpx;
+  text-align: center;
+}
+.line-has-text .text{
+  display: inline-block;
+  padding: 0 24rpx;
+  background-color: #f0f0f0;
+  font-size: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  color: #BDBDBD;
+}
+.line-has-text-box{
+  padding: 15rpx 24rpx;
+}
+/* 1px边框线 */
+.line {
+  position: relative;
+}
+.line::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    transform: scaleY(.5); 
+    background: #e0e0e0;
+}
+
+/* tab导航 */
+.nav {
+  display: flex;
+  height: 112rpx;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.nav view {
+  flex: 1;
+  height: 100%;
+  line-height: 112rpx;
+  text-align: center;
+}
+/* 导航条边框线 */
+.nav-bottom-line {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  font-size: 32rpx;
+}
+.nav-bottom-line.active::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0);
+  content: "";
+  width: 80rpx;
+  height: 2px;
+  background: #00A191;
+}
+/* panel */
+.xkd-panel {
+  padding-left: 24rpx;
+  background: #fff;
+}
+.xkd-cell {
+  display: flex;
+  align-items: center;
+  padding: 32rpx 24rpx 32rpx 0;
+} 
+.xkd-cell-single .left-words {
+  flex: 1;
+  font-size: 32rpx;
+}
+.xkd-cell .left-words {
+  line-height: 48rpx;
+}
+.xkd-cell .cell-center {
+  flex: 1;
+  margin-left: 32rpx;
+}
+.xkd-cell input.cell-center {
+  margin-top: 4rpx;
+}
+/* textarea */ 
+.xkd-textarea-panel .xkd-textarea-title {
+  height: 56rpx;
+  line-height: 56rpx;
+  padding-left: 24rpx;
+  font-size: 32rpx;
+}
+.xkd-textarea-panel textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 192rpx;
+  line-height: 48rpx;
+  padding: 24rpx;
+  background: #fff;
+  font-size: 32rpx;
+}
+/* label */
+.xkd-label {
+  display: inline-block;
+  font-size: 24rpx;
+  padding: 6rpx;
+  border-radius: 8rpx;
+}
+.xkd-label.label-primary {
+  background: #FA3F6E;
+  color: #fff;
+}
+.group-row .input-box{
+    display: block;
+    width: 530rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    text-align: right;
+}
+/* button */
+.xkd-button-panel {
+  padding: 0 24rpx;
+}
+.xkd-button-big {
+  box-sizing: border-box;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 36rpx;
+  text-align: center;
+  border-radius: 5px;
+}
+.xkd-button-primary {
+  color: #fff;
+  background: #00A699;
+}
+.xkd-button-white {
+  color: #212121;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+.img-box{
+  display: flex;
+}
+.img-box view{
+  flex: 1;
+}
+
+/* 底部版权logo */
+.logo-content{
+  width: 100%;
+}
+.logo-img{
+  width: 100%;
+  height: 64rpx;
+  padding: 32rpx 0;
+  text-align: center;
+  background: #f7f7f7;
+}
+.logo-img image{
+  width: 88rpx;
+  height: 24rpx;
+}
+.logo-text{
+  font-size: 24rpx;
+  color: #ccc;
+}
+.position-bottom{
+  position: absolute;
+  bottom: 0;
+}
+/* 客服 */
+.customer-service{
+    position: fixed;
+    right: 32rpx;
+    bottom: 32rpx;
+    width: 88rpx;
+    height: 88rpx;
+    background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/customer-service.png') transparent no-repeat left top;
+    background-size: cover;
+}
+button.nav-fiexd-bottom-item{
+    padding: 0;
+    height: 100rpx;
+    line-height:normal;
+    background-color: transparent;
+}
+.nav-fiexd-bottom-item .message-icon{
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/message-icon.png") no-repeat center bottom;
+  background-size: 100%;
+}
+
+.bottom-copyright{
+    padding: 24rpx 0;
+    background-color: #FAFAFA;
+    margin-bottom: 2rpx;
+    margin-top: 24rpx;
+}
+.bottom-copyright.copyright-fixed{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.bottom-copyright.copyright-fixed-hasnav{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 100rpx;
+}
+.bottom-copyright image{
+    display: block;
+    width: 88rpx;
+    height: 24rpx;
+    margin: 0 auto 10rpx;
+}
+.bottom-copyright .aspectFill-text{
+    text-align: center;
+    font-size: 24rpx;
+    line-height: 48rpx;
+    color: #DEDEDE;
+}
+
+/* 商品详情富文本编辑换行 */
+.wxParse-br{
+  height: 50rpx;
+}
+/* 分销说明富文本编辑换行 */
+.wxParse-span{
+  display: inline-block;
+}
+.close-state{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    padding-top: 280rpx;
+    z-index: 999999;
+    text-align: center;
+}
+.close-state.show{
+    display: block;
+}
+.close-state .close-img image{
+    width: 200rpx;
+    height: 128rpx;
+}
+.close-state .tips{
+    color: #666;
+    font-size: 34rpx;
+}
+.close-state .close-btn{
+    margin-top: 90rpx;
+    font-size: 32rpx;
+    color: #00A699;
+    border:1rpx solid #00A699;
+    border-radius: 10rpx;
+    display: inline-block;
+    height: 70rpx;
+    line-height: 70rpx;
+    padding: 0 20rpx;
+}
+.state-success-icon{
+    background: url(http://testfile.xiaokeduo.com/system/xkdxcx/system/images/state-success-icon.png) no-repeat left top;
+    background-size: cover;
+}
+.state-error-icon{
+    background: url(http://testfile.xiaokeduo.com/system/xkdxcx/system/images/state-error-icon.png) no-repeat left top;
+    background-size: cover;
+}
+.state-prompt-icon{
+    background: url(http://testfile.xiaokeduo.com/system/xkdxcx/system/images/state-prompt-icon.png) no-repeat left top;
+    background-size: cover;
+}
+.probation-tips{
+    height:88rpx;
+    line-height:88rpx;
+    color:#212121;
+    font-size:28rpx;
+    background-color:#ffdf7f;
+    padding:0 24rpx;
+    z-index:300;
+}
+

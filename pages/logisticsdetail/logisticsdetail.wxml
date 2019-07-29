@@ -1,0 +1,37 @@
+<!--pages/logisticsdetail/logisticsdetail.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}">
+  <view class="table-view-cell padding-24 bg-white margin-b-24">
+    <image class="media-object" mode="aspectFill" src="{{logisticsInfo.orderImg}}"></image>
+    <view class="media-body">
+      <view class="font-32" style="margin-bottom:10rpx;">
+        物流状态 <text class="color-main">{{logisticsInfo.logisticsState}}</text>
+      </view>
+      <view class="color-75 font-28" style="margin-top:-24rpx;">物流公司：{{logisticsInfo.logisticsCompany}}</view>
+      <view class="color-75 font-28" style="margin-top:-28rpx;">运单编号：{{logisticsInfo.orderNumber}}</view>
+    </view>
+  </view>
+  <view class="group-row border-bottom">物流数据</view>
+  <view class="logistics-data-p">
+    <view class="logistics-data-group">
+      <view class="logistics-data-item {{idx==0?'current':''}}" wx:for-index="idx" wx:for="{{logisticsInfo.logisticsData}}">
+        <text class="title">{{item.logisticsCompany}}</text>
+        <text class="date-time">{{item.dateTime}}</text>
+      </view>
+    </view>
+  </view>
+  <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+</view>
+<view wx:else class="load-prompt" style="top:100rpx;">
+  <template is="loadPrompt"/>
+</view>
+<view wx:if="{{isShowToast}}">
+  <template is="toast" data="{{...toastText}}" />
+</view>
+</button>
+</form>

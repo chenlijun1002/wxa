@@ -1,0 +1,25 @@
+<!--pages/distributor/distributordescription/distributordescription.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../wxparse/wxParse.wxml" />
+<import src="../../../template/logo.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view wx:if="{{loadComplete}}">
+            <view class="wxParse">
+                <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+            </view>
+            <view class="store-btn">
+                <button bindtap="goBack">返回分销中心</button>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

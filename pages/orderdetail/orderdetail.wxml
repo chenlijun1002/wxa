@@ -1,0 +1,155 @@
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}">
+            <view class="group-row font-32 bg-white border-bottom">
+                <text>订单号：{{orderInfo.OrderId}}</text>
+                <text class="pull-right color-strong">{{orderInfo.OrderStatusName}}</text>
+            </view>
+            <view class="order-logistics" bindtap="callPhone" wx:if="{{orderInfo.ExpressCompanyName && !orderInfo.ShipOrderNumber }}">
+                <view class="logistics-name">
+                    <view class="frieghtName">商家配送</view>
+                    <label class="iphone-icon"></label>
+                </view>
+                <label class="phone-icon"></label>
+                <view class="logistics-info">
+                    <view>
+                        <text class="font-32 line-height-56">{{orderInfo.ExpressCompanyName}} {{orderInfo.ExpressCompanyAbb}}</text>
+                    </view>
+                    <view>
+                        <text class="font-28 color-75">{{orderInfo.ShippingDate}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="order-address {{orderInfo.PickupOrder?'mb0':''}}">
+                <view><text class="font-32 color-202020">收货人信息</text></view>
+                <view style='position:relative;'>
+                  <text class="font-28">{{orderInfo.ShipTo}} {{orderInfo.CellPhone}}</text>
+                  <label class="address-icon"></label>
+                </view>
+                <view class="address">
+                    <text>{{orderInfo.Address}}</text>
+                    <!-- <label class="address-icon"></label> -->
+                </view>
+            </view>
+            <view class="order-address border-top" wx:if="{{orderInfo.PickupOrder}}">
+                <!-- <text class="font-32">{{orderInfo.SelfLiftingName}}</text> -->
+                <text class="font-32 color-202020">自提点信息</text>
+                <view class="address pickup-info font-32">
+                    <text>{{orderInfo.SelfPromotionMan}} {{orderInfo.SelfPromotionPhone}}</text>
+                    <label class="address-icon"></label>
+                </view>
+                <text class="font-28">{{orderInfo.SelfPromotionAddress}}</text>
+                <view style='height:112rpx;color: #747474;position:relative' class="pickup-time font-28" >
+                  <label class="address-icon top14"></label>
+                  <text class='pull-left mr24' wx:for="{{orderInfo.ServeiceTime}}" wx:key="*this" wx:for-item="item">{{item.Name}}{{item.ServeiceTime}}</text>
+                </view>
+            </view>
+            <view class="order-info bg-white margin-b-24">
+                <view class="group-row color-75 border-bottom">商品清单</view>
+                <view class="table-view-cell padding-24 border-bottom clearfix" wx:for="{{orderInfo.OrderItems}}" wx:key="*this">
+                    <navigator url="../detail/detail?productId={{item.ProductId}}">
+                        <image class="media-object" mode="aspectFill" src="{{item.ThumbnailsUrl}}"></image>
+                        <view class="media-body">
+                            <view class="text-ellipsis product-name">{{item.ItemDescription}}</view>
+                            <view class="prodcut-specifications">{{item.SKUContent}}
+                                <text class="pull-right font-28">x{{item.Quantity}}</text>
+                            </view>
+                            <view class="price-num">
+                                <text class="pull-left font-32">￥{{item.ItemAdjustedPrice}}</text>
+                            </view>
+                            <view class="button-box" wx:if="{{item.OrderItemsStatus==2||item.OrderItemsStatus==3}}" data-orderstatus="{{item.OrderItemsStatus}}" data-orderid="{{orderInfo.OrderId}}" data-orderitemid="{{item.Id}}" data-refundmoney="{{item.ItemAdjustedPrice}}" data-refundnum="{{item.Quantity}}"
+                                data-discountavg="{{item.DiscountAverage}}" data-adj="{{item.ItemAdjustedCommssion}}" catchtap="requestRefund" data-hasprotectionapplying="{{item.HasProtectionApplying}}">
+                                <button class="inline-block apply-service-btn" type="default">申请售后</button>
+                            </view>
+                            <view class="button-box" wx:if="{{item.OrderItemsStatus==6 || item.OrderItemsStatus==7}}" data-orderid="{{orderInfo.OrderId}}" data-orderitemid="{{item.Id}}" catchtap="showRefundDetail">
+                                <button class="inline-block apply-service-btn" type="default">售后中</button>
+                            </view>
+                            <view class="button-box" wx:if="{{item.OrderItemsStatus==9 || item.OrderItemsStatus==10}}" data-orderid="{{orderInfo.OrderId}}" data-orderitemid="{{item.Id}}" catchtap="showRefundDetail">
+                                <button class="inline-block apply-service-btn" type="default">售后详情</button>
+                            </view>
+                            <view class="button-box" wx:if="{{item.OrderItemsStatus==13}}" data-orderid="{{orderInfo.OrderId}}" data-orderitemid="{{item.Id}}" catchtap="showRefundDetail">
+                                <button class="inline-block apply-service-btn" type="default">拒绝退款</button>
+                            </view>
+                            <!-- <text class="apply-service-text" wx:if="{{item.OrderItemsStatus==13}}">拒绝退款</text> -->
+                        </view>
+                    </navigator>
+                    <!-- 申请退货按钮，显示条件wx:if="{{item.OrderItemsStatus==3}}" -->
+                    <!-- 申请退款按钮，显示条件wx:if="{{item.OrderItemsStatus==2}}" -->
+                    <!-- 查看售后详情按钮，显示条件wx:if="{{item.OrderItemsStatus==6 || item.OrderItemsStatus==7}}" -->
+                </view>
+                <!-- <view class="group-row font-32" wx:if="{{orderInfo.PaymentTypeId}}"> -->
+                <view class="group-row font-32 clearfix">
+                    <label class="color-75">配送方式</label>
+                    <view class="pull-right">
+                        <text class="margin-l-10 font-28">{{orderInfo.shippingModeText}}</text>
+                    </view>
+                </view>
+                <view class="group-row font-32 clearfix">
+                    <label class="color-75">支付方式</label>
+                    <view class="pull-right {{isIPhone?'':'mr-124'}}">
+                        <text class="margin-l-10 font-28">{{orderInfo.PaymentStr}}</text>
+                    </view>
+                </view>
+                <view class="remark">
+                    <label>备注：</label>
+                    <view class="remark-input" wx:if="{{orderInfo.Remark}}">{{orderInfo.Remark}}</view>
+                    <view class="remark-input" wx:else>无</view>
+                </view>
+            </view>
+            <view class="order-price margin-b-24">
+                <view class="row">
+                    <label class="color-75">商品金额</label>
+                    <text class="pull-right">￥{{orderInfo.ProductSumPrice}}</text>
+                </view>
+                <view class="row" wx:if="{{orderInfo.priceY>0}}">
+                    <label class="color-75">商品优惠</label>
+                    <text class="pull-right" wx:if="{{orderInfo.priceYag}}">-￥{{orderInfo.priceY}}</text>
+                    <text class="pull-right" wx:else>+￥{{orderInfo.priceY}}</text>
+                </view>
+                <view class="row" wx:if="{{orderInfo.priceT>0}}">
+                    <label class="color-75">价格调整</label>
+                    <text class="pull-right" wx:if="{{orderInfo.priceTag}}">-￥{{orderInfo.priceT}}</text>
+                    <text class="pull-right" wx:else>+￥{{orderInfo.priceT}}</text>
+                </view>
+                <view class="row">
+                    <label class="color-75">运费</label>
+                    <text class="pull-right">￥{{orderInfo.AdjustedFreight}}</text>
+                </view>
+                <view class="row">
+                    <label class="color-75">合计</label>
+                    <text class="pull-right">￥{{orderInfo.TotalPrice}}</text>
+                </view>
+                <!-- <view class="row">
+     <text class="pull-right">积分 完成订单后预计可返{{point}}积分</text>
+    </view> -->
+            </view>
+            <view class="bg-white padding-32-24">
+                <view class="font-32" wx:if="{{orderInfo.FinishDate != null && orderInfo.FinishDate != '/Date(-62135596800000)/' }}"><text class="integral-mark">积分</text> 本订单返
+                <text class="color-FF4757">{{point}}</text>积分</view>
+                <view class="font-32" wx:if="{{orderInfo.FinishDate == null || orderInfo.FinishDate == '/Date(-62135596800000)/' }}"><text class="integral-mark">积分</text> 完成订单后预计可返
+                <text class="color-FF4757">{{point}}</text>积分</view>
+            </view>
+            <view class="nav-fiexd-bottom fiexd-bottom-btns block text-right" wx:if="{{orderInfo.OrderStatus==1 || orderInfo.OrderStatus==3||(item.OrderStatus==5 && item.ExpressCompanyName) || orderInfo.OrderStatus==14}}">
+                <view class="padding-lr-24">
+                    <button class="inline-block" type="default" wx:if="{{orderInfo.OrderStatus==1}}" bindtap="cancelOrder">取消订单</button>
+                    <button class="inline-block btn-outline-strong" type="default" wx:if="{{orderInfo.OrderStatus==1}}" bindtap="payOrder">立即支付</button>
+                    <button class="inline-block btn-outline-strong" type="default" wx:if="{{(orderInfo.OrderStatus==3||orderInfo.OrderStatus==5)&& (orderInfo.ExpressCompanyName && orderInfo.ShipOrderNumber )}}" data-orderId="{{orderInfo.OrderId}}" bindtap="lookLogistics">查看物流</button>
+                    <button class="inline-block btn-outline-strong" type="default" wx:if="{{orderInfo.OrderStatus==3}}" bindtap="confirmReceipt">确认收货</button>
+                    <button class="inline-block btn-outline-strong" type="default" wx:if="{{orderInfo.OrderStatus==14}}" bindtap="confirmPickup">确认提货</button>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

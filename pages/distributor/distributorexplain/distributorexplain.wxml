@@ -1,0 +1,100 @@
+<!--申请分销说明-->
+<import src="../../../wxparse/wxParse.wxml" />
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'><login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}">
+  <block wx:if="{{DistributorApplicationCondition}}">
+    <view class="request-condition  margin-b-24">
+    <view class="title">{{DistributorApplyTitle || '申请成为分销商的条件'}}</view>
+    <view class="request-progress">
+      <view class="step step-one clearfix active">
+        <view class="line-progress pull-left"></view>
+        <text class="text">申请成为商城会员</text>
+        <icon class="pull-right" type="success_no_circle" size="21" color="#00A699" />
+      </view>
+      <view class="step step-two clearfix {{IsOverCondition?'active':''}}" wx:if="{{DistributorApplicationCondition}}">
+        <view class="line-progress pull-left"></view>
+        <view class="text">
+        <view wx:if="{{IsFinishedOrderMoney}}">账号在商城累计消费额达到{{MinimumCash}}元（已消费{{Expenditure}}元）</view>
+        <view wx:if="{{IsExist}}">或</view>
+        <view wx:if="{{IsBuyProduct}}">购买<view class="color-main" bindtap="buyProduct" data-productids="{{DistributorProducts}}">指定商品</view></view>
+        <view wx:if="{{IsExist}}">或</view>
+        <view wx:if="{{IsRechargeMoneyToDistributor}}">一次性预存{{RechargeMoneyToDistributor}}元，即可成为分销商！<view class="color-main" bindtap="recharge">充值</view></view>
+        </view>
+        <text class="pull-right" wx:if="{{!IsOverCondition}}">未达成</text>
+        <icon class="pull-right" type="success_no_circle" size="21" wx:if="{{IsOverCondition}}" color="#00A699"/>
+      </view>
+    </view>
+  </view>
+  <view class="btn">
+  <button bindtap="goApplyDis" wx:if="{{IsOverCondition}}">申请分销商</button>
+    <button bindtap="goIndex">继续逛逛</button>
+  </view>
+  <view class="privilege">
+    <view class="title">{{DistributorApplyDesc||"分销商特权"}}</view>
+    <!-- <view class="items">
+      <view class="item">
+        <view class="item-head">独立微店</view>
+        <view class="item-text">拥有自己的微信店铺</view>
+      </view>
+      <view class="item">
+        <view class="item-head">快捷推广</view>
+        <view class="item-text">拥有专属推广链接、推广二维码和店铺名片，快速发展 下级分销商和会员</view>
+      </view>
+      <view class="item">
+        <view class="item-head">分享素材</view>
+        <view class="item-text">除了可以分享店铺首页和商品，平台还提供各种精美素 材供分销商分享</view>
+      </view>
+      <view class="item">
+        <view class="item-head">佣金收益</view>
+        <view class="item-text">通过下级会员消费获得佣金收益，佣金可以提现</view>
+      </view>
+    </view>
+    <view class="explain">分销商的商品销售统一由主平台直接收款，直接发货，并提供产品的售后服务，分销佣金由主平台统一设置。</view> -->
+
+                    <!-- 特权内容 -->
+                    <view class="wxParse">
+                        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+                    </view>
+                </view>
+
+            </block>
+            <block wx:else>
+                <view class='content'>
+                    <view class='view-cell line-height200'>
+                        <text>店铺LOGO<text class="common-color-r">*</text></text>
+                        <view class='upload-img' bindtap='upload'>
+                            <image src="https://xkdsaas.oss-cn-shanghai.aliyuncs.com/MerChant/2905/1260/1508825197284.png" width="80" height="90" wx:if="{{imgPath.length<=0}}"></image>
+                            <image src='{{imgPath[0]}}' wx:if="{{imgPath.length>0}}"></image>
+                            <view class="upload-prompt" data="{{imgPath[0]}}">点击图片上传</view>
+                        </view>
+                    </view>
+                    <view class='view-cell edit-shopname border-t-b height-42'>
+                        <label>店铺名称
+                            <text class="common-color-r">*</text>
+                        </label>
+                        <input placeholder="请输入店铺名称" bindinput='setDisName'></input>
+                    </view>
+                    <view class='view-cell edit-shopname height-42'>
+                        <label>店铺简介
+                            <text class="common-color-r">*</text>
+                        </label>
+                        <input placeholder="简介30个字以内" bindinput='setDisDesc'></input>
+                    </view>
+                </view>
+                <button class="apply-btn" bindtap="goStoreInfo">立即申请分销商</button>
+                <button class="apply-btn mt410" bindtap="goIndex">继续逛逛</button>
+            </block>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

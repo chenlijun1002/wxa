@@ -1,0 +1,12 @@
+<!--pages/unauthorized/unauthorized.wxml-->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view class='close-state'>
+            <view class="close-img">
+                <image src="http://testfile.xiaokeduo.com/system/xkdxcx/system/images/close-tips-icon.png"></image>
+            </view>
+            <view class="tips" style='margin-top:30rpx;'>小程序授权信息已过期~</view>
+            <button class="close-btn" data-tell="{{cellphone}}" bindtap='callShoptell'>联系商家</button>
+        </view>
+    </button>
+</form>

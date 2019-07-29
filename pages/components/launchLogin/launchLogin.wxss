@@ -1,0 +1,57 @@
+/* pages/components/launchLogin/launchLogin.wxss */
+.authorization-box{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 998;
+}
+.authorization-modal{
+    position: fixed;
+    width: 580rpx;
+    left: 50%;
+    top: 50%;
+    background-color: #fff;
+    margin-left: -290rpx;
+    transform: translateY(-50%);
+    z-index: 999;
+}
+.authorization-modal .modal-body{
+    padding: 40rpx;
+    font-size: 32rpx;
+    line-height: 46rpx;
+    text-align: justify;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack:justify;
+    -webkit-justify-content:space-between;
+    -ms-flex-pack:justify;
+    justify-content:space-between;
+}
+.authorization-modal .modal-footer{
+    position: relative;
+}
+.authorization-modal .modal-footer:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    color: #D5D5D6;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    border-top: 2rpx solid #D5D5D6;
+}
+.authorization-modal .modal-footer button{
+    height: 98rpx;
+    line-height: 98rpx;
+    background-color: #fff;
+    color: #62b900;
+}

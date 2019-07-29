@@ -1,0 +1,10 @@
+{
+    "navigationBarTextStyle": "",
+    "navigationBarTitleText": "我的秒杀",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false,
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

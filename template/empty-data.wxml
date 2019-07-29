@@ -1,0 +1,8 @@
+<template name="emptyData">
+  <view class="empty-data">
+    <view class="empty-img-prompt">
+      <image src="{{imgSrc}}"></image>
+    </view>
+    <text class="font-36 empty-data-text">{{toastText}}</text>
+  </view>
+</template>

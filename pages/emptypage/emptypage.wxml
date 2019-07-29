@@ -1,0 +1,15 @@
+<!--pages/emptypage/emptypage.wxml-->
+<import src="../../template/empty-data.wxml" />
+<import src="../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view>
+  <template is="emptyData" data="{{...emptyData}}"></template>
+</view>
+<view class="empty-btn">
+  <button bindtap="backMemberCenter">返回会员中心</button>
+</view>
+<template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+</button>
+</form>

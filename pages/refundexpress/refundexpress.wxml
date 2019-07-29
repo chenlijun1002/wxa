@@ -1,0 +1,69 @@
+<!--pages/refundexpress/refundexpress.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view wx:if="{{loadComplete}}">
+            <view class="refund-header bg-white margin-b-24">
+                <view class="refund-header-title font-36">请退货给商家！</view>
+                <view class="refund-address font-32">
+                    <view class="express-icon pull-left"></view>
+                    <view class="refund-address-text color-66">退货地址：{{merchantAddressInfo}}</view>
+                </view>
+                <view class="header-bg"></view>
+            </view>
+            <view class="xkd-panel font-32 margin-b-24">
+                <view class="xkd-cell line" bindtap="showExpressPopup">
+                    <text>物流公司</text>
+                    <text class="cell-center color-bd">{{selectedExpressName}}</text>
+                    <view class="right-icon"></view>
+                </view>
+                <view class="xkd-cell line">
+                    <text>物流单号</text>
+                    <input class="cell-center" type="text" placeholder="请填写物流单号" placeholder-style="color: #bdbdbd;" bindinput="changeExpressNum" bindconfirm="changeExpressNum" />
+                </view>
+                <view class="xkd-cell">
+                    <text>联系电话</text>
+                    <input class="cell-center" type="digit" placeholder="请填写联系电话" placeholder-style="color: #bdbdbd;" bindinput="changeCellPhone" bindconfirm="changeCellPhone" />
+                </view>
+            </view>
+            <view class="xkd-textarea-panel">
+                <view class="xkd-textarea-title">退款原因</view>
+                <input placeholder="请填写退款原因" placeholder-style="color: #bdbdbd;" bindconfirm="changeRefundReason" bindinput="changeRefundReason" />
+            </view>
+            <view class="tips">商家同意后，1-7个工作日内将{{refundInfo.RefundMoney}}元原路退回</view>
+            <view class="xkd-button-panel">
+                <button class="xkd-button-big xkd-button-primary margin-b-24" bindtap="submitExpress">提交物流信息</button>
+                <button class="xkd-button-big xkd-button-white" bindtap="goBack">取消</button>
+            </view>
+            <!-- 物流公司弹窗 -->
+            <view class="mask {{expressPopup}}" bindtap="closeExpressPopup"></view>
+            <view class="popup {{expressPopup}}">
+                <view class="popup-header line">
+                    <text>选择物流公司</text>
+                    <icon class="cancel" type="cancel" bindtap="closeExpressPopup" size="22" color="#757575" />
+                </view>
+                <view class="popup-content">
+                    <scroll-view scroll-y>
+                        <view class="xkd-panel" wx:for="{{merchantExpressList}}">
+                            <view class="xkd-cell xkd-cell-single line" bindtap="selectExpress" data-id="{{item.Kuaidi100Code}}" data-name="{{item.Name}}" data-index="{{index}}">
+                                <text class="left-words">{{item.Name}}</text>
+                                <icon wx:if="{{expressId == item.Id}}" type="success_no_circle" size="18" color="#00A699" />
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

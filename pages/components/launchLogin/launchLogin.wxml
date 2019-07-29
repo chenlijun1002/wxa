@@ -1,0 +1,11 @@
+<!--pages/components/launchLogin/launchLogin.wxml-->
+<view class="authorization-box">
+    <view class='authorization-modal'>
+        <view class='modal-body'>
+            为保障购物体验，我们需要您的授权。
+        </view>
+        <view class='modal-footer'>
+            <button bindgetuserinfo="bindgetuserinfo" open-type='getUserInfo'>去授权</button>
+        </view>
+    </view>
+</view>

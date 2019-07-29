@@ -1,0 +1,41 @@
+<import src="../../../template/loading.wxml" />
+<!-- <template wx:if="{{isClose}}" is="close" /> -->
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view class="store-card" wx:if="{{loadComplete}}">
+            <view class="store-card-img" wx:if="{{posterUrl}}" bindtap="preView">
+                <image src="{{posterUrl}}"></image>
+            </view>
+            <view wx:else>
+                <view class="empty-data">
+                    <view class="empty-img-prompt">
+                      <image src="{{emptyData.imgSrc}}"></image>
+                    </view>
+                    <text class="font-36 empty-data-text padding-b-48">{{emptyData.toastText}}</text>
+                    <view class="padding-24" style="padding-top:263rpx;">
+                      <button class="add-btn" bindtap="loadCard">创建我的名片</button>
+                    </view>
+                    <view class="padding-24">
+                      <button class="add-btn-copy" type="default" bindtap="loadCopy">复制我的推广链接</button>
+                    </view>
+                </view>
+            </view>
+            <view class="padding-24" wx:if="{{posterUrl}}">
+                <button class="add-btn" bindtap="saveToAlbum">保存到相册</button>
+            </view>
+            <view class="padding-24" wx:if="{{posterUrl}}">
+                <button class="add-btn" bindtap="loadCard">重新生成我的名片</button>
+            </view>
+            <view class="padding-24" wx:if="{{posterUrl}}">
+                <button class="add-btn-copy" type="default" bindtap="loadCopy">复制我的推广链接</button>
+            </view>
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

@@ -1,0 +1,4 @@
+<!--pages/guide/guide.wxml-->
+<!--<text>过渡页面，用于小程序临时二维码跳转</text>-->
+<view>{{tscene}}</view>
+<view>{{title}}</view>

@@ -1,0 +1,56 @@
+/* pages/addresslist/addresslist.wxss */
+.address-item{
+  position: relative;
+  background-color: #fff;
+  padding: 40rpx 40rpx 35rpx 76rpx;
+  margin-bottom: 24rpx;
+}
+.address-info .user{
+  margin-right: 30rpx;
+}
+.address-info .user-tel{
+  font-size: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  margin-bottom: 20rpx;
+}
+.address-detail{
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.address-item .checkbox{
+  left: 24rpx;
+  top: 38rpx;
+  width:38rpx;
+  height:38rpx;
+  margin-top:0;
+  background-size:38rpx 77.72727272rpx;
+}
+.address-item .checkbox.checked {
+  background-position:left -38rpx;
+}
+.address-item .edit{
+  position: absolute;
+  width: 48rpx;
+  height: 48rpx;
+  right: 30rpx;
+  top: 36rpx;
+  background: url('http://testfile.xiaokeduo.com/system/xkdxcx/system/images/edit-address-icon.png') no-repeat left top;
+  background-size: cover;
+}
+.add-new-address{
+  margin-top: 64rpx;
+}
+.add-new-address button{
+  border:1px solid #00A699;
+  color: #00A699;
+  height: 90rpx;
+  line-height: 84rpx;
+}
+button.add-btn{
+  height: 90rpx;
+  line-height: 84rpx;
+  margin-top: 24rpx;
+  border:1px solid #00A699;
+  color: #00A699;
+}

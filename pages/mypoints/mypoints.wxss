@@ -1,0 +1,56 @@
+/* pages/mypoints/mypoints.wxss */
+.commission-detail {
+  display: flex;
+  align-items: center;
+  height: 160rpx;
+  background: #fff;
+}
+
+.commission-detail .column {
+  display: flex;
+  flex: 1;
+  height: 70%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.commission-detail .column1 {
+  border-right: 1px solid #e0e0e0;
+}
+
+.commission-detail .column .text {
+  font-size: 28rpx;
+  line-height: 48rpx;
+}
+
+.commission-detail .column .points {
+  font-size: 44rpx;
+  line-height: 64rpx;
+}
+.item {
+  padding: 32rpx 24rpx;
+  background: #fff;
+}
+.item-row {
+  display: flex;
+  line-height: 48rpx;
+}
+.item .item-row:first-child {
+  font-size: 36rpx;
+  margin-bottom: 16rpx;
+}
+.item .item-row:first-child text:first-child {
+  flex: 1;
+  margin-right: 16rpx;
+}
+.item .item-row:last-child {
+  font-size: 28rpx;
+  color: #747474;
+}
+scroll-view {
+  position: fixed;
+  top: 184rpx;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

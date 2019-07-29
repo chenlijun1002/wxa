@@ -1,0 +1,30 @@
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <view wx:if="{{loadComplete}}">
+            <view class="address-item" wx:for="{{addressList}}" wx:key="*this">
+                <view class="address-info">
+                    <view class="user-tel">
+                        <text class="user">{{item.ShipTo}}</text>
+                        <text>{{item.CellPhone}}</text>
+                    </view>
+                    <view class="address-detail">{{item.ProvinceName}} {{item.CityName}} {{item.CountyName}} {{item.StreetName}} {{item.Address}}</view>
+                </view>
+                <view class="checkbox {{item.checked}}" bindtap="setDefault" data-addressid="{{item.Id}}"></view>
+                <view class="edit" bindtap="editAddress" data-addressid="{{item.Id}}"></view>
+            </view>
+            <view class="padding-24">
+                <button class="add-btn" type="default" bindtap="addNewAddress">新增收货地址</button>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

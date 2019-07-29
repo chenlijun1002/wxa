@@ -1,0 +1,255 @@
+/* pages/seckilling/confirmorder/confirmorder.wxss */
+
+page {
+  padding-bottom: 160rpx;
+}
+
+.order-address {
+  padding: 35rpx 0;
+  font-size: 32rpx;
+  margin-bottom: 22rpx;
+  padding-left: 72rpx;
+  padding-right: 100rpx;
+  background: url('http://file.xiaokeduo.com/system/xkdxcx/system/images/address-line.jpg') no-repeat left bottom #fff;
+  background-size: 100% auto;
+}
+
+.order-address label {
+  display: inline-block;
+  font-size: 42rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.order-address .address {
+  position: relative;
+  margin-top: 12rpx;
+  line-height: 44rpx;
+  font-size: 28rpx;
+}
+
+.order-address .address-icon {
+  position: absolute;
+  left: -36rpx;
+  top: 6rpx;
+  width: 26rpx;
+  height: 32rpx;
+  background: url("http://testfile.xiaokeduo.com/system/xkdxcx/system/images/address-icon.png") no-repeat left top;
+  background-size: cover;
+}
+
+.order-address .right-icon {
+  position: absolute;
+  width: 40rpx;
+  height: 8rpx;
+  background: url("http://xkdsaas.oss-cn-shanghai.aliyuncs.com/system/xkdxcx/system/images/select-row-right.png") no-repeat left top;
+  background-size: cover;
+  top: 15rpx;
+  right: -90rpx;
+}
+
+.shop-panel {
+  padding-left: 24rpx;
+  background: #fff;
+  font-size: 28rpx;
+}
+
+.shop-cell,
+.shop-cell-small {
+  display: flex;
+  align-items: center;
+}
+
+.shop-cell {
+  height: 96rpx;
+}
+
+.shop-cell-between {
+  justify-content: space-between;
+}
+
+.shop-cell-small {
+  height: 64rpx;
+}
+
+.shop-cell .shop-cell-center,
+.shop-cell-small .shop-cell-center {
+  flex: 1;
+  margin-left: 48rpx;
+  padding-right: 24rpx;
+}
+
+.shop-cell input.shop-cell-center {
+  margin-top: 4rpx;
+}
+
+.shop-detail {
+  padding: 32rpx 24rpx;
+  margin-left: -24rpx;
+  background: #f6f6f6;
+}
+
+.shop-detail-img {
+  box-sizing: border-box;
+  width: 136rpx;
+  height: 136rpx;
+  margin-right: 32rpx;
+  border: 1px solid #e0e0e0;
+}
+
+.shop-detail-img image {
+  width: 100%;
+  height: 100%;
+}
+
+.shop-detail .shop-detail-content {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.shop-name .activity-tag {
+  font-size: 24rpx;
+  color: #ff7800;
+  border: 1rpx solid #ff7800;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+}
+
+.shop-name {
+  line-height: 40rpx;
+  padding: 4px 0;
+}
+
+.shop-specification {
+  line-height: 32rpx;
+}
+
+.shop-specification {
+  flex: 1;
+  margin: 16rpx 0;
+}
+
+.shop-price {
+  display: flex;
+  line-height: 48rpx;
+  justify-content: space-between;
+}
+
+.price-detail {
+  background: #fff;
+  font-size: 28rpx;
+  padding: 16rpx 0 16rpx 24rpx;
+}
+
+switch {
+  margin-right: 16rpx;
+}
+
+.nav-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 96rpx;
+  z-index: 10;
+}
+
+.nav-footer .pay-price {
+  flex: 1;
+  text-align: right;
+  padding-right: 32rpx;
+  color: #515151;
+}
+
+.nav-footer .pay-price .price {
+  color: #FD1D1D;
+}
+
+.nav-footer .pay-btn {
+  width: 256rpx;
+  height: 100%;
+  line-height: 96rpx;
+  font-size: 36rpx;
+  color: #fff;
+  background: linear-gradient(to right, #FFA200, #FF7800);
+  border-radius: 0;
+}
+
+.tips {
+  position: fixed;
+  bottom: 96rpx;
+  left: 0;
+  width: 100%;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #FF7800;
+  background: rgba(255, 162, 0, .5);
+  border: 1px solid #FF7800;
+  z-index: 10;
+}
+
+.balance-pay-icon,
+.wx-pay-icon {
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: 32rpx;
+}
+
+.balance-pay-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/balance-pay-icon.png") no-repeat left top;
+  background-size: cover;
+}
+
+.wx-pay-icon {
+  background: url("http://file.xiaokeduo.com/system/xkdxcx/system/images/wx-pay.png") no-repeat left top;
+  background-size: cover;
+}
+
+.pay-text {
+  flex: 1;
+}
+
+.popup-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+}
+
+.popup-btn button {
+  width: 100%;
+  height: 100%;
+  line-height: 100rpx;
+  border-radius: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  background: linear-gradient(to right, #FFA200, #FF7800);
+}
+
+.submit-btn {
+  height: 90rpx;
+  padding: 0 24rpx;
+  margin-top: 96rpx;
+}
+
+.submit-btn button {
+  width: 100%;
+  height: 100%;
+  line-height: 96rpx;
+  font-size: 36rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(to right, #FFA200, #FF7800);
+}

@@ -1,0 +1,29 @@
+<!--pages/cusNav4/cusNav4.wxml-->
+<import src="../../template/loading.wxml" />
+<import src="../../template/logo.wxml" />
+
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+<login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+<view wx:if="{{loadComplete}}">
+  <view class="search-product" style="background-color:{{navigationBarBackgroundColor}}">
+    <view class="search-content">
+      <!--<input placeholder="搜索" type="text" bindfocus="sear
+      chFocus" />-->
+                    <view class="inputsearch" bindtap="searchFocus">搜索</view>
+                    <icon class="search" type="search" size="20" />
+                </view>
+            </view>
+            <import src="../common/templeates.wxml" />
+            <block wx:for="{{TopicData}}" wx:key="id">
+                <template is="{{'temp_'+item.type}}" data="{{...item,RequestUrl}}"></template>
+            </block>
+            <template wx:if="{{copyright.isOpenCopyRight}}" is="copyright" data="{{copyright}}" />
+            <button class='customer-service' open-type='contact'></button>
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+    </button>
+</form>

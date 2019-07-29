@@ -1,0 +1,6 @@
+/* pages/stairgroup/mygrouplist/mygrouplist.wxss */
+@import '/pages/reduceauction/myauctionlist/myauctionlist.wxss';
+.logo-content{
+  position: absolute;
+  bottom: 0;
+}

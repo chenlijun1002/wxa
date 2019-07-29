@@ -1,0 +1,8 @@
+@import '/pages/pintuan/index/index.wxss';
+scroll-view{
+  position:fixed;
+  left:0;
+  top:122rpx;
+  bottom:0;
+  width:100%;
+}

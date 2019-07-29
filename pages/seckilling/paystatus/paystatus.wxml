@@ -1,0 +1,84 @@
+<!--pages/seckilling/paystatus/paystatus.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <template wx:if="{{isClose}}" is="close" />
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view wx:if="{{loadComplete}}">
+            <view class="pay-status bg{{status}}">
+                <text wx:if="{{status == 1}}">恭喜您！秒杀成功！</text>
+                <view class="lack-stock" wx:if="{{status == 2}}">
+                    <text>抱歉，您晚了一步…</text>
+                    <text class="font-28">由于库存不足，货款已退回账户余额</text>
+                </view>
+                <text wx:if="{{status == 3}}">支付超时，下次早点来</text>
+            </view>
+            <view class="order-address ">
+                <text class="font-32">{{RegionMemberName}} {{CellPhone}}</text>
+                <view class="address">
+                    <label class="address-icon"></label>
+                    <text>{{Address}}</text>
+                </view>
+            </view>
+            <view class="shop-panel margin-b-24">
+                <view class="shop-cell">商品详情</view>
+                <view class="shop-detail clearfix">
+                    <view class="shop-detail-img pull-left">
+                        <image src="{{ProductList.ProductImg}}"></image>
+                    </view>
+                    <view class="shop-detail-content">
+                        <view class="shop-name text-ellipsis font-28">
+                            <text class="activity-tag">{{ActivityTag}}</text>{{ProductList.ProductName}}</view>
+                        <view class="shop-specification font-24 text-ellipsis">
+                            <text>{{ProductSkuName}}</text>
+                        </view>
+                        <view class="shop-price">
+                            <text class="font-28"> <text class="font-24">￥</text>{{ProductList.ProductKillPrice}}</text>
+                            <text>x{{ProductList.ProductNum}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="shop-cell line">
+                    <text class="shop-cell-left color-74">配送方式</text>
+                    <text class="shop-cell-center text-right">{{ShipMode}}</text>
+                </view>
+                <view class="shop-cell line">
+                    <text class="shop-cell-left color-74">订单备注</text>
+                    <text class="shop-cell-center text-ellipsis text-right">{{Remark}}</text>
+                </view>
+                <view class="shop-cell">
+                    <text class="shop-cell-left color-74">下单时间</text>
+                    <text class="shop-cell-center text-right">{{PayTime}}</text>
+                </view>
+            </view>
+            <view class="price-detail line">
+                <view class="shop-cell-small">
+                    <text class="shop-cell-left color-74">商品金额</text>
+                    <text class="shop-cell-center text-right">￥{{ProductList.ProductKillPrice}}</text>
+                </view>
+                <view class="shop-cell-small">
+                    <text class="shop-cell-left color-74">运费</text>
+                    <text class="shop-cell-center text-right">￥{{Freight}}</text>
+                </view>
+                <view class="shop-cell-small">
+                    <text class="shop-cell-left color-74">合计</text>
+                    <text class="shop-cell-center text-right">￥{{AmountPayable}}</text>
+                </view>
+            </view>
+            <view class="shop-cell bg-white margin-b-24">
+                <text class="shop-cell-center text-right font-28">实付金额：<text class="font-32">￥{{AmountPayable}}</text></text>
+            </view>
+            <view wx:if="{{status == 3}}" class="submit-btn margin-b-24">
+                <button bindtap="goDetail">重新下单</button>
+            </view>
+            <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+        </view>
+        <view wx:else class="load-prompt">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+    </button>
+</form>

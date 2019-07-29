@@ -1,0 +1,65 @@
+/* pages/logisticsdetail/logisticsdetail.wxss */
+.table-view-cell .media-object{
+  width: 136rpx;
+  height: 136rpx;
+}
+.table-view-cell .media-body{
+  height: 136rpx;
+}
+.logistics-data-p{
+  padding-left: 48rpx;
+  padding-bottom: 100rpx;
+  background-color: #fff;
+}
+.logistics-data-group{
+  position: relative;
+}
+.logistics-data-group:before{
+  display: block;
+  content: "";
+  position: absolute;
+  width: 2rpx;
+  background-color: #E0E0E0;
+  left: 0;
+  top: 39rpx;
+  bottom: 90rpx;
+}
+.logistics-data-item{
+  position: relative;
+  margin-left: 38rpx;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #DFDFDF;
+}
+.logistics-data-item:before{
+  display: block;
+  content: "";
+  position: absolute;
+  width: 18rpx;
+  height: 18rpx;
+  background-color: #E0E0E0;
+  border-radius: 50%;
+  top: 39rpx;
+  left: -46rpx;
+}
+.logistics-data-item.current:before{
+  border:4rpx solid #ABECE8;
+  background-color: #00A699;
+  top: 35rpx;
+  left: -50rpx;
+}
+.logistics-data-item text{
+  display: block;
+  line-height: 34rpx;
+}
+.logistics-data-item .title{
+  font-size: 28rpx;
+  margin-bottom: 14rpx;
+  color: #757575;
+}
+.logistics-data-item.current .title{
+  color: #00A699;
+}
+.logistics-data-item .date-time{
+  font-size: 24rpx;
+  color: #BDBDBD;
+}

@@ -1,0 +1,79 @@
+<!--activitylist.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<template wx:if="{{isClose}}" is="close" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view class="search border-bottom">
+            <icon type="search" size="16" color="#747474" />
+            <input type="text" placeholder="挑选您想要的商品" confirm-type="搜索" bindconfirm="changeSearchValue" />
+            <view class="screen" bindtap="screen">
+                <view class="icon"></view>
+                <view class="screen-text">筛选</view>
+            </view>
+        </view>
+        <view class="activity-list-nav">
+            <view class="nav-item {{activityStatus==1?'active':''}}" data-status="1" bindtap="changeActivityStatus">活动进行时</view>
+            <view class="nav-item {{activityStatus==2?'active':''}}" data-status="2" bindtap="changeActivityStatus">即将开始</view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view scroll-y>
+                <view style="height:24rpx;"></view>
+                <view wx:if="{{activityList.length>0}}">
+                    <view class="activity-list clearfix {{item.ActivityType==2?'seckill':''}}" wx:for="{{activityList}}" wx:key="*this">
+                        <view class="media-object">
+                            <image src="{{item.ActivityImg}}" />
+                        </view>
+                        <view class="media-body">
+                            <view class="prodcut-name text-ellipsis-2">
+                                <label>{{item.labelName}}</label>{{item.ActivityName}}</view>
+                            <view class="original-price-sold">
+                                <text class="original-price">￥{{item.ProductOldPrice}}</text>
+                                <text class="color-75">已秒杀{{item.SpellGroupNum}}件</text>
+                            </view>
+                            <view class="activity-price clearfix">
+                                <view class="pull-left">
+                                    <text class="present-price">￥{{item.SalePrice}}</text>
+                                </view>
+                                <view class="pull-right font-28 color-75">
+                                    <button wx:if="{{item.ActivityType==1}}" class="pull-right activity-btn activity-pintuan-btn" type="primary" hover-class="pintuan-btn-hover" data-activityid="{{item.ActivityId}}" bindtap="openGroup">去开团</button>
+                                    <button wx:if="{{item.ActivityType==2}}" class="pull-right activity-btn activity-miaosha-btn" type="primary" hover-class="miaosha-btn-hover">去抢购</button>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="empty-data" wx:else>
+                    <view class="empty-img-prompt">
+                        <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/empty-activitylist.png"></image>
+                    </view>
+                    <text class="font-36">暂无相关活动哦~</text>
+                </view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <view class="mark {{showScreen}}" bindtap="closePopup"></view>
+        <view class="screen-popup {{showScreen}}">
+            <view class="screen-content">
+                <view class="screen-content-header">
+                    <view class="header-text">筛选</view>
+                </view>
+                <view class="screen-nav-list">
+                    <view class="nav-item all {{activityType==0?'select':''}}">
+                        <view class="nav-text" data-type="0" bindtap="changeActivityType">全部</view>
+                    </view>
+                    <view class="nav-item {{activityType==1?'select':''}}">
+                        <view class="nav-text" data-type="1" bindtap="changeActivityType">爱拼团</view>
+                    </view>
+                    <view class="nav-item {{activityType==2?'select':''}}">
+                        <view class="nav-text" data-type="2" bindtap="changeActivityType">限时秒杀</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </button>
+</form>

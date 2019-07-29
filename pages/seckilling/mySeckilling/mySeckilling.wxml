@@ -1,0 +1,58 @@
+<!--mySeckilling.wxml-->
+<import src="../../../template/loading.wxml" />
+<import src="../../../template/logo.wxml" />
+<form report-submit="true" bindsubmit='sendFormId'>
+    <button class='sendformid-btn' form-type='submit'>
+        <login-authorization wx:if="{{showAuthorization}}" bindgetuserinfo="getuserinfo"></login-authorization>
+        <view class="nav-fixed-top">
+            <view class="nav-item {{selectIndex==-1?'active':''}}" data-index="-1" bindtap="changeState">全部</view>
+            <view class="nav-item {{selectIndex==0?'active':''}}" data-index="0" bindtap="changeState">待付款</view>
+            <view class="nav-item {{selectIndex==1?'active':''}}" data-index="1" bindtap="changeState">秒杀成功</view>
+            <view class="nav-item {{selectIndex==2?'active':''}}" data-index="2" bindtap="changeState">秒杀失败</view>
+        </view>
+        <view wx:if="{{loadComplete}}">
+            <scroll-view scroll-y lower-threshold="200" scroll-top="{{scrollTop}}" bindscrolltolower="pullLoadingData" class="scroll">
+                <view wx:if="{{sepllGroupList.length>0}}">
+                    <view class="order-item" wx:for="{{sepllGroupList}}">
+                        <navigator url="{{item.OrderStatus==0?'/pages/seckilling/confirmorder/confirmorder?orderId='+item.OrderId:item.OrderStatus==1?'/pages/orderdetail/orderdetail?orderId='+item.OrderId:item.OrderStatus==2?'/pages/seckilling/paystatus/paystatus?status=3&orderId='+item.OrderId:''}}">
+                            <view class="table-view-table border-bottom padding-24">
+                                <view class="table-view-cell clearfix">
+                                    <image mode="aspectFill" class="media-object" src="{{item.ProductImgUrl}}"></image>
+                                    <view class="media-body">
+                                        <view class="text-ellipsis-2 product-name font-28">
+                                            <view class="markdown-sale">{{item.ActivityTag}}</view>{{item.ProductName}}</view>
+                                        <view class="prodcut-specifications font-28">
+                                            <text class="color-21 font-32">￥{{item.Price}}</text>
+                                            <text class="color-75 ml30">{{item.ProductNum}}件</text>
+                                            <text wx:if="{{item.OrderStatus==1}}" class="pull-right {{item.OrderStatus==1?'color-success':''}}">秒杀成功</text>
+                                            <text wx:if="{{item.OrderStatus==2}}" class="pull-right">秒杀失败</text>
+                                            <text wx:if="{{item.OrderStatus==0}}" class="pull-right {{item.OrderStatus==0?'color-200':''}}">待付款</text>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                    </view>
+                </view>
+                <view class="empty-data" wx:else>
+                    <view class="empty-img-prompt">
+                        <image src="http://file.xiaokeduo.com/system/xkdxcx/system/images/noActivity.png"></image>
+                    </view>
+                    <text class="font-36">亲~您还没有参与秒杀活动哦~</text>
+                </view>
+                <view class="pull-loading" wx:if="{{isShowLoading}}">
+                    <view class="pull-loading-icon" wx:if="{{pullLoading}}"></view>
+                    {{loadingText}}
+                </view>
+                <template wx:if="{{copyright.isOpenCopyRight!=0}}" is="copyright" data="{{copyright}}" />
+            </scroll-view>
+        </view>
+        <view wx:else class="load-prompt" style="top:100rpx;">
+            <template is="loadPrompt" />
+        </view>
+        <view wx:if="{{isShowToast}}">
+            <template is="toast" data="{{...toastText}}" />
+        </view>
+
+    </button>
+</form>

@@ -1,0 +1,9 @@
+{
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "余额明细",
+    "backgroundTextStyle": "light",
+    "component": "true",
+    "usingComponents": {
+        "login-authorization": "/pages/components/launchLogin/launchLogin"
+    }
+}

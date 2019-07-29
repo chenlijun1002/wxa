@@ -1,0 +1,46 @@
+/* pages/distributor/storesetting/storesetting.wxss */
+.store-name-box {
+  display: flex;
+  align-items: center;
+  height: 112rpx;
+  background: #fff;
+  margin-top: 24rpx;
+  padding: 0 24rpx;
+}
+.store-name-box text {
+  line-height: 108rpx;
+}
+.store-name-box input {
+  flex: 1;
+  margin-left: 26rpx;
+  height: 100%;
+}
+.store-btn {
+  box-sizing: border-box;
+  height: 88rpx;
+  padding: 0 24rpx;
+  margin-top: 72rpx;
+}
+.store-btn button {
+  width: 100%;
+  height: 100%;
+  line-height: 88rpx;
+  background: #00A699;
+  color: #fff;
+  font-size: 36rpx;
+  border-radius: 16rpx;
+}
+.store-description-box view {
+  box-sizing: border-box;
+  height: 80rpx;
+  padding: 24rpx 24rpx 0;
+  line-height: 48rpx;
+}
+.store-description-box textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 242rpx;
+  padding: 26rpx 24rpx;
+  background: #fff;
+  line-height: 48rpx;
+}
